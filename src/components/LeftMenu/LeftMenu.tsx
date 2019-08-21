@@ -1,6 +1,6 @@
 import React from 'react';
-import Nav from "../Nav/Nav";
-import CaseMenu from "../CaseMenu/CaseMenu";
+import Nav from '../Nav/Nav';
+import CaseMenu from '../CaseMenu/CaseMenu';
 import './LeftMenu.less';
 
 const LeftMenu = () => {

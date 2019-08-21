@@ -12,7 +12,8 @@ interface MenuLinkProps {
 }
 
 const sanitizePath = (path?: string) =>
-    path && path
+    path &&
+    path
         .split(' ')
         .join('-')
         .replace('.', '')

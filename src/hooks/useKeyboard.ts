@@ -17,8 +17,10 @@ interface Action {
 }
 
 const shouldDisableKeyboard = () => {
-    return document.activeElement
-        && document.activeElement.tagName.toLowerCase() === 'textarea';
+    return (
+        document.activeElement &&
+        document.activeElement.tagName.toLowerCase() === 'textarea'
+    );
 };
 
 export const useKeyboard = (actions: Action[]) => {

@@ -2,64 +2,64 @@
 @unsolvedBackgroundColor: #ffe9cc;
 
 li.MenuLink {
-  .applyIcon(@color, @url) {
-    background: @color;
+    .applyIcon(@color, @url) {
+        background: @color;
 
-    &:before {
-      content: url(@url);
-      height: 100%;
-      margin: 0 0.8125rem 0 -3rem;
-    }
-  }
-
-  &:hover > a {
-    .applyIcon(#f3f5f5, "./img/Ikon_hover_aktiv.svg");
-  }
-
-  &.normal > a.active {
-    .applyIcon(#e7e9e9, "./img/Ikon_hover_aktiv.svg");
-  }
-
-  &.unsolved > a {
-    &.active {
-      background: @unsolvedBackgroundColor;
-    }
-    .applyIcon(#f3f5f5, "./img/Ikon_oppgave.svg");
-
-    &:hover {
-      .applyIcon(#ffe9cc, "./img/Ikon_oppgave.svg");
-    }
-  }
-
-  &.solved > a {
-    .applyIcon(#cde7d8, "./img/Ikon_oppgave_løst.svg");
-  }
-
-  .typo-normal {
-    &:first-child {
-      flex: 1;
+        &:before {
+            content: url(@url);
+            height: 100%;
+            margin: 0 0.8125rem 0 -3rem;
+        }
     }
 
-    &:last-child {
-      text-align: right;
+    &:hover > a {
+        .applyIcon(#f3f5f5, './img/Ikon_hover_aktiv.svg');
     }
-  }
 
-  > a {
-    color: #3e3832;
-    display: flex;
-    align-items: center;
-    height: 2rem;
-    padding: 0 3rem;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    cursor: pointer;
-    overflow: hidden;
-
-    &.active {
-      .typo-normal {
-        font-weight: 600;
-      }
+    &.normal > a.active {
+        .applyIcon(#e7e9e9, './img/Ikon_hover_aktiv.svg');
     }
-  }
+
+    &.unsolved > a {
+        &.active {
+            background: @unsolvedBackgroundColor;
+        }
+        .applyIcon(#f3f5f5, './img/Ikon_oppgave.svg');
+
+        &:hover {
+            .applyIcon(#ffe9cc, './img/Ikon_oppgave.svg');
+        }
+    }
+
+    &.solved > a {
+        .applyIcon(#cde7d8, './img/Ikon_oppgave_løst.svg');
+    }
+
+    .typo-normal {
+        &:first-child {
+            flex: 1;
+        }
+
+        &:last-child {
+            text-align: right;
+        }
+    }
+
+    > a {
+        color: #3e3832;
+        display: flex;
+        align-items: center;
+        height: 2rem;
+        padding: 0 3rem;
+        border-radius: 0.25rem;
+        text-decoration: none;
+        cursor: pointer;
+        overflow: hidden;
+
+        &.active {
+            .typo-normal {
+                font-weight: 600;
+            }
+        }
+    }
 }

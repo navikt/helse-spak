@@ -16,9 +16,7 @@ const MainContent = () => {
                 onToggleTimeline={toggleTimeline}
                 showTimeline={showTimeline}
             />
-            {showTimeline && (
-                <Timeline />
-            )}
+            {showTimeline && <Timeline />}
         </div>
     );
 };

@@ -12,31 +12,19 @@ export const toMoments = (rows: Row[]): Row[] => {
 };
 
 export const extractDates = (rows: Row[]): Period[] => {
-    return rows.reduce<Period[]>(
-        (acc, row) => acc.concat(row.periods), []
-    );
+    return rows.reduce<Period[]>((acc, row) => acc.concat(row.periods), []);
 };
 
 export const earliestDate = (periods: Period[]): Moment => {
-    return periods.reduce(
-        (acc: Moment, period: Period) => {
-            return (period.start as Moment) < acc
-                ? period.start as Moment
-                : acc;
-        },
-        moment()
-    );
+    return periods.reduce((acc: Moment, period: Period) => {
+        return (period.start as Moment) < acc ? (period.start as Moment) : acc;
+    }, moment());
 };
 
 export const latestDate = (periods: Period[]): Moment => {
-    return periods.reduce(
-        (acc: Moment, period: Period) => {
-            return (period.end as Moment) > acc
-                ? period.end as Moment
-                : acc;
-        },
-        moment('1900-01-01')
-    );
+    return periods.reduce((acc: Moment, period: Period) => {
+        return (period.end as Moment) > acc ? (period.end as Moment) : acc;
+    }, moment('1900-01-01'));
 };
 
 export const daysBetween = (earliestDate: Moment, latestDate: Moment) => {

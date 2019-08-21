@@ -13,7 +13,13 @@ interface TimelineRowProps {
     dates: Period[];
 }
 
-const TimelineRow = ({ dates, label, earliest, latest, width }: TimelineRowProps) => {
+const TimelineRow = ({
+    dates,
+    label,
+    earliest,
+    latest,
+    width
+}: TimelineRowProps) => {
     const mappedDates = useMemo(
         () =>
             width === 0

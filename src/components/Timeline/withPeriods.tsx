@@ -4,7 +4,9 @@ import { toDate } from './utils';
 import { PeriodStatus } from './types';
 import { TimelineProps } from './Timeline';
 
-export const withPeriods = (Component: React.FunctionComponent<TimelineProps>) => {
+export const withPeriods = (
+    Component: React.FunctionComponent<TimelineProps>
+) => {
     return (props: TimelineProps) => {
         const data = [
             {

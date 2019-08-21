@@ -6,9 +6,7 @@ import './RowLabels.css';
 const RowLabels = ({ rows }: TimelineProps) => (
     <div className="RowLabels">
         {rows.map((row, i) => (
-            <Undertekst key={`period-label-${i}`}>
-                {row.label}
-            </Undertekst>
+            <Undertekst key={`period-label-${i}`}>{row.label}</Undertekst>
         ))}
     </div>
 );

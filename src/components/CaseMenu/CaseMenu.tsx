@@ -33,8 +33,7 @@ const CaseMenu = ({
             <div className="CaseMenu__info">
                 <Normaltekst>
                     <Icon type={IconType.Arbeidsgiver} />
-                    {arbeidsgiver} / {fom} - {tom} /{' '}
-                    {`${sykmeldingsgrad}%`}
+                    {arbeidsgiver} / {fom} - {tom} / {`${sykmeldingsgrad}%`}
                 </Normaltekst>
                 <Normaltekst>
                     <Icon type={IconType.Sykmelder} />
