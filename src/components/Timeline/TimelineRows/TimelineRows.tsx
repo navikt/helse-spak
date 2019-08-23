@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 import TimelineRow from './TimelineRow';
-import YearPins from '../YearPins/YearPins';
-import { useElementWidth } from '../../../hooks/useElementWidth';
+import YearPins from '../YearPins';
+import { useElementWidth } from '../../../hooks';
 import { earliestDate, extractDates, latestDate, yearsBetween } from '../calc';
 import { TimelineProps } from '../Timeline';
 import './TimelineRows.css';
@@ -21,8 +21,8 @@ const TimelineRows = ({ rows }: TimelineProps) => {
                 <>
                     <YearPins
                         years={years}
-                        startDate={earliest}
-                        endDate={latest}
+                        start={earliest}
+                        end={latest}
                         width={width}
                     />
                     {rows.map((row, i) => (

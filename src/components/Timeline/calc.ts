@@ -1,7 +1,8 @@
 import moment, { Moment } from 'moment';
-import { Period, Row } from './types';
+import { Period } from './types';
+import { TimelineRow } from '../../context/CaseContext';
 
-export const toMoments = (rows: Row[]): Row[] => {
+export const toMoments = (rows: TimelineRow[]): TimelineRow[] => {
     return rows.map(row => ({
         ...row,
         periods: row.periods.map(period => ({
@@ -11,7 +12,7 @@ export const toMoments = (rows: Row[]): Row[] => {
     }));
 };
 
-export const extractDates = (rows: Row[]): Period[] => {
+export const extractDates = (rows: TimelineRow[]): Period[] => {
     return rows.reduce<Period[]>((acc, row) => acc.concat(row.periods), []);
 };
 
@@ -65,7 +66,7 @@ export const calculatePlacement = (
 /* Finds the horizontal position and width of a year pin/label based on the earliest and latest
  * dates as well as the total width of the containing element.
  */
-export const calculateYearPinPlacement = (
+export const calculateYearPinPosition = (
     year: Moment,
     start: Moment,
     end: Moment,

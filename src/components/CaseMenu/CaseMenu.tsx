@@ -1,4 +1,5 @@
 import React from 'react';
+import Picker from '../Picker';
 import CasePicker from './CasePicker';
 import Progresjonsbar from '../Progresjonsbar/Progresjonsbar';
 import Icon, { IconType } from '../Icon/Icon';
@@ -28,6 +29,10 @@ const CaseMenu = ({
         <Panel className="CaseMenu">
             <div className="CaseMenu__top">
                 <CasePicker />
+                <Picker
+                    defaultLabel="Behandling"
+                    items={['test1', 'test2', 'test3']}
+                />
             </div>
             {foerstegang && <EtikettInfo>Førstegangs.</EtikettInfo>}
             <div className="CaseMenu__info">

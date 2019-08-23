@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import LeftMenu from '../LeftMenu';
 import TopBar from '../TopBar';
 import MainContent from '../MainContent';
+import { CaseProvider } from '../../context/CaseContext';
 import './App.less';
 
 const App = () => {
@@ -11,8 +12,10 @@ const App = () => {
             <div className="App">
                 <TopBar />
                 <div className="Content">
-                    <LeftMenu />
-                    <MainContent />
+                    <CaseProvider>
+                        <LeftMenu />
+                        <MainContent />
+                    </CaseProvider>
                 </div>
             </div>
         </Router>

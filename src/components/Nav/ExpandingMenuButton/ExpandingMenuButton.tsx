@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import MenuLink from './MenuLink';
 import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { TaskStatus } from '../types';
+import { TaskStatus } from '../../../context/types';
 import './ExpandingMenuButton.less';
 
 export interface ExpandingMenuButtonData {
@@ -31,6 +31,7 @@ const ExpandingMenuButton = ({ label, data }: ExpandingMenuButtonProps) => {
     return (
         <>
             <button
+                role="menu"
                 className={className}
                 onClick={() => setIsOpen(!isOpen)}
                 aria-expanded={isOpen}

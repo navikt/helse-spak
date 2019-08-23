@@ -1,8 +1,7 @@
 import React, { useRef, useState } from 'react';
+import Picker from '../Picker';
+import { useClickOutside } from '../../hooks';
 import './CasePicker.less';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { useClickOutside } from '../../hooks/useClickOutside';
-import { NedChevron } from 'nav-frontend-chevron';
 
 interface CasePickerProps {
     caseId?: string;
@@ -20,6 +19,8 @@ const CasePicker = ({
         setShowPopup(false);
     });
 
+    return <Picker className="CasePicker" preLabel="SAKS ID" items={cases} />;
+    /*
     return (
         <div className="CasePicker">
             <Normaltekst>SAKS ID {caseId}</Normaltekst>
@@ -37,6 +38,7 @@ const CasePicker = ({
             </button>
         </div>
     );
+    */
 };
 
 export default CasePicker;

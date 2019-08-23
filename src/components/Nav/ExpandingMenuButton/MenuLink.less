@@ -1,3 +1,5 @@
+@import '../../../mixins';
+
 @normalBackgroundColor: #f3f5f5;
 @unsolvedBackgroundColor: #ffe9cc;
 
@@ -12,7 +14,10 @@ li.MenuLink {
         }
     }
 
-    &:hover > a {
+    outline: none;
+
+    &:hover > a,
+    &:focus > a {
         .applyIcon(#f3f5f5, './img/Ikon_hover_aktiv.svg');
     }
 
@@ -20,15 +25,16 @@ li.MenuLink {
         .applyIcon(#e7e9e9, './img/Ikon_hover_aktiv.svg');
     }
 
+    &.unsolved:focus > a,
+    &.unsolved:hover > a {
+        .applyIcon(#ffe9cc, './img/Ikon_oppgave.svg');
+    }
+
     &.unsolved > a {
         &.active {
             background: @unsolvedBackgroundColor;
         }
         .applyIcon(#f3f5f5, './img/Ikon_oppgave.svg');
-
-        &:hover {
-            .applyIcon(#ffe9cc, './img/Ikon_oppgave.svg');
-        }
     }
 
     &.solved > a {
@@ -55,6 +61,7 @@ li.MenuLink {
         text-decoration: none;
         cursor: pointer;
         overflow: hidden;
+        outline: none;
 
         &.active {
             .typo-normal {

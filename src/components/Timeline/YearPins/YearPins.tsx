@@ -1,25 +1,25 @@
 import React, { useMemo } from 'react';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { Undertekst } from 'nav-frontend-typografi';
-import { calculateYearPinPlacement } from '../calc';
+import { calculateYearPinPosition } from '../calc';
 import './YearPins.css';
 
 interface YearPinsProps {
     years: number[];
-    startDate: object;
-    endDate: object;
+    start: Moment;
+    end: Moment;
     width: number;
 }
 
-const YearPins = ({ years, startDate, endDate, width }: YearPinsProps) => {
+const YearPins = ({ years, start, end, width }: YearPinsProps) => {
     const mappedYears = useMemo(
         () =>
             years.map(year => ({
                 label: year,
-                x: calculateYearPinPlacement(
+                x: calculateYearPinPosition(
                     moment(year, 'YYYY'),
-                    startDate,
-                    endDate,
+                    start,
+                    end,
                     width
                 )
             })),

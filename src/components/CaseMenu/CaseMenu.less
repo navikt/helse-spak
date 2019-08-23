@@ -1,14 +1,21 @@
+@menuPadding: 1.5rem;
+
 .CaseMenu {
     display: flex;
     flex-direction: column;
-    width: calc(100% - 5rem - 2px);
-    padding: 2.5rem;
+    width: calc(100% - @menuPadding * 2 - 2px);
+    padding: 1.5rem;
     border: 1px solid #78706a;
     background: #fcfcfc;
 
     .CaseMenu__top {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+
+        > *:not(:first-child) {
+            margin-left: 2rem;
+        }
     }
 
     .etikett.etikett--info {

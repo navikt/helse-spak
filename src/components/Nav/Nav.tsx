@@ -1,29 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ExpandingMenuButton from './ExpandingMenuButton';
-import { TaskStatus } from './types';
-import { ExpandingMenuButtonData } from './ExpandingMenuButton/ExpandingMenuButton';
+import { CaseContext } from '../../context/CaseContext';
 import './Nav.less';
 
-const sykepengegrunnlag: ExpandingMenuButtonData[] = [
-    { label: 'Månedsinntekt', value: '17 000,00', status: TaskStatus.Solved },
-    { label: 'Omregnet til årsinntekt', value: '204 000,00' },
-    { label: 'Sammenligningsgr.lag', value: '155 691,00' },
-    { label: 'Fastsatt inntekt', value: '-', status: TaskStatus.Unsolved },
-    { label: 'Sykepengegrunnlag', value: '-' },
-    { label: 'Dagsats', value: '-' }
-];
-
 const Nav = () => {
+    const {
+        inngangsvilkår,
+        sykdomsvilkår,
+        oppfølging,
+        sykepengegrunnlag,
+        sykepengeperiode,
+        utbetaling
+    } = useContext(CaseContext);
+
     return (
-        <nav className="Nav">
-            <ExpandingMenuButton label="Sykdomsvilkår" />
-            <ExpandingMenuButton label="Inngangsvilkår" />
+        <nav className="Nav" role="menu" aria-orientation="vertical">
+            <ExpandingMenuButton label="Sykdomsvilkår" data={sykdomsvilkår} />
+            <ExpandingMenuButton label="Inngangsvilkår" data={inngangsvilkår} />
+            <ExpandingMenuButton label="Oppfølging" data={oppfølging} />
             <ExpandingMenuButton
                 label="Sykepengegrunnlag"
                 data={sykepengegrunnlag}
             />
-            <ExpandingMenuButton label="Sykepengeperiode" />
-            <ExpandingMenuButton label="Utbetaling" />
+            <ExpandingMenuButton label="Sykepengeperiode" data={sykepengeperiode} />
+            <ExpandingMenuButton label="Utbetaling" data={utbetaling} />
             <ExpandingMenuButton label="Oppsummering" />
         </nav>
     );
