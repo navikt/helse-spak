@@ -4,18 +4,18 @@
 @marginTop: 3rem;
 @marginRight: 6rem;
 
-.Søylediagram {
+.BarChart {
     position: relative;
     height: 7.5rem;
     margin-right: @marginRight;
     margin-bottom: 1.25rem;
 
-    .søyler {
+    .BarChart__bars {
         display: flex;
         align-items: flex-end;
     }
 
-    .søyle {
+    .BarChart__bar {
         background: #66a4dc;
         width: @barWidth;
         margin-right: @barMargin;
@@ -56,13 +56,15 @@
 
     .min,
     .max {
+        @offset: 2rem;
         position: absolute;
-        right: -@marginRight;
-        width: calc(100% + @marginRight);
+        right: -@marginRight + @offset;
+        width: calc(100% + @marginRight - @offset);
         display: flex;
         align-items: center;
 
         .typo-undertekst {
+            color: #3e3832;
             font-weight: bold;
             font-size: 1rem;
             margin-left: 0.25rem;

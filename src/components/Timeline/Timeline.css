@@ -1,5 +1,4 @@
 .Timeline__wrapper {
-    max-width: calc(100% - 4rem);
     margin: 0;
     padding: 0;
 }
@@ -9,7 +8,7 @@
     min-width: 800px;
     overflow-x: scroll;
     display: flex;
-    padding: 1rem;
+    padding: 0;
 }
 
 hr {

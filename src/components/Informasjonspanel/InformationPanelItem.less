@@ -1,34 +1,33 @@
 @lineHeight: 1.5rem;
 
-.InformasjonspanelItem {
+.InformationPanelItem {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
     line-height: @lineHeight;
     height: @lineHeight;
 
     > .typo-undertekst {
+        display: flex;
         font-size: 1rem;
         white-space: nowrap;
         &:first-child {
             color: #59514b;
-            min-width: 9rem;
+            min-width: 11rem;
+            flex: 1;
         }
         &:nth-child(2) {
-            text-align: right;
+            color: #3e3832;
             font-weight: bold;
             flex: 1;
         }
-    }
 
-    .InformasjonspanelItem__right {
-        width: 1.5rem;
-
-        .typo-undertekst {
+        > a {
             color: #0067c5;
             text-decoration: underline;
-            text-align: right;
             font-size: 14px;
             cursor: pointer;
+            margin-left: 0.5rem;
         }
     }
 }

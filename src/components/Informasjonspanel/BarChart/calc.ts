@@ -18,7 +18,7 @@ export const lastTwelveMonths = () => {
  * @param {number} width - Diagrammets bredde i piksler
  * @return {number} Strekens horisontale plassering i piksler fra venstre i diagrammet
  */
-export const calculateYearPinPosition = width => {
+export const calculateYearPinPosition = (width: number) => {
     const monthsOffset = Math.abs(moment().month() - 11);
     const ratio = width / 12.0;
     return monthsOffset * ratio;
@@ -30,7 +30,11 @@ export const calculateYearPinPosition = width => {
  * @param {number} height - Diagrammets høyde i piksler
  * @return Søylens høyde i piksler
  */
-export const incomeToHeight = (income, maxIncome, height) => {
+export const incomeToHeight = (
+    income: number,
+    maxIncome: number,
+    height: number
+) => {
     const ratio = height / maxIncome;
     return ratio * income;
 };

@@ -25,6 +25,24 @@ export interface TimelineRow {
     periods: TimelinePeriod[];
 }
 
+export interface Employment {
+    arbeidsgiver: string;
+    arbeidsforhold: string;
+    yrkesbeskrivelse: string;
+    arbeidstidsordning: string;
+    stillingsprosent: number;
+    start: string;
+    end?: string;
+}
+
+export interface Salary {
+    beregnetInntekt: number;
+    gjennomsnittligInntekt: number;
+    sammenligningsgrunnlag: number;
+    omregnetÅrsinntekt: number;
+    lønnstype?: string;
+}
+
 export interface CaseData {
     inngangsvilkår: CaseField[];
     oppfølging: CaseField[];
@@ -33,4 +51,6 @@ export interface CaseData {
     sykepengeperiode: CaseField[];
     utbetaling: CaseField[];
     timelineData: TimelineRow[];
+    employment: Employment;
+    salary: Salary;
 }

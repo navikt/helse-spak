@@ -1,32 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Undertekst } from 'nav-frontend-typografi';
-import { toKroner } from '../../../../utils/locale';
-import { useElementSize } from '../../../../hooks/useElementSize';
-import './Søylediagram.less';
+import { formatCurrency } from '../../../utility/locale';
+import { useElementSize } from '../../../hooks/useElementSize';
 import {
     calculateYearPinPosition,
     incomeToHeight,
     lastTwelveMonths
 } from './calc';
+import './BarChart.less';
 
 const months = lastTwelveMonths();
 
-const withDiagramdata = Component => {
-    const randomIncome = (low, high) => {
-        const offset = Math.random() * Math.abs(low - high);
-        return Math.floor(low) + Math.floor(offset);
-    };
-
-    const incomes = new Array(12).fill(0).map(() => randomIncome(20000, 35000));
-    return props => <Component incomes={incomes} {...props} />;
+const randomIncome = (low: number, high: number) => {
+    const offset = Math.random() * Math.abs(low - high);
+    return Math.floor(low) + Math.floor(offset);
 };
 
-/* Viser et søylediagram over rapportert inntekt de siste 12 mnd.
- */
-const Søylediagram = withDiagramdata(({ incomes }) => {
-    const ref = useRef();
+const incomes = new Array(12).fill(0).map(() => randomIncome(20000, 25000));
+
+const BarChart = () => {
+    const ref = useRef<HTMLDivElement>(null);
     const [maxHeight, maxWidth] = useElementSize(ref);
-    const [heights, setHeights] = useState([]);
+    const [heights, setHeights] = useState<number[]>([]);
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(0);
 
@@ -44,12 +39,12 @@ const Søylediagram = withDiagramdata(({ incomes }) => {
     }, [incomes]);
 
     return (
-        <div className="Søylediagram" ref={ref}>
-            <div className="søyler">
+        <div className="BarChart" ref={ref}>
+            <div className="BarChart__bars">
                 {heights.map((height, i) => (
                     <div
-                        key={`søyle-${i}`}
-                        className="søyle"
+                        key={`BarChart__bar-${i}`}
+                        className="BarChart__bar"
                         style={{ height: `${height}px` }}
                     />
                 ))}
@@ -71,14 +66,14 @@ const Søylediagram = withDiagramdata(({ incomes }) => {
                 style={{ bottom: `${incomeToHeight(min, max, maxHeight)}px` }}
             >
                 <div className="pin" />
-                <Undertekst>{toKroner(min)}</Undertekst>
+                <Undertekst>{formatCurrency(min)}</Undertekst>
             </div>
             <div className="max">
                 <div className="pin" />
-                <Undertekst>{toKroner(max)}</Undertekst>
+                <Undertekst>{formatCurrency(max)}</Undertekst>
             </div>
         </div>
     );
-});
+};
 
-export default Søylediagram;
+export default BarChart;

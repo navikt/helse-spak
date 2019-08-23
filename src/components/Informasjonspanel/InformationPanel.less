@@ -1,25 +1,26 @@
 @lineHeight: 1.5rem;
 
-.Informasjonspanel.panel {
-    max-width: 1233px;
-    padding: 0 0 2.5rem 0;
+.InformationPanel {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     position: relative;
 
-    .Informasjonspanel__left,
-    .Informasjonspanel__mid,
-    .Informasjonspanel__right {
-        padding: 2.5rem;
-        flex: 1;
-
-        .typo-undertittel {
-            font-size: 18px;
-        }
+    .vertical.solid.Separator {
+        margin-top: 5rem;
+        height: @lineHeight * 7;
     }
 
-    .Informasjonspanel__left {
-        .InformasjonspanelItem__right {
+    .InformationPanel__left,
+    .InformationPanel__mid,
+    .InformationPanel__right {
+        padding: 2rem;
+        flex: 1;
+    }
+
+    .InformationPanel__left {
+        padding-left: 0;
+
+        .InformationPanelItem__right {
             width: 3rem;
         }
 
@@ -35,28 +36,25 @@
         }
     }
 
-    .Informasjonspanel__mid {
-        .InformasjonspanelItem:nth-child(3) {
-            margin-bottom: @lineHeight * 3;
-        }
-
-        > .typo-undertekst:last-child {
-            position: absolute;
-            bottom: 3.75rem;
-            color: #ba3a26;
-            font-weight: bold;
+    .InformationPanel__mid {
+        > *:nth-child(4) {
+            margin-bottom: @lineHeight * 2;
         }
     }
 
-    .Informasjonspanel__right {
+    .InformationPanel__right {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        padding-right: 0;
 
         > .typo-undertekst:last-child {
             position: absolute;
-            bottom: 3.75rem;
+            bottom: 2rem;
+            right: 2rem;
             color: #0067c5;
+            text-decoration: underline;
+            cursor: pointer;
         }
     }
 

@@ -1,5 +1,7 @@
 @import '../../../mixins';
 
+@menuItemColor: #3e3832;
+
 button.ExpandingMenuButton {
     display: flex;
     align-items: center;
@@ -15,15 +17,15 @@ button.ExpandingMenuButton {
     > .typo-undertittel {
         font-size: 18px;
         margin-left: 1rem;
-        color: #0067c5;
+        color: @menuItemColor;
     }
 
     &.ExpandingMenuButton--open > .typo-undertittel {
-        color: #3e3832;
+        color: @menuItemColor;
     }
 
     > i {
-        margin: 0 0.375rem;
+        margin: 0 0.375rem 0 1rem;
     }
 
     .ExpandingMenuButton__counter {
@@ -39,4 +41,5 @@ button.ExpandingMenuButton {
 ul.ExpandingMenuButton__content {
     list-style: none;
     padding: 0.5rem 0;
+    margin: 0;
 }

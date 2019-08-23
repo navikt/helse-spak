@@ -30,7 +30,7 @@ const setMomentMonth = month => {
     };
 };
 
-describe('Søylediagram calc', () => {
+describe('SYlediagram calc', () => {
     describe('lastTwelveMonths', () => {
         describe('calculates the last twelve months correctly', () => {
             it('when the current month is January', () => {

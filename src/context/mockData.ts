@@ -1,5 +1,5 @@
-import { TaskStatus } from './types';
-import { CaseData, TimelineRow } from './CaseContext';
+import { Employment, Salary, TaskStatus } from './types';
+import { CaseData, TimelineRow } from './types';
 
 const timelineData: TimelineRow[] = [
     {
@@ -69,6 +69,22 @@ const timelineData: TimelineRow[] = [
     }
 ];
 
+const employment: Employment = {
+    arbeidsgiver: 'Sykepleierhuset AS',
+    arbeidsforhold: 'Ordinær',
+    arbeidstidsordning: 'Ikke skift',
+    stillingsprosent: 60,
+    start: '12.0.2017',
+    yrkesbeskrivelse: 'Sykepleier'
+};
+
+const salary: Salary = {
+    beregnetInntekt: 17000,
+    omregnetÅrsinntekt: 204000,
+    gjennomsnittligInntekt: 17328,
+    sammenligningsgrunnlag: 155691
+};
+
 export const mockCaseData: CaseData = {
     sykdomsvilkår: [
         { label: 'Sykdomsvilkår', value: 'OK' },
@@ -108,5 +124,7 @@ export const mockCaseData: CaseData = {
         { label: 'Fordeling', value: '-' },
         { label: 'Utbetaling', value: '7 407,00 kr' }
     ],
-    timelineData
+    timelineData,
+    employment,
+    salary
 };
