@@ -25,7 +25,7 @@ const Picker = ({ items, preLabel, defaultLabel, className }: PickerProps) => {
     return (
         <button
             role="select"
-            className={`Picker ${className && className}`}
+            className={`Picker ${className ? className : ''}`}
             onClick={() => setShowPopup(!showPopup)}
         >
             <Normaltekst>

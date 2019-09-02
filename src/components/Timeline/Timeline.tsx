@@ -1,25 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RowLabels from './RowLabels';
 import TimelineRows from './TimelineRows';
 import { TimelineRow } from '../../context/types';
-import './Timeline.css';
 import { useTimelineData } from './useTimelineData';
+import './Timeline.less';
+import { Undertekst } from 'nav-frontend-typografi';
+import { NedChevron, OppChevron } from 'nav-frontend-chevron';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export interface TimelineProps {
     rows: TimelineRow[];
 }
 
+const timelineAnimation = {
+    initial: { height: 0, opacity: 0 },
+    animate: { height: 'unset', opacity: 1 },
+    exit: { height: 0, opacity: 0 },
+    transition: { type: 'tween' }
+};
+
 const Timeline = () => {
     const timelineData = useTimelineData();
 
+    const [showTimeline, setShowTimeline] = useState(true);
+
+    const onToggleTimeline = () => {
+        setShowTimeline(!showTimeline);
+    };
+
     return (
         <div className="Timeline__wrapper">
-            {timelineData && (
-                <div className="Timeline">
-                    <RowLabels rows={timelineData} />
-                    <TimelineRows rows={timelineData} />
-                </div>
-            )}
+            <button className="Timeline__toggle" onClick={onToggleTimeline}>
+                <Undertekst>{showTimeline ? 'Skjul' : 'Vis'}</Undertekst>
+                {showTimeline ? <OppChevron /> : <NedChevron />}
+            </button>
+            <AnimatePresence initial={false}>
+                {timelineData && showTimeline && (
+                    <motion.div className="Timeline" {...timelineAnimation}>
+                        <RowLabels rows={timelineData} />
+                        <TimelineRows rows={timelineData} />
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };

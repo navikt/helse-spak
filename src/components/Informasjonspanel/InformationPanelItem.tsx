@@ -7,10 +7,7 @@ interface InformationPanelItemProps {
     value?: React.ReactChild;
 }
 
-const InformationPanelItem = ({
-    label,
-    value
-}: InformationPanelItemProps) => (
+const InformationPanelItem = ({ label, value }: InformationPanelItemProps) => (
     <span className="InformationPanelItem">
         {label && <Undertekst>{label}</Undertekst>}
         {value && <Undertekst>{value}</Undertekst>}

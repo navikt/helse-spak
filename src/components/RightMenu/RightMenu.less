@@ -1,6 +1,70 @@
+@import '../../variables';
+
+@borderColor: #c6c2bf;
+
 .RightMenu {
-  border-left: 1px solid #c6c2bf;
-  width: 20rem;
-  min-height: calc(100vh - 3rem);
-  height: max-content;
+    border-left: 1px solid @borderColor;
+    width: 20rem;
+    min-height: calc(100vh - 3rem);
+    height: max-content;
+
+    .RightMenu__top {
+        height: 3.875rem;
+        border-bottom: 1px solid @borderColor;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+            position: relative;
+            width: 3.875rem;
+            background: rgba(250,250,250,1);
+            border: none;
+
+            &:hover:after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: -2px;
+                width: 100%;
+                height: 0;
+                border: 2px solid #0067c5;
+                z-index: 10;
+            }
+        }
+    }
+
+    .RightMenu__list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .RightMenu__item {
+            position: relative;
+            padding: 0.875rem;
+            margin: 0 1.5rem;
+            border-bottom: 1px solid @borderColor;
+
+            &:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 20%;
+                height: 60%;
+                border: 2px solid @greenNormal;
+                border-radius: 4px;
+            }
+
+            &.document:before {
+                border-color: #59514b;
+            }
+
+            &.note:before {
+                border-color: #b7b1a9;
+            }
+
+            p {
+                color: #3e3832
+            }
+        }
+    }
 }

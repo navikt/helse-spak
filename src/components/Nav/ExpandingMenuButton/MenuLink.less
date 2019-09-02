@@ -2,6 +2,7 @@
 
 @normalBackgroundColor: #f3f5f5;
 @unsolvedBackgroundColor: #ffe9cc;
+@unsolvedBorderColor: #b26d14;
 @offset: 4.5rem;
 @iconWidth: 2rem;
 
@@ -30,14 +31,16 @@ li.MenuLink {
 
     &.unsolved:focus > a,
     &.unsolved:hover > a {
-        .applyIcon(#ffe9cc, './img/Ikon_oppgave.svg');
+        .applyIcon(@unsolvedBackgroundColor, './img/Ikon_oppgave.svg');
     }
 
     &.unsolved > a {
+        .applyIcon(#f3f5f5, './img/Ikon_oppgave_hollow.svg');
         &.active {
             background: @unsolvedBackgroundColor;
+            box-shadow: inset 0 0 0 1px @unsolvedBorderColor;
+            .applyIcon(@unsolvedBackgroundColor, './img/Ikon_oppgave.svg');
         }
-        .applyIcon(#f3f5f5, './img/Ikon_oppgave.svg');
     }
 
     &.solved > a {
@@ -47,10 +50,13 @@ li.MenuLink {
     .typo-normal {
         &:first-child {
             flex: 1;
+            width: 70%;
+            color: #59514b;
         }
 
         &:last-child {
-            text-align: right;
+            font-weight: 600;
+            width: 30%;
         }
     }
 
@@ -58,18 +64,13 @@ li.MenuLink {
         color: #3e3832;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         height: 2rem;
-        padding: 0 @offset;
+        padding: 0 1.5rem 0 @offset;
         border-radius: 0.25rem 0 0 0.25rem;
         text-decoration: none;
         cursor: pointer;
         overflow: hidden;
         outline: none;
-
-        &.active {
-            .typo-normal {
-                font-weight: 600;
-            }
-        }
     }
 }

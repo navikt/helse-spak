@@ -22,7 +22,10 @@ const Nav = () => {
                 label="Sykepengegrunnlag"
                 data={sykepengegrunnlag}
             />
-            <ExpandingMenuButton label="Sykepengeperiode" data={sykepengeperiode} />
+            <ExpandingMenuButton
+                label="Sykepengeperiode"
+                data={sykepengeperiode}
+            />
             <ExpandingMenuButton label="Utbetaling" data={utbetaling} />
             <ExpandingMenuButton label="Oppsummering" />
         </nav>

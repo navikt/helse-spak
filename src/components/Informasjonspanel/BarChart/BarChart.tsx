@@ -7,16 +7,24 @@ import {
     incomeToHeight,
     lastTwelveMonths
 } from './calc';
+import { motion } from 'framer-motion';
 import './BarChart.less';
 
 const months = lastTwelveMonths();
 
-const randomIncome = (low: number, high: number) => {
-    const offset = Math.random() * Math.abs(low - high);
-    return Math.floor(low) + Math.floor(offset);
-};
+let baseIncome = 25000;
 
-const incomes = new Array(12).fill(0).map(() => randomIncome(20000, 25000));
+const incomes = new Array(12)
+    .fill(0)
+    .map(() => baseIncome)
+    .map(() => {
+        if (Math.random() > 0.9) {
+            baseIncome += Math.floor(
+                Math.random() * (baseIncome * Math.random())
+            );
+        }
+        return baseIncome;
+    });
 
 const BarChart = () => {
     const ref = useRef<HTMLDivElement>(null);
@@ -42,10 +50,17 @@ const BarChart = () => {
         <div className="BarChart" ref={ref}>
             <div className="BarChart__bars">
                 {heights.map((height, i) => (
-                    <div
+                    <motion.div
                         key={`BarChart__bar-${i}`}
                         className="BarChart__bar"
-                        style={{ height: `${height}px` }}
+                        animate={{
+                            height
+                        }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 200,
+                            damping: 15
+                        }}
                     />
                 ))}
             </div>

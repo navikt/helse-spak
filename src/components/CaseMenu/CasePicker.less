@@ -2,6 +2,7 @@
 
 @idWidth: 10rem;
 @idPadding: 1rem;
+@chevronWidth: 2.375rem;
 @borderThickness: 0.125rem;
 
 .CasePicker {
@@ -12,11 +13,10 @@
 
     > .typo-normal {
         text-align: center;
-        width: @idWidth;
     }
 
     .Picker__popup {
-        left: @idWidth + @borderThickness + @idPadding * 2;
+        left: calc(100% - @chevronWidth + @borderThickness);
         top: @idHeight + @borderThickness;
         padding: 1rem;
     }

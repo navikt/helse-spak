@@ -1,7 +1,7 @@
 import React from 'react';
 import { Key } from '../../../hooks/useKeyboard';
 import { PeriodStatus } from '../types';
-import './PeriodLine.css';
+import './PeriodLine.less';
 
 interface PeriodLineProps {
     label: string;

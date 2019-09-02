@@ -1,10 +1,15 @@
+@import '../../../variables';
+
+@height: 0.5rem;
+@heightSelected: @height + 0.125rem;
+
 .Period {
     position: absolute;
     min-width: 10px;
-    height: 10px;
-    background: #6ab889;
+    height: @height;
+    background: @greenNormal;
     transform: translateY(-50%);
-    border-radius: 5px;
+    border-radius: @height / 2;
 }
 
 .Period.rejected {
@@ -29,7 +34,7 @@
     background: #ffa733;
     box-shadow: 0 0 0 2px #0067c5;
     outline: none;
-    height: 12px;
-    min-width: 12px;
-    border-radius: 12px;
+    height: @heightSelected;
+    min-width: @heightSelected;
+    border-radius: @heightSelected / 2;
 }

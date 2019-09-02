@@ -26,10 +26,7 @@ const InformationPanel = () => {
     return (
         <div className="InformationPanel">
             <div className="InformationPanel__left">
-                <div>
-                    <div className="Ikon__arbeidsgiver" />
-                    <Undertittel>{employment.arbeidsgiver}</Undertittel>
-                </div>
+                <Undertittel>{employment.arbeidsgiver}</Undertittel>
                 <InformationPanelItem
                     label="Arbeidsforhold"
                     value={employment.arbeidsforhold}

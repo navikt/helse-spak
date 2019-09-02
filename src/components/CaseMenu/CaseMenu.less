@@ -1,3 +1,5 @@
+@import '../../variables';
+
 @menuPadding: 1.5rem;
 
 .CaseMenu {
@@ -13,7 +15,7 @@
         align-items: center;
 
         > *:not(:first-child) {
-            margin-left: 2rem;
+            margin-left: 1rem;
         }
     }
 
@@ -28,7 +30,7 @@
         align-items: center;
 
         .typo-normal {
-            font-size: 0.875rem;
+            font-size: @fontSizeSmall;
             color: #3e3832;
         }
     }
@@ -41,6 +43,7 @@
             display: flex;
             align-items: center;
             margin: 0.125rem 0;
+            font-size: @fontSizeSmall;
 
             .Icon {
                 margin-left: 0;

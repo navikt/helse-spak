@@ -1,29 +1,29 @@
 @color: #c6c2bf;
-@margin: 0.5rem;
+@margin: 0;
 
 .Separator {
-  border: none;
-  background: none;
+    border: none;
+    background: none;
 
-  &.horizontal {
-    height: 0;
-    width: 100%;
-    border-top: 1px solid @color;
-    margin: @margin 0;
+    &.horizontal {
+        height: 0;
+        width: 100%;
+        border-top: 1px solid @color;
+        margin: @margin 0;
 
-    &.dotted {
-      border-top: 1px dotted @color;
+        &.dotted {
+            border-top: 1px dotted @color;
+        }
     }
-  }
 
-  &.vertical {
-    width: 0;
-    height: 100%;
-    border-right: 1px solid @color;
-    margin: 0 @margin;
+    &.vertical {
+        width: 0;
+        height: 100%;
+        border-right: 1px solid @color;
+        margin: 0 @margin;
 
-    &.dotted {
-      border-right: 1px dotted @color;
+        &.dotted {
+            border-right: 1px dotted @color;
+        }
     }
-  }
 }
