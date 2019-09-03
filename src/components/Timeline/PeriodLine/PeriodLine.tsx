@@ -1,5 +1,6 @@
 import React from 'react';
 import { Key } from '../../../hooks/useKeyboard';
+import { motion } from 'framer-motion';
 import { PeriodStatus } from '../types';
 import './PeriodLine.less';
 
@@ -10,6 +11,18 @@ interface PeriodLineProps {
     width: number;
     onClick?: () => void;
 }
+
+const periodLineAnimation = (left: number, width: number) => ({
+    animate: {
+        left,
+        width: `${width}px`
+    },
+    transition: {
+        type: 'spring',
+        damping: 15
+    },
+    initial: false
+});
 
 const PeriodLine = ({
     label,
@@ -25,17 +38,14 @@ const PeriodLine = ({
     };
 
     return (
-        <div
+        <motion.div
             role="button"
             aria-label={label}
             className={`Period ${status}`}
-            style={{
-                left: xPosition,
-                width: `${width}px`
-            }}
             tabIndex={0}
             onClick={onClick}
             onKeyDown={handleKeyPress}
+            {...periodLineAnimation(xPosition, width)}
         />
     );
 };

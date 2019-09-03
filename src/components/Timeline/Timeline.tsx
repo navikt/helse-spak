@@ -13,9 +13,9 @@ export interface TimelineProps {
 }
 
 const timelineAnimation = {
-    initial: { height: 0, opacity: 0 },
-    animate: { height: 'unset', opacity: 1 },
-    exit: { height: 0, opacity: 0 },
+    initial: { height: 0 },
+    animate: { height: 'unset' },
+    exit: { height: 0 },
     transition: { type: 'tween' }
 };
 
