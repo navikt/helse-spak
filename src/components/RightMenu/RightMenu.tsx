@@ -1,4 +1,5 @@
 import React from 'react';
+import RightMenuButton, { RightMenuButtonIcon } from './RightMenuButton';
 import { Element, Undertekst } from 'nav-frontend-typografi';
 import './RightMenu.less';
 
@@ -50,9 +51,9 @@ const RightMenu = () => {
     return (
         <div className="RightMenu">
             <div className="RightMenu__top">
-                <button></button>
-                <button></button>
-                <button></button>
+                <RightMenuButton icon={RightMenuButtonIcon.History} />
+                <RightMenuButton icon={RightMenuButtonIcon.Dialogue} />
+                <RightMenuButton icon={RightMenuButtonIcon.Document} />
             </div>
             <ul className="RightMenu__list">
                 {items.map((item, i) => (

@@ -1,0 +1,57 @@
+button.RightMenuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 3.875rem;
+  background: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+
+  > .circle {
+    background-color: #e7e9e9;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+
+    &.history {
+      background-image: url('./img/history.svg');
+      background-position-x: 0.185rem;
+    }
+
+    &.dialogue {
+      background-image: url('img/dialogue.svg');
+      background-size: 1.25rem;
+      background-position-y: 0.5rem;
+    }
+
+    &.document {
+      background-image: url('./img/document.svg');
+      background-size: 1.125rem;
+      background-position-x: 0.4125rem;
+    }
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:hover:after,
+  &:focus:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: -2px;
+    width: 100%;
+    height: 0;
+    border-radius: 2px;
+    border: 2px solid #0067c5;
+    z-index: 10;
+  }
+}
