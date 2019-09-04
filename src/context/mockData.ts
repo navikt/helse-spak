@@ -1,5 +1,5 @@
-import { Employment, Salary, TaskStatus } from './types';
-import { CaseData, TimelineRow } from './types';
+import { CaseData, Employment, Salary, TaskStatus, TimelineRow } from './types';
+import { IconType } from '../components/Icon';
 
 const timelineData: TimelineRow[] = [
     {
@@ -103,9 +103,9 @@ export const mockCaseData: CaseData = {
         { label: 'Dialogmøte', value: '-' }
     ],
     sykepengegrunnlag: [
-        { label: 'Månedsinntekt', value: '17 000,00' },
+        { label: 'Månedsinntekt', value: '17 000,00', icon: IconType.Inntekstmelding },
         { label: 'Omregnet til årsinntekt', value: '204 000,00' },
-        { label: 'Sammenligningsgr.lag', value: '155 691,00' },
+        { label: 'Sammenligningsgr.lag', value: '155 691,00', icon: IconType.Aaregisteret },
         { label: 'Fastsatt inntekt', value: '-', status: TaskStatus.Unsolved },
         { label: 'Sykepengegrunnlag', value: '-' },
         { label: 'Dagsats', value: '-' }

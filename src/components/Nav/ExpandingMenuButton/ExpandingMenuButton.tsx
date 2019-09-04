@@ -4,6 +4,7 @@ import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { TaskStatus } from '../../../context/types';
 import './ExpandingMenuButton.less';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export interface ExpandingMenuButtonData {
     label: string;
@@ -15,6 +16,16 @@ interface ExpandingMenuButtonProps {
     label: string;
     data?: ExpandingMenuButtonData[];
 }
+
+const expandingAnimation = {
+    initial: { height: 0 },
+    animate: { height: 'unset' },
+    exit: { height: 0 },
+    transition: {
+        type: 'spring',
+        restDelta: 0.5
+    }
+};
 
 const ExpandingMenuButton = ({ label, data }: ExpandingMenuButtonProps) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -44,17 +55,22 @@ const ExpandingMenuButton = ({ label, data }: ExpandingMenuButtonProps) => {
                     </Normaltekst>
                 )}
             </button>
-            {isOpen && data && (
-                <ul className="ExpandingMenuButton__content">
-                    {data.map(item => (
-                        <MenuLink
-                            key={item.label}
-                            {...item}
-                            path={label.toLowerCase()}
-                        />
-                    ))}
-                </ul>
-            )}
+            <AnimatePresence initial={true}>
+                {isOpen && data && (
+                    <motion.ul
+                        className="ExpandingMenuButton__content"
+                        {...expandingAnimation}
+                    >
+                        {data.map(item => (
+                            <MenuLink
+                                key={item.label}
+                                {...item}
+                                path={label.toLowerCase()}
+                            />
+                        ))}
+                    </motion.ul>
+                )}
+            </AnimatePresence>
         </>
     );
 };

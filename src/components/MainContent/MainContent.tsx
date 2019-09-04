@@ -1,11 +1,12 @@
 import React from 'react';
+import Section from './Section';
 import Timeline from '../Timeline';
+import CasePanel from '../CasePanel/CasePanel';
 import PersonBar from '../PersonBar';
 import Separator, { SeparatorType } from '../Separator';
-import InformationPanel from '../Informasjonspanel/InformationPanel';
+import InformationPanel from '../InformationPanel';
 import './MainContent.less';
-import Section from './Section';
-import CasePanel from '../CasePanel/CasePanel';
+import ActionPanel from '../ActionPanel';
 
 const casePanelText =
     '31% avvik - Mer enn 25% avvik mellom oppgitt månedsinntekt og rapportert årsinntekt';
@@ -20,13 +21,17 @@ const MainContent = () => {
             <Section>
                 <Timeline />
             </Section>
+            <Separator />
             <Section>
                 <CasePanel text={casePanelText}>
                     <InformationPanel />
                 </CasePanel>
             </Section>
             <Section>
-                <Separator type={SeparatorType.Dotted}/>
+                <Separator type={SeparatorType.Dotted} />
+            </Section>
+            <Section>
+                <ActionPanel />
             </Section>
         </div>
     );

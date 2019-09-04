@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Icon, { IconType } from '../Icon';
 import BarChart from './BarChart';
 import InformationPanelItem from './InformationPanelItem';
 import Separator, { SeparatorAlignment } from '../Separator';
@@ -64,12 +65,14 @@ const InformationPanel = () => {
                 <InformationPanelItem
                     label="Beregnet mnd. inntekt"
                     value={`${formatCurrency(salary.beregnetInntekt)} kr`}
+                    icon={IconType.Inntekstmelding}
                 />
                 <InformationPanelItem
                     label="Gj.snitt mnd. inntekt"
                     value={`${formatCurrency(
                         salary.gjennomsnittligInntekt
                     )} kr`}
+                    icon={IconType.Aaregisteret}
                 />
                 <InformationPanelItem label="Avvik" value={`${avvik} %`} />
                 <InformationPanelItem
@@ -85,7 +88,10 @@ const InformationPanel = () => {
             </div>
             <Separator alignment={SeparatorAlignment.Vertical} />
             <div className="InformationPanel__right">
-                <Undertittel>Rapportert mnd. inntekt</Undertittel>
+                <Undertittel>
+                    Rapportert mnd. inntekt
+                    <Icon type={IconType.Aaregisteret} />
+                </Undertittel>
                 <BarChart />
                 <Undertekst>Detaljer</Undertekst>
             </div>

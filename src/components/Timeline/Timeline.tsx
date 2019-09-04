@@ -13,10 +13,14 @@ export interface TimelineProps {
 }
 
 const timelineAnimation = {
-    initial: { height: 0 },
-    animate: { height: 'unset' },
-    exit: { height: 0 },
-    transition: { type: 'tween' }
+    initial: { height: 0, opacity: 0 },
+    animate: { height: 'unset', opacity: 1 },
+    exit: { height: 0, opacity: 0 },
+    transition: {
+        type: 'tween',
+        ease: 'easeInOut',
+        duration: 0.2
+    }
 };
 
 const Timeline = () => {

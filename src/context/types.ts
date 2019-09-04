@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { PeriodStatus } from '../components/Timeline/types';
+import { IconType } from '../components/Icon';
 
 export enum TaskStatus {
     Solved = 'solved',
@@ -11,6 +12,7 @@ export interface CaseField {
     label: string;
     value?: string;
     status?: TaskStatus;
+    icon?: IconType;
 }
 
 export interface TimelinePeriod {

@@ -1,0 +1,92 @@
+.ActionPanel {
+  > .typo-undertittel:first-child {
+    margin-bottom: 1.5rem;
+  }
+
+  .typo-undertittel,
+  .typo-normal,
+  .skjemaelement__label,
+  .skjema__legend {
+    color: #3e3832;
+    font-size: 1rem;
+  }
+
+  input,
+  select {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 1rem;
+    color: #3e3832;
+  }
+
+  select {
+    padding: 0.5rem 1rem;
+  }
+
+  .ActionPanel__content {
+    display: flex;
+    justify-content: space-between;
+
+    .ActionPanel__right {
+      flex: 1;
+      margin-left: 3rem;
+
+      > .skjemaelement.textarea__container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        > .textarea--medMeta__wrapper {
+          flex: 1;
+          display: flex;
+
+          textarea {
+            font-family: 'Source Sans Pro', Arial, sans-serif;
+            font-size: 1rem;
+            height: unset !important;
+            flex: 1;
+          }
+        }
+      }
+    }
+
+    .ActionPanel__left {
+      .skjemaelement__label {
+        display: flex;
+        align-items: center;
+
+        .skjemaelement {
+          margin: 0;
+
+          .skjemaelement__label {
+            display: none;
+          }
+        }
+      }
+
+      > .skjemaelement:first-child {
+        margin-bottom: 2rem;
+      }
+      .skjema__legend {
+        margin-bottom: 1.5rem;
+      }
+
+      .checkboks + .skjemaelement__label:before,
+      .radioknapp + .skjemaelement__label:before {
+        top: unset;
+      }
+
+      .ActionPanel__radio {
+        display: flex;
+        align-items: center;
+
+        .typo-normal:first-child {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+
+  .knapp {
+    margin: 1.5rem 1rem 0 0;
+  }
+}

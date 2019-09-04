@@ -6,18 +6,18 @@
 @offset: 4.5rem;
 @iconWidth: 2rem;
 
-li.MenuLink {
-    .applyIcon(@color, @url) {
-        background: @color;
+.applyIcon(@color, @url) {
+    background: @color;
 
-        &:before {
-            content: url(@url);
-            width: @iconWidth;
-            height: 100%;
-            margin: 0 (@offset - @iconWidth) 0 -@offset;
-        }
+    &:before {
+        content: url(@url);
+        width: @iconWidth;
+        height: 100%;
+        margin: 0 (@offset - @iconWidth) 0 -@offset;
     }
+}
 
+li.MenuLink {
     outline: none;
 
     &:hover > a,
@@ -38,7 +38,7 @@ li.MenuLink {
         .applyIcon(#f3f5f5, './img/Ikon_oppgave_hollow.svg');
         &.active {
             background: @unsolvedBackgroundColor;
-            box-shadow: inset 0 0 0 1px @unsolvedBorderColor;
+            box-shadow: inset 1px 0 0 1px @unsolvedBorderColor;
             .applyIcon(@unsolvedBackgroundColor, './img/Ikon_oppgave.svg');
         }
     }
@@ -48,15 +48,18 @@ li.MenuLink {
     }
 
     .typo-normal {
+        @firstChildPercentage: 50%;
+        display: flex;
+        align-items: center;
+
         &:first-child {
-            flex: 1;
-            width: 70%;
+            width: @firstChildPercentage;
             color: #59514b;
         }
 
         &:last-child {
             font-weight: 600;
-            width: 30%;
+            width: 100% - @firstChildPercentage;
         }
     }
 

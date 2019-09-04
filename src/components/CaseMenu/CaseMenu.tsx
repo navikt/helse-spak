@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Picker from '../Picker';
 import CasePicker from './CasePicker';
 import Progresjonsbar from '../Progresjonsbar/Progresjonsbar';
@@ -25,6 +25,7 @@ const CaseMenu = ({
     sykmelder = 'Nasse Nøff / Fjellet Legesenter',
     foerstegang = true
 }: Case) => {
+    const [current, setCurrent] = useState(1);
     return (
         <Panel className="CaseMenu">
             <div className="CaseMenu__top">
@@ -45,7 +46,7 @@ const CaseMenu = ({
                     {sykmelder}
                 </Normaltekst>
             </div>
-            <Progresjonsbar current={1} total={2} />
+            <Progresjonsbar current={current} total={2} />
         </Panel>
     );
 };

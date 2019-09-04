@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Icon, { IconType } from '../../Icon';
+import { Key } from '../../../hooks/useKeyboard';
 import { NavLink } from 'react-router-dom';
 import { TaskStatus } from '../../../context/types';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './MenuLink.less';
-import { Key } from '../../../hooks/useKeyboard';
 
 interface MenuLinkProps {
     label: string;
     value?: string;
     status?: TaskStatus;
+    icon?: IconType;
     path?: string;
 }
 
@@ -20,7 +22,7 @@ const sanitizePath = (path?: string) =>
         .replace('.', '')
         .toLowerCase();
 
-const MenuLink = ({ label, value, status, path }: MenuLinkProps) => {
+const MenuLink = ({ label, value, status, icon, path }: MenuLinkProps) => {
     const linkRef = useRef<HTMLAnchorElement>(null);
     const [isActive, setIsActive] = useState(false);
 
@@ -58,7 +60,10 @@ const MenuLink = ({ label, value, status, path }: MenuLinkProps) => {
                 innerRef={linkRef}
             >
                 <Normaltekst>{label}</Normaltekst>
-                <Normaltekst>{value}</Normaltekst>
+                <Normaltekst>
+                    {value}
+                    {icon && <Icon type={icon} />}
+                </Normaltekst>
             </NavLink>
         </li>
     );
