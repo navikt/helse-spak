@@ -3,10 +3,9 @@
 @borderColor: #c6c2bf;
 
 .RightMenu {
+    position: relative;
     border-left: 1px solid @borderColor;
     min-width: 19rem;
-    min-height: calc(100vh - 3rem);
-    height: max-content;
 
     .RightMenu__top {
         height: 3.875rem;
@@ -19,6 +18,10 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow-y: scroll;
 
         .RightMenu__item {
             position: relative;
