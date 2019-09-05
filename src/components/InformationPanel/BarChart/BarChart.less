@@ -1,6 +1,7 @@
 @barWidth: 3%;
 @barMargin: 3%;
 @chartWidth: 200px;
+@chartMaxWidth: 400px;
 
 @marginTop: 3rem;
 @marginRight: 4rem;
@@ -18,6 +19,7 @@
         justify-content: space-between;
         height: 120px;
         min-width: @chartWidth;
+        max-width: @chartMaxWidth;
     }
 
     .BarChart__bar {
@@ -30,6 +32,7 @@
     .months {
         display: flex;
         min-width: @chartWidth;
+        max-width: @chartMaxWidth;
         justify-content: space-between;
 
         > .typo-undertekst {
