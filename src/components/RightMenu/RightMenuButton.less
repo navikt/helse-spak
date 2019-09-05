@@ -11,29 +11,12 @@ button.RightMenuButton {
 
   > .circle {
     background-color: #e7e9e9;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 1.5rem;
     width: 2rem;
     height: 2rem;
     border-radius: 1rem;
-
-    &.history {
-      background-image: url('./img/history.svg');
-      background-position-x: 0.185rem;
-    }
-
-    &.dialogue {
-      background-image: url('img/dialogue.svg');
-      background-size: 1.25rem;
-      background-position-y: 0.5rem;
-    }
-
-    &.document {
-      background-image: url('./img/document.svg');
-      background-size: 1.125rem;
-      background-position-x: 0.5rem;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &:hover,

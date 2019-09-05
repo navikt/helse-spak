@@ -1,0 +1,48 @@
+@import '../../variables';
+
+@borderColor: #c6c2bf;
+@verticalPadding: 1.125rem;
+
+.RightMenuItem {
+  position: relative;
+  padding: @verticalPadding 0.875rem;
+  margin: 0 1.5rem;
+  border-bottom: 1px solid @borderColor;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: @verticalPadding;
+    height: calc(100% - (@verticalPadding * 2));
+    border: 2px solid @greenNormal;
+    border-radius: 4px;
+  }
+
+  &.document:before {
+    border-color: #59514b;
+  }
+
+  &.note:before {
+    border-color: #337c9b;
+  }
+
+  .RightMenuItem__content {
+    display: flex;
+
+    .Icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      min-width: 1.25rem;
+      margin-right: 0.5rem;
+    }
+
+    p {
+      color: #3e3832
+    }
+  }
+}

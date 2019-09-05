@@ -36,7 +36,9 @@ const mockItems = [
     {
         date: '2019-01-04',
         label: 'Notat',
-        type: ItemType.Note
+        type: ItemType.Note,
+        body:
+            'Mottatt telefon med korrigerende opplysninger på inntektsmelding. Feil uttfylt på ferie.'
     },
     {
         date: '2019-01-04',

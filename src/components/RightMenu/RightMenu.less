@@ -5,7 +5,8 @@
 .RightMenu {
     position: relative;
     border-left: 1px solid @borderColor;
-    min-width: 19rem;
+    min-width: 10rem;
+    max-width: 19rem;
 
     .RightMenu__top {
         height: 3.875rem;
@@ -22,34 +23,5 @@
         flex-direction: column;
         height: 100%;
         overflow-y: scroll;
-
-        .RightMenu__item {
-            position: relative;
-            padding: 0.875rem;
-            margin: 0 1.5rem;
-            border-bottom: 1px solid @borderColor;
-
-            &:before {
-                content: '';
-                position: absolute;
-                left: 0;
-                top: 20%;
-                height: 60%;
-                border: 2px solid @greenNormal;
-                border-radius: 4px;
-            }
-
-            &.document:before {
-                border-color: #59514b;
-            }
-
-            &.note:before {
-                border-color: #b7b1a9;
-            }
-
-            p {
-                color: #3e3832
-            }
-        }
     }
 }

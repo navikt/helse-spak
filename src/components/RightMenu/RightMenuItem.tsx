@@ -1,23 +1,23 @@
-import React from 'react';
-import { Element, Undertekst } from 'nav-frontend-typografi';
+import React, { ReactNode, useState } from 'react';
+import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { motion } from 'framer-motion';
+import './RightMenuItem.less';
+import { ItemType } from './RightMenu';
+import { AcceptedIcon, DocumentIcon, PersonIcon } from './icons';
 
 interface RightMenuProps {
     id: string;
+    date: string;
     type: string;
     label: string;
-    date: string;
     onRemove: (id: string) => void;
+    body?: string;
 }
 
 const itemAnimation = {
     initial: {
         opacity: 0,
         y: '-100%'
-    },
-    animate: {
-        opacity: 1,
-        y: 0
     },
     whileHover: {
         scale: 1.05
@@ -31,15 +31,48 @@ const itemAnimation = {
     }
 };
 
-const RightMenuItem = ({ id, type, label, date, onRemove }: RightMenuProps) => {
+const RightMenuItem = ({
+    id,
+    type,
+    label,
+    date,
+    onRemove,
+    body
+}: RightMenuProps) => {
+    const [hasFocus, setHasFocus] = useState(false);
+
+    const strokeColor = '#3e3832';
+    const icon =
+        type === ItemType.Accepted ? (
+            <AcceptedIcon strokeColor={strokeColor} />
+        ) : type === ItemType.Document ? (
+            <DocumentIcon strokeColor={strokeColor} />
+        ) : (
+            <PersonIcon strokeColor={strokeColor} />
+        );
+
     return (
         <motion.li
             positionTransition
-            className={`RightMenu__item ${type}`}
+            className={`RightMenuItem ${type}`}
+            tabIndex={0}
+            onFocus={() => setHasFocus(true)}
+            onBlur={() => setHasFocus(false)}
+            animate={{
+                opacity: 1,
+                y: 0,
+                scale: hasFocus ? 1.05 : 1
+            }}
             {...itemAnimation}
         >
-            <Undertekst>{date}</Undertekst>
-            <Element>{label}</Element>
+            <div className="RightMenuItem__content">
+                {icon}
+                <div className="content">
+                    <Undertekst>{date}</Undertekst>
+                    <Element>{label}</Element>
+                    {body && <Normaltekst>{body}</Normaltekst>}
+                </div>
+            </div>
         </motion.li>
     );
 };
