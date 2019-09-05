@@ -1,8 +1,9 @@
-@barWidth: 7px;
-@barMargin: 13px;
+@barWidth: 3%;
+@barMargin: 3%;
+@chartWidth: 200px;
 
 @marginTop: 3rem;
-@marginRight: 6rem;
+@marginRight: 4rem;
 
 .BarChart {
     position: relative;
@@ -11,28 +12,31 @@
     margin-bottom: 1.25rem;
 
     .BarChart__bars {
+        position: relative;
         display: flex;
         align-items: flex-end;
+        justify-content: space-between;
         height: 120px;
+        min-width: @chartWidth;
     }
 
     .BarChart__bar {
         background: #66a4dc;
         width: @barWidth;
-        margin-right: @barMargin;
         position: relative;
         bottom: 0;
     }
 
     .months {
         display: flex;
+        min-width: @chartWidth;
+        justify-content: space-between;
 
         > .typo-undertekst {
             display: flex;
             justify-content: center;
             color: #78706a;
             width: @barWidth;
-            margin-right: @barMargin;
         }
     }
 
@@ -43,7 +47,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        transform: translateX(calc(-50% - @barMargin / 2));
+        transform: translateX(-50%);
 
         .typo-undertekst {
             font-size: 0.75rem;
@@ -61,8 +65,8 @@
     .max {
         @offset: 2rem;
         position: absolute;
-        right: -@marginRight + @offset;
-        width: calc(100% + @marginRight - @offset);
+        left: 0;
+        width: calc(100% + @marginRight);
         display: flex;
         align-items: center;
 

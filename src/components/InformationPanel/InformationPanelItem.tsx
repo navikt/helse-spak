@@ -9,16 +9,22 @@ interface InformationPanelItemProps {
     icon?: IconType;
 }
 
-const InformationPanelItem = ({ label, value, icon }: InformationPanelItemProps) => (
-    <span className="InformationPanelItem">
-        {label && <Undertekst>{label}</Undertekst>}
+const InformationPanelItem = ({
+    label,
+    value,
+    icon
+}: InformationPanelItemProps) => (
+    <>
+        {label && (
+            <Undertekst className="InformationPanel__item">{label}</Undertekst>
+        )}
         {value && (
-            <Undertekst>
+            <Undertekst className="InformationPanel__item">
                 {value}
                 {icon && <Icon type={icon} />}
             </Undertekst>
         )}
-    </span>
+    </>
 );
 
 export default InformationPanelItem;

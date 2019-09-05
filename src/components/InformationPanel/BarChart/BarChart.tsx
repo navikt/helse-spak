@@ -71,7 +71,7 @@ const BarChart = () => {
             </div>
             <div
                 className="year"
-                style={{ left: `${calculateYearPinPosition(maxWidth)}px` }}
+                style={{ left: `${calculateYearPinPosition(maxWidth)}%` }}
             >
                 <Undertekst>2019</Undertekst>
                 <div className="pin" />

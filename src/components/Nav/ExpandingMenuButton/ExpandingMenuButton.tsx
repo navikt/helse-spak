@@ -22,8 +22,8 @@ const expandingAnimation = {
     animate: { height: 'unset' },
     exit: { height: 0 },
     transition: {
-        type: 'spring',
-        restDelta: 0.5
+        type: 'tween',
+        duration: 0.2
     }
 };
 

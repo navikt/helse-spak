@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Picker from '../Picker';
 import CasePicker from './CasePicker';
-import Progresjonsbar from '../Progresjonsbar/Progresjonsbar';
+import ProgressBar from '../ProgressBar';
 import Icon, { IconType } from '../Icon/Icon';
 import { Panel } from 'nav-frontend-paneler';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -46,7 +46,7 @@ const CaseMenu = ({
                     {sykmelder}
                 </Normaltekst>
             </div>
-            <Progresjonsbar current={current} total={2} />
+            <ProgressBar current={current} total={2} />
         </Panel>
     );
 };

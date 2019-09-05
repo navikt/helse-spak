@@ -1,24 +1,34 @@
 @lineHeight: 1.5rem;
+@panelPadding: 1.5rem;
 
 .InformationPanel {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
 
     .vertical.solid.Separator {
-        margin-top: 5rem;
+        margin-top: 4.5rem;
         height: @lineHeight * 7;
+    }
+
+    .InformationPanel__grid {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-column-gap: 0.5rem;
     }
 
     .InformationPanel__left,
     .InformationPanel__mid,
     .InformationPanel__right {
-        padding: 1.5rem;
+        padding: @panelPadding;
         flex: 1;
 
         .typo-undertittel {
             display: flex;
             align-items: center;
+            font-size: 1rem;
+            line-height: @lineHeight;
+            margin-bottom: @lineHeight;
 
             .Icon {
                 margin-left: 0.5rem;
@@ -28,15 +38,11 @@
 
     .InformationPanel__left {
         padding-left: 0;
-
-        .InformationPanelItem__right {
-            width: 3rem;
-        }
     }
 
     .InformationPanel__mid {
-        > *:nth-child(4) {
-            margin-bottom: @lineHeight * 2;
+        .InformationPanel__grid:not(:last-child) {
+            margin-bottom: @lineHeight;
         }
     }
 
@@ -48,17 +54,11 @@
 
         > .typo-undertekst:last-child {
             position: absolute;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: @panelPadding;
+            right: 0;
             color: #0067c5;
             text-decoration: underline;
             cursor: pointer;
         }
-    }
-
-    .typo-undertittel {
-        font-size: 1rem;
-        line-height: @lineHeight;
-        margin-bottom: @lineHeight;
     }
 }

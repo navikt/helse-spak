@@ -28,63 +28,76 @@ const InformationPanel = () => {
         <div className="InformationPanel">
             <div className="InformationPanel__left">
                 <Undertittel>{employment.arbeidsgiver}</Undertittel>
-                <InformationPanelItem
-                    label="Arbeidsforhold"
-                    value={employment.arbeidsforhold}
-                />
-                <InformationPanelItem
-                    label="Startdato"
-                    value={
-                        employment.start ? loggableValue(employment.start) : ''
-                    }
-                />
-                <InformationPanelItem
-                    label="Sluttdato"
-                    value={employment.end ? loggableValue(employment.end) : ''}
-                />
-                <InformationPanelItem
-                    label="Lønnstype"
-                    value={salary.lønnstype || ''}
-                />
-                <InformationPanelItem
-                    label="Yrkesbeskrivelse"
-                    value={employment.yrkesbeskrivelse || ''}
-                />
-                <InformationPanelItem
-                    label="Arbeidstidsordning"
-                    value={employment.arbeidstidsordning || ''}
-                />
-                <InformationPanelItem
-                    label="Stillingsprosent"
-                    value={loggableValue(`${employment.stillingsprosent}%`)}
-                />
+                <div className="InformationPanel__grid">
+                    <InformationPanelItem
+                        label="Arbeidsforhold"
+                        value={employment.arbeidsforhold}
+                    />
+                    <InformationPanelItem
+                        label="Startdato"
+                        value={
+                            employment.start
+                                ? loggableValue(employment.start)
+                                : ''
+                        }
+                    />
+                    <InformationPanelItem
+                        label="Sluttdato"
+                        value={
+                            employment.end ? loggableValue(employment.end) : '-'
+                        }
+                    />
+                    <InformationPanelItem
+                        label="Lønnstype"
+                        value={salary.lønnstype || '-'}
+                    />
+                    <InformationPanelItem
+                        label="Yrkesbeskrivelse"
+                        value={employment.yrkesbeskrivelse || '-'}
+                    />
+                    <InformationPanelItem
+                        label="Arbeidstidsordning"
+                        value={employment.arbeidstidsordning || '-'}
+                    />
+                    <InformationPanelItem
+                        label="Stillingsprosent"
+                        value={loggableValue(`${employment.stillingsprosent}%`)}
+                    />
+                </div>
             </div>
             <Separator alignment={SeparatorAlignment.Vertical} />
             <div className="InformationPanel__mid">
                 <Undertittel>Mnd. inntekt siste 3 mnd</Undertittel>
-                <InformationPanelItem
-                    label="Beregnet mnd. inntekt"
-                    value={`${formatCurrency(salary.beregnetInntekt)} kr`}
-                    icon={IconType.Inntekstmelding}
-                />
-                <InformationPanelItem
-                    label="Gj.snitt mnd. inntekt"
-                    value={`${formatCurrency(
-                        salary.gjennomsnittligInntekt
-                    )} kr`}
-                    icon={IconType.Aaregisteret}
-                />
-                <InformationPanelItem label="Avvik" value={`${avvik} %`} />
-                <InformationPanelItem
-                    label="Omregnet årsinntekt"
-                    value={`${formatCurrency(salary.omregnetÅrsinntekt)} kr`}
-                />
-                <InformationPanelItem
-                    label="Sammenligningsgrunnl."
-                    value={`${formatCurrency(
-                        salary.sammenligningsgrunnlag
-                    )} kr`}
-                />
+                <div className="InformationPanel__grid">
+                    <InformationPanelItem
+                        label="Beregnet mnd. inntekt"
+                        value={`${formatCurrency(salary.beregnetInntekt)} kr`}
+                        icon={IconType.Inntekstmelding}
+                    />
+                    <InformationPanelItem
+                        label="Gj.snitt mnd. inntekt"
+                        value={`${formatCurrency(
+                            salary.gjennomsnittligInntekt
+                        )} kr`}
+                        icon={IconType.Aaregisteret}
+                    />
+                    <InformationPanelItem label={`Avvik: ${avvik} %`} />
+                </div>
+                <InformationPanelItem label="Årsinntekt" />
+                <div className="InformationPanel__grid">
+                    <InformationPanelItem
+                        label="Omregnet årsinntekt"
+                        value={`${formatCurrency(
+                            salary.omregnetÅrsinntekt
+                        )} kr`}
+                    />
+                    <InformationPanelItem
+                        label="Sammenligningsgrunnl."
+                        value={`${formatCurrency(
+                            salary.sammenligningsgrunnlag
+                        )} kr`}
+                    />
+                </div>
             </div>
             <Separator alignment={SeparatorAlignment.Vertical} />
             <div className="InformationPanel__right">

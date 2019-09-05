@@ -2,12 +2,12 @@
 @borderRadius: 0.25rem;
 @borderThickness: 0.25rem;
 
-.Progresjonsbar__wrapper {
+.ProgressBar__wrapper {
     position: relative;
     display: flex;
     align-items: center;
 
-    .Progresjonsbar {
+    .ProgressBar {
         flex: 1;
         background: #cde7d8;
         border-radius: @borderRadius;
@@ -16,7 +16,7 @@
         max-width: calc(100% - @borderThickness * 2);
         overflow: hidden;
 
-        .Progresjonsbar__bar {
+        .ProgressBar__bar {
             height: @borderThickness * 2;
             background: #42b970;
             border-radius: @borderRadius;
@@ -25,7 +25,7 @@
         }
     }
 
-    .Progresjonsbar__counter {
+    .ProgressBar__counter {
         margin-right: 0.5rem;
         color: #3e3832;
     }

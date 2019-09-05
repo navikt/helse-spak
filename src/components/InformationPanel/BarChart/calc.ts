@@ -20,8 +20,12 @@ export const lastTwelveMonths = () => {
  */
 export const calculateYearPinPosition = (width: number) => {
     const monthsOffset = Math.abs(moment().month() - 11);
-    const ratio = width / 12.0;
-    return monthsOffset * ratio;
+    const barWidthRatio = 0.03; // Width of bar is 3% of container width
+    const barWidth = width * barWidthRatio;
+    const barMargin = (width - barWidth * 12) / 11;
+    const positionInPixels =
+        (barWidth + barMargin) * monthsOffset - barMargin / 2;
+    return (positionInPixels / width) * 100;
 };
 
 /* Regner ut en søyles høyde i piksler.
