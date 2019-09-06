@@ -20,7 +20,7 @@ const itemAnimation = {
         y: '-100%'
     },
     whileHover: {
-        scale: 1.05
+        x: -10
     },
     exit: {
         x: 25,
@@ -61,7 +61,7 @@ const RightMenuItem = ({
             animate={{
                 opacity: 1,
                 y: 0,
-                scale: hasFocus ? 1.05 : 1
+                x: hasFocus ? -10 : 0
             }}
             {...itemAnimation}
         >

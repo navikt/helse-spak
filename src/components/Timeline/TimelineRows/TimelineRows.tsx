@@ -4,7 +4,7 @@ import YearPins from '../YearPins';
 import { useElementWidth } from '../../../hooks';
 import { earliestDate, extractDates, latestDate, yearsBetween } from '../calc';
 import { TimelineProps } from '../Timeline';
-import './TimelineRows.css';
+import './TimelineRows.less';
 
 const TimelineRows = ({ rows }: TimelineProps) => {
     const ref = useRef<HTMLDivElement>(null);

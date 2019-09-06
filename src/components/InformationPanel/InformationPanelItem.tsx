@@ -16,10 +16,12 @@ const InformationPanelItem = ({
 }: InformationPanelItemProps) => (
     <>
         {label && (
-            <Undertekst className="InformationPanel__item">{label}</Undertekst>
+            <Undertekst className="InformationPanel__item label">
+                {label}
+            </Undertekst>
         )}
         {value && (
-            <Undertekst className="InformationPanel__item">
+            <Undertekst className="InformationPanel__item value">
                 {value}
                 {icon && <Icon type={icon} />}
             </Undertekst>

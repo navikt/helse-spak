@@ -5,8 +5,7 @@
 .RightMenu {
     position: relative;
     border-left: 1px solid @borderColor;
-    min-width: 10rem;
-    max-width: 19rem;
+    width: 19rem;
 
     .RightMenu__top {
         height: 3.875rem;
@@ -17,11 +16,11 @@
 
     .RightMenu__list {
         list-style: none;
-        padding: 0;
+        padding: 0 0 1rem 0;
         margin: 0;
         display: flex;
         flex-direction: column;
-        height: 100%;
         overflow-y: scroll;
+        overflow-x: hidden;
     }
 }

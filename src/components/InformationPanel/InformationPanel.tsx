@@ -81,9 +81,9 @@ const InformationPanel = () => {
                         )} kr`}
                         icon={IconType.Aaregisteret}
                     />
-                    <InformationPanelItem label={`Avvik: ${avvik} %`} />
+                    <InformationPanelItem value={`Avvik: ${avvik} %`} />
                 </div>
-                <InformationPanelItem label="Årsinntekt" />
+                <InformationPanelItem value="Årsinntekt" />
                 <div className="InformationPanel__grid">
                     <InformationPanelItem
                         label="Omregnet årsinntekt"
