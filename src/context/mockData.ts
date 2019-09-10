@@ -82,7 +82,21 @@ const salary: Salary = {
     beregnetInntekt: 17000,
     omregnetÅrsinntekt: 204000,
     gjennomsnittligInntekt: 17328,
-    sammenligningsgrunnlag: 155691
+    sammenligningsgrunnlag: 155691,
+    lastTwelveMonths: [
+        11523,
+        11523,
+        11523,
+        11523,
+        11523,
+        11523,
+        11523,
+        11523,
+        11523,
+        17328,
+        17328,
+        17328
+    ]
 };
 
 export const mockCaseData: CaseData = {

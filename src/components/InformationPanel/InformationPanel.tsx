@@ -105,7 +105,7 @@ const InformationPanel = () => {
                     Rapportert mnd. inntekt
                     <Icon type={IconType.Aaregisteret} />
                 </Undertittel>
-                <BarChart />
+                <BarChart data={salary.lastTwelveMonths} />
                 <Undertekst>Detaljer</Undertekst>
             </div>
         </div>

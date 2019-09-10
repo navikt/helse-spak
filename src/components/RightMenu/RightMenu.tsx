@@ -61,6 +61,7 @@ const addWindowProperty = (prop: string, val: any) => {
 
 const RightMenu = () => {
     const [items, setItems] = useState(mockItems);
+    const [filters, setFilters] = useState<ItemType[]>([]);
 
     useEffect(() => {
         addWindowProperty('addMockItem', (label: string, type: ItemType) => {
@@ -87,19 +88,36 @@ const RightMenu = () => {
     return (
         <div className="RightMenu">
             <div className="RightMenu__top">
-                <RightMenuButton icon={RightMenuButtonIcon.History} />
-                <RightMenuButton icon={RightMenuButtonIcon.Dialogue} />
-                <RightMenuButton icon={RightMenuButtonIcon.Document} />
+                <RightMenuButton
+                    icon={RightMenuButtonIcon.History}
+                    onClick={() => setFilters([])}
+                    active
+                />
+                <RightMenuButton
+                    icon={RightMenuButtonIcon.Dialogue}
+                    onClick={() => setFilters([ItemType.Note])}
+                />
+                <RightMenuButton
+                    icon={RightMenuButtonIcon.Document}
+                    onClick={() => setFilters([ItemType.Document])}
+                />
             </div>
             <ul className="RightMenu__list">
                 <AnimatePresence initial={false}>
-                    {items.map(item => (
-                        <RightMenuItem
-                            key={item.id}
-                            onRemove={removeItem}
-                            {...item}
-                        />
-                    ))}
+                    {items
+                        .filter(item => {
+                            return (
+                                filters.length === 0 ||
+                                filters.find(filter => filter === item.type)
+                            );
+                        })
+                        .map(item => (
+                            <RightMenuItem
+                                key={item.id}
+                                onRemove={removeItem}
+                                {...item}
+                            />
+                        ))}
                 </AnimatePresence>
             </ul>
         </div>

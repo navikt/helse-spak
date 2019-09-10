@@ -12,21 +12,11 @@ import './BarChart.less';
 
 const months = lastTwelveMonths();
 
-let baseIncome = 25000;
+interface BarCharProps {
+    data: number[];
+}
 
-const incomes = new Array(12)
-    .fill(0)
-    .map(() => baseIncome)
-    .map(() => {
-        if (Math.random() > 0.9) {
-            baseIncome += Math.floor(
-                Math.random() * (baseIncome * Math.random())
-            );
-        }
-        return baseIncome;
-    });
-
-const BarChart = () => {
+const BarChart = ({ data }: BarCharProps) => {
     const ref = useRef<HTMLDivElement>(null);
     const [maxHeight, maxWidth] = useElementSize(ref);
     const [heights, setHeights] = useState<number[]>([]);
@@ -36,15 +26,15 @@ const BarChart = () => {
     useEffect(() => {
         if (maxHeight > 0 && max > 0) {
             setHeights(
-                incomes.map(income => incomeToHeight(income, max, maxHeight))
+                data.map(income => incomeToHeight(income, max, maxHeight))
             );
         }
-    }, [maxHeight, max]);
+    }, [maxHeight, max, data]);
 
     useEffect(() => {
-        setMin(incomes.reduce((prev, curr) => Math.min(prev, curr)));
-        setMax(incomes.reduce((prev, curr) => Math.max(prev, curr)));
-    }, [incomes]);
+        setMin(data.reduce((prev, curr) => Math.min(prev, curr)));
+        setMax(data.reduce((prev, curr) => Math.max(prev, curr)));
+    }, [data]);
 
     return (
         <div className="BarChart" ref={ref}>

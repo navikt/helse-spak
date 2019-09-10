@@ -42,6 +42,7 @@ export interface Salary {
     gjennomsnittligInntekt: number;
     sammenligningsgrunnlag: number;
     omregnetÅrsinntekt: number;
+    lastTwelveMonths: number[];
     lønnstype?: string;
 }
 

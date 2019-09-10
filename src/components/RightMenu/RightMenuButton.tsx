@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './RightMenuButton.less';
 import { DialogueIcon, DocumentIcon, HistoryIcon } from './icons';
 
@@ -10,11 +10,17 @@ export enum RightMenuButtonIcon {
 
 interface RightMenuButtonProps {
     icon: RightMenuButtonIcon;
+    active?: boolean;
+    onClick?: (event: React.MouseEvent) => void;
 }
 
-const RightMenuButton = ({ icon }: RightMenuButtonProps) => {
+const RightMenuButton = ({ icon, active, onClick }: RightMenuButtonProps) => {
+    const [isActive, setIsActive] = useState(active);
     return (
-        <button className="RightMenuButton">
+        <button
+            className={`RightMenuButton ${isActive ? 'active' : ''}`}
+            onClick={onClick}
+        >
             <div className="circle">
                 {icon === RightMenuButtonIcon.History ? (
                     <HistoryIcon />
