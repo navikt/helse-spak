@@ -4,6 +4,10 @@
   align-items: center;
   cursor: pointer;
 
+  .Clipboard__children.focused {
+    border-bottom: 1px dotted #000;
+  }
+
   &:hover .Clipboard__children {
     border-bottom: 1px dotted #000;
   }
@@ -15,13 +19,20 @@
     padding: 0;
     margin-left: 0.25rem;
     cursor: pointer;
+
+    &:focus, &:active {
+      outline: none;
+
+      svg {
+        fill: #0267c5;
+      }
+    }
+
   }
 
   &:focus,
   &:active,
   &:hover {
-    outline: none;
-
     svg {
       fill: #0267c5;
     }

@@ -19,7 +19,9 @@ interface ClipboardProps {
 
 const Clipboard = ({ children }: ClipboardProps) => {
     const [didCopy, setDidCopy] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const ref = useRef<HTMLDivElement>(null);
+    const childrenClass = `Clipboard__children ${isFocused ? 'focused' : ''}`;
 
     const copy = (e: React.MouseEvent<HTMLElement>) => {
         e.stopPropagation();
@@ -37,9 +39,13 @@ const Clipboard = ({ children }: ClipboardProps) => {
     return (
         <div className="Clipboard" onClick={copy}>
             <div ref={ref}>
-                <div className="Clipboard__children">{children}</div>
+                <div className={childrenClass}>{children}</div>
             </div>
-            <button onClick={copy}>
+            <button
+                onClick={copy}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+            >
                 <AnimatePresence initial={false} exitBeforeEnter>
                     <motion.div {...animation} key={didCopy ? 'check' : 'copy'}>
                         <Icon type={didCopy ? IconType.Check : IconType.Copy} />
