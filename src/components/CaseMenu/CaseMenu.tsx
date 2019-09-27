@@ -38,7 +38,7 @@ const CaseMenu = ({
             {foerstegang && <EtikettInfo>Førstegangs.</EtikettInfo>}
             <div className="CaseMenu__info">
                 <Normaltekst>
-                    <Icon type={IconType.Arbeidsgiver} />
+                    <Icon type={IconType.Employer} />
                     {arbeidsgiver} / {fom} - {tom} / {`${sykmeldingsgrad}%`}
                 </Normaltekst>
                 <Normaltekst>
@@ -46,7 +46,6 @@ const CaseMenu = ({
                     {sykmelder}
                 </Normaltekst>
             </div>
-            <ProgressBar current={current} total={2} />
         </Panel>
     );
 };

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import { motion } from 'framer-motion';
 import './RightMenuItem.less';
@@ -14,6 +14,10 @@ interface RightMenuProps {
     body?: string;
 }
 
+const transition = {
+    duration: 0.2
+};
+
 const itemAnimation = {
     initial: {
         opacity: 0,
@@ -26,19 +30,10 @@ const itemAnimation = {
         x: 25,
         opacity: 0
     },
-    transition: {
-        duration: 0.1
-    }
+    transition
 };
 
-const RightMenuItem = ({
-    id,
-    type,
-    label,
-    date,
-    onRemove,
-    body
-}: RightMenuProps) => {
+const RightMenuItem = ({ type, label, date, body }: RightMenuProps) => {
     const [hasFocus, setHasFocus] = useState(false);
 
     const strokeColor = '#3e3832';
@@ -53,7 +48,7 @@ const RightMenuItem = ({
 
     return (
         <motion.li
-            positionTransition
+            positionTransition={transition}
             className={`RightMenuItem ${type}`}
             tabIndex={0}
             onFocus={() => setHasFocus(true)}
