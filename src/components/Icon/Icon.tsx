@@ -3,12 +3,16 @@ import EmployerIcon from './Icons/EmployerIcon';
 import SykmelderIcon from './Icons/SykmelderIcon';
 import AARegisteretIcon from './Icons/AARegisteretIcon';
 import InntektsmeldingIcon from './Icons/InntektsmeldingIcon';
+import CopyIcon from './Icons/CopyIcon';
+import CheckIcon from './Icons/CheckIcon';
 
 export enum IconType {
     Aaregisteret = 'aaregisteret',
     Inntekstmelding = 'inntektsmelding',
     Sykmelder = 'sykmelder',
-    Employer = 'employer'
+    Employer = 'employer',
+    Check = 'check',
+    Copy = 'copy'
 }
 
 export interface CommonIconProps {
@@ -36,6 +40,10 @@ const renderIcon = (type: IconType, props: CommonIconProps) => {
             return <InntektsmeldingIcon {...props} />;
         case IconType.Sykmelder:
             return <SykmelderIcon {...props} />;
+        case IconType.Check:
+            return <CheckIcon />
+        case IconType.Copy:
+            return <CopyIcon />;
     }
 };
 
