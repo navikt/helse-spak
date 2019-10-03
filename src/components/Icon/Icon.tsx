@@ -3,6 +3,7 @@ import CopyIcon from './Icons/CopyIcon';
 import MaleIcon from './Icons/MaleIcon';
 import CheckIcon from './Icons/CheckIcon';
 import PhoneIcon from './Icons/PhoneIcon';
+import SearchIcon from './Icons/SearchIcon';
 import FemaleIcon from './Icons/FemaleIcon';
 import EmployerIcon from './Icons/EmployerIcon';
 import SykmelderIcon from './Icons/SykmelderIcon';
@@ -17,6 +18,7 @@ export enum IconType {
     Sykmelder = 'sykmelder',
     Employer = 'employer',
     Female = 'female',
+    Search = 'search',
     Phone = 'phone',
     Check = 'check',
     Male = 'male',
@@ -52,6 +54,8 @@ const renderIcon = (type: IconType, props: CommonIconProps) => {
             return <EmployerIcon {...props} />;
         case IconType.Female:
             return <FemaleIcon {...props} />;
+        case IconType.Search:
+            return <SearchIcon {...props} />;
         case IconType.Phone:
             return <PhoneIcon />;
         case IconType.Check:

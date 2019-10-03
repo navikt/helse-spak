@@ -1,0 +1,73 @@
+@import '../../variables';
+
+@borderRadius: 0.25rem;
+
+.Search {
+  position: relative;
+  border: 1px solid @grey;
+  border-radius: @borderRadius;
+  display: flex;
+  height: 1.875rem;
+  width: 24rem;
+
+  &:hover {
+    border-color: @greyLight;
+  }
+
+  input[type='text'] {
+    padding: 0.5rem;
+    background-color: @greyDark;
+    color: @greyLight;
+    font-size: 0.875rem;
+    border: none;
+    border-radius: @borderRadius;
+    flex: 1;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #ead744;
+    }
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    background: none;
+
+    svg.Icon {
+      padding: 0 !important;
+    }
+
+    &:active,
+    &:focus {
+      outline: none;
+    }
+
+    &:hover svg > g > path,
+    &:focus svg > g > path {
+      fill: @greyLight;
+    }
+
+    &:active svg > g > path {
+      fill: @grey;
+    }
+  }
+}
+
+::-webkit-input-placeholder {
+  color: @greyNormal;
+}
+::-moz-placeholder {
+  color: @greyNormal;
+}
+:-ms-input-placeholder {
+  color: @greyNormal;
+}
+::placeholder {
+  color: @greyNormal;
+}

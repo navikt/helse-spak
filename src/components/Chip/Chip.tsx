@@ -7,16 +7,24 @@ interface ChipProps {
     label: string;
     done?: boolean;
     active?: boolean;
+    onClick?: () => void;
 }
 
-const Chip = ({ label, done, active }: ChipProps) => {
+const Chip = ({ label, done, active, onClick }: ChipProps) => {
     const [isActive, setActive] = useState(active);
 
     const className =
         'Chip' + (isActive ? ' active' : '') + (done ? ' done' : '');
 
     return (
-        <div className={className} onClick={() => setActive(!isActive)}>
+        <div
+            className={className}
+            onClick={() => {
+                setActive(!isActive);
+                onClick && onClick();
+            }}
+            tabIndex={0}
+        >
             <Normaltekst>
                 {done && <Icon type={IconType.Check} size={16} />}
                 {label}

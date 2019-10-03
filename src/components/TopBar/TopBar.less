@@ -1,13 +1,21 @@
+@import '../../variables';
+
 .TopBar {
     width: 100%;
-    background: #3e3832;
+    background: @greyDark;
     color: #fff;
-    height: 3rem;
+    height: 3.125rem;
     display: flex;
     align-items: center;
 
+    .Separator {
+        margin: 0 1.5rem;
+        height: 1.75rem;
+        border-color: @grey;
+    }
+
     h1.typo-sidetittel {
-        margin-left: 2rem;
+        margin-left: 1.5rem;
         font-size: 1.125rem;
         line-height: 1.125rem;
     }
