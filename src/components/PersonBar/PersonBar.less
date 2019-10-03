@@ -1,34 +1,20 @@
 .PersonBar {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     margin: 0.25rem 0;
 
     > *:not(:first-child) {
         margin-left: 1rem;
     }
 
-    .typo-undertekst {
+    .typo-normal,
+    .typo-element {
+        display: flex;
+        align-items: center;
         color: #3e3832;
-        display: flex;
-        align-items: center;
     }
 
-    .divider {
-        height: 60%;
-        border-right: 1px solid #c6c2bf;
-    }
-
-    .PersonBar__gender {
-        @size: 0.875rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #0067c5;
-        color: #fff;
-        height: @size;
-        width: @size;
-        border-radius: @size / 7;
-        font-size: 0.75rem;
-        margin-left: 0.5rem;
+    .typo-element:first-child svg {
+        margin-right: 0.375rem;
     }
 }

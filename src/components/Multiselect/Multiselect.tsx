@@ -1,18 +1,26 @@
 import React from 'react';
 import Select from 'react-select';
-import PropTypes from 'prop-types';
 import { guid } from 'nav-frontend-js-utils';
+import { Option } from './types';
 import './Multiselect.less';
 
-const Multiselect = ({ label, placeholder, options }) => {
+interface MultiselectProps {
+    label: string;
+    options: Option[];
+    placeholder?: string;
+}
+
+const Multiselect = ({
+    label,
+    options,
+    placeholder = 'Velg...'
+}: MultiselectProps) => {
     const ariaId = guid();
     return (
         <div className="Multiselect">
             {label && (
                 <div className="Multiselect__label">
-                    <label id={ariaId}>
-                        {label}
-                    </label>
+                    <label id={ariaId}>{label}</label>
                 </div>
             )}
             <Select
@@ -26,17 +34,6 @@ const Multiselect = ({ label, placeholder, options }) => {
             />
         </div>
     );
-};
-
-Multiselect.propTypes = {
-    label: PropTypes.string,
-    placeholder: PropTypes.string,
-    options: PropTypes.arrayOf(
-        PropTypes.shape({
-            value: PropTypes.string,
-            label: PropTypes.string
-        })
-    )
 };
 
 export default Multiselect;

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Icon, { IconType } from '../../Icon';
-import { Key } from '../../../hooks/useKeyboard';
+import Icon, { IconType } from '../Icon';
+import StatusIndicator from '../StatusIndicator';
+import { motion } from 'framer-motion';
+import { Key } from '../../hooks/useKeyboard';
 import { NavLink } from 'react-router-dom';
-import { TaskStatus } from '../../../context/types';
+import { TaskStatus } from '../../context/types';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './MenuLink.less';
 
@@ -46,7 +48,7 @@ const MenuLink = ({ label, value, status, icon, path }: MenuLinkProps) => {
     }, [linkRef.current]);
 
     return (
-        <li
+        <motion.li
             key={label}
             role="menuitem"
             className={classNames}
@@ -54,6 +56,9 @@ const MenuLink = ({ label, value, status, icon, path }: MenuLinkProps) => {
             onKeyDown={onLinkKeyDown}
             tabIndex={0}
         >
+            {status === TaskStatus.Unsolved && (
+                <StatusIndicator taskCount={1} />
+            )}
             <NavLink
                 to={`/${sanitizePath(path)}/${sanitizePath(label)}`}
                 activeClassName="active"
@@ -65,7 +70,7 @@ const MenuLink = ({ label, value, status, icon, path }: MenuLinkProps) => {
                     {icon && <Icon type={icon} />}
                 </Normaltekst>
             </NavLink>
-        </li>
+        </motion.li>
     );
 };
 

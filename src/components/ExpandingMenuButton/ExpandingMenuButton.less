@@ -1,22 +1,32 @@
-@import '../../../mixins';
+@import '../../mixins';
+@import '../../variables';
 
-@menuItemColor: #3e3832;
+@menuItemColor: @greyDark;
 
 button.ExpandingMenuButton {
+    position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     border: none;
     background: none;
     cursor: pointer;
     width: 100%;
     height: 2.5rem;
-    padding: 0;
+    padding: 0 1.5rem;
 
-    .focusable();
+    &:focus,
+    &:active {
+        outline: none;
+    }
+
+    &:hover {
+        background: @greyLight;
+    }
 
     > .typo-undertittel {
         font-size: 18px;
-        margin-left: 1rem;
+        margin-left: 2rem;
         color: @menuItemColor;
     }
 
@@ -26,16 +36,6 @@ button.ExpandingMenuButton {
 
     > i {
         margin: 0 0.375rem 0 1rem;
-    }
-
-    .ExpandingMenuButton__counter {
-        display: none; // disabler visning inntil videre
-        background: #ff9100;
-        font-weight: 600;
-        width: 1.5rem;
-        height: 1.5rem;
-        border-radius: 1rem;
-        margin-left: 1rem;
     }
 }
 

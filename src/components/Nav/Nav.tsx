@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import ExpandingMenuButton from './ExpandingMenuButton';
+import ExpandingMenuButton from '../ExpandingMenuButton';
 import { CaseContext } from '../../context/CaseContext';
 import './Nav.less';
 

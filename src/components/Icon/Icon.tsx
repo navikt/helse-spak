@@ -1,17 +1,25 @@
 import React from 'react';
+import CopyIcon from './Icons/CopyIcon';
+import MaleIcon from './Icons/MaleIcon';
+import CheckIcon from './Icons/CheckIcon';
+import PhoneIcon from './Icons/PhoneIcon';
+import FemaleIcon from './Icons/FemaleIcon';
 import EmployerIcon from './Icons/EmployerIcon';
 import SykmelderIcon from './Icons/SykmelderIcon';
 import AARegisteretIcon from './Icons/AARegisteretIcon';
 import InntektsmeldingIcon from './Icons/InntektsmeldingIcon';
-import CopyIcon from './Icons/CopyIcon';
-import CheckIcon from './Icons/CheckIcon';
+import NonBinaryGenderIcon from './Icons/NonBinaryGenderIcon';
 
 export enum IconType {
-    Aaregisteret = 'aaregisteret',
+    NonBinaryGender = 'nonbinarygender',
     Inntekstmelding = 'inntektsmelding',
+    Aaregisteret = 'aaregisteret',
     Sykmelder = 'sykmelder',
     Employer = 'employer',
+    Female = 'female',
+    Phone = 'phone',
     Check = 'check',
+    Male = 'male',
     Copy = 'copy'
 }
 
@@ -32,16 +40,24 @@ interface IconProps {
 
 const renderIcon = (type: IconType, props: CommonIconProps) => {
     switch (type) {
-        case IconType.Aaregisteret:
-            return <AARegisteretIcon {...props} />;
-        case IconType.Employer:
-            return <EmployerIcon {...props} />;
+        case IconType.NonBinaryGender:
+            return <NonBinaryGenderIcon {...props} />;
         case IconType.Inntekstmelding:
             return <InntektsmeldingIcon {...props} />;
+        case IconType.Aaregisteret:
+            return <AARegisteretIcon {...props} />;
         case IconType.Sykmelder:
             return <SykmelderIcon {...props} />;
+        case IconType.Employer:
+            return <EmployerIcon {...props} />;
+        case IconType.Female:
+            return <FemaleIcon {...props} />;
+        case IconType.Phone:
+            return <PhoneIcon />;
         case IconType.Check:
-            return <CheckIcon />
+            return <CheckIcon />;
+        case IconType.Male:
+            return <MaleIcon {...props} />;
         case IconType.Copy:
             return <CopyIcon />;
     }

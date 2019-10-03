@@ -1,5 +1,5 @@
 @lineHeight: 1.5rem;
-@panelPadding: 1.5rem;
+@panelPadding: 2rem;
 
 .InformationPanel {
     display: flex;
@@ -7,8 +7,8 @@
     position: relative;
 
     .vertical.solid.Separator {
-        margin-top: 4.5rem;
-        height: @lineHeight * 7;
+        margin: 3rem 0;
+        height: 180px;
     }
 
     .InformationPanel__grid {
@@ -20,7 +20,7 @@
     .InformationPanel__left,
     .InformationPanel__mid,
     .InformationPanel__right {
-        padding: @panelPadding;
+        padding: 0 @panelPadding;
         max-width: 500px;
         flex: 1;
 
@@ -29,7 +29,7 @@
             align-items: center;
             font-size: 1rem;
             line-height: @lineHeight;
-            margin-bottom: @lineHeight;
+            margin-bottom: 1.25rem;
 
             .Icon {
                 margin-left: 0.5rem;
@@ -50,7 +50,6 @@
     .InformationPanel__right {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
         padding-right: 0;
 
         > .typo-undertekst:last-child {
@@ -60,6 +59,10 @@
             color: #0067c5;
             text-decoration: underline;
             cursor: pointer;
+        }
+
+        > .BarChart {
+            margin-top: 2rem;
         }
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Section from './Section';
+import TaskBar from '../TaskBar';
 import PersonBar from '../PersonBar';
 import ActionPanel from '../ActionPanel';
 import InformationPanel from '../InformationPanel';
@@ -13,6 +14,10 @@ const MainContent = () => {
                 <PersonBar />
             </Section>
             <Separator />
+            <TaskBar />
+            <Section>
+                <Separator type={SeparatorType.Dotted} />
+            </Section>
             <Section>
                 <InformationPanel />
             </Section>

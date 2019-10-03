@@ -20,8 +20,7 @@ export const lastTwelveMonths = () => {
  */
 export const calculateYearPinPosition = (width: number) => {
     const monthsOffset = Math.abs(moment().month() - 11);
-    const barWidthRatio = 0.03; // Width of bar is 3% of container width
-    const barWidth = width * barWidthRatio;
+    const barWidth = 4;
     const barMargin = (width - barWidth * 12) / 11;
     const positionInPixels =
         (barWidth + barMargin) * monthsOffset - barMargin / 2;

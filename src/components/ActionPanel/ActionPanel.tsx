@@ -1,8 +1,9 @@
 import React from 'react';
 import { Flatknapp, Knapp } from 'nav-frontend-knapper';
-import { Fieldset, Input, Radio, Select, TextareaControlled } from 'nav-frontend-skjema';
+import { Fieldset, Input, Radio, TextareaControlled } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel, Element } from 'nav-frontend-typografi';
 import './ActionPanel.less';
+import Multiselect from '../Multiselect';
 
 const ActionPanel = () => {
     return (
@@ -10,13 +11,17 @@ const ActionPanel = () => {
             <Undertittel>Begrunnelse for fastsettelse</Undertittel>
             <div className="ActionPanel__content">
                 <div className="ActionPanel__left">
-                    <Select label="Begrunnelse for resultat">
-                        <option>Velg begrunnelse</option>
-                        <option>test 1</option>
-                        <option>test 2</option>
-                        <option>test 3</option>
-                    </Select>
-                    <Fieldset legend="Skjønnsmessig fastsettelse av sykepengegrunnlaget">
+                    <Multiselect
+                        label="Begrunnelse for resultat"
+                        options={[
+                            { value: 'test_1', label: 'etikett1' },
+                            { value: 'test_2', label: 'etikett2' },
+                            { value: 'test_3', label: 'etikett3' },
+                            { value: 'test_4', label: 'etikett4' },
+                            { value: 'test_5', label: 'etikett5' }
+                        ]}
+                    />
+                    <Fieldset legend="Vurdering">
                         <Radio
                             label={
                                 <div className="ActionPanel__radio">

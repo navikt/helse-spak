@@ -1,0 +1,29 @@
+.TaskBar {
+  display: flex;
+  align-items: center;
+  padding: 1.75rem 1.75rem 0.75rem;
+
+  >
+
+  .TaskBar__tasks {
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+
+    > * {
+      user-select: none;
+    }
+
+    > *:not(:first-child) {
+      margin-left: 0.5rem;
+    }
+  }
+
+  > .typo-element {
+    font-size: 18px;
+
+    &:not(:first-child) {
+      margin-left: 0.75rem;
+    }
+  }
+}

@@ -11,18 +11,8 @@ import './InformationPanel.less';
 const InformationPanel = () => {
     const { employment, salary } = useContext(CaseContext);
 
-    const avvik = Math.abs(
-        Math.floor(
-            (salary.beregnetInntekt / salary.gjennomsnittligInntekt - 1) * 100
-        )
-    );
-
-    const loggableValue = (value: string) => (
-        <>
-            {value}
-            <a>Logg</a>
-        </>
-    );
+    const avvik = (val1: number, val2: number) =>
+        Math.abs(Math.floor((val1 / val2 - 1) * 100));
 
     return (
         <div className="InformationPanel">
@@ -35,17 +25,11 @@ const InformationPanel = () => {
                     />
                     <InformationPanelItem
                         label="Startdato"
-                        value={
-                            employment.start
-                                ? loggableValue(employment.start)
-                                : ''
-                        }
+                        value={employment.start}
                     />
                     <InformationPanelItem
                         label="Sluttdato"
-                        value={
-                            employment.end ? loggableValue(employment.end) : '-'
-                        }
+                        value={employment.end || '-'}
                     />
                     <InformationPanelItem
                         label="Lønnstype"
@@ -61,7 +45,19 @@ const InformationPanel = () => {
                     />
                     <InformationPanelItem
                         label="Stillingsprosent"
-                        value={loggableValue(`${employment.stillingsprosent}%`)}
+                        value={`${employment.stillingsprosent}%`}
+                    />
+                    <InformationPanelItem
+                        label="Dato siste lønnsendring"
+                        value="-"
+                    />
+                    <InformationPanelItem
+                        label="Dato endret stillingsprosent"
+                        value="-"
+                    />
+                    <InformationPanelItem
+                        label="Antall timer full stilling"
+                        value="-"
                     />
                 </div>
             </div>
@@ -81,9 +77,15 @@ const InformationPanel = () => {
                         )} kr`}
                         icon={IconType.Aaregisteret}
                     />
-                    <InformationPanelItem value={`Avvik: ${avvik} %`} />
+                    <InformationPanelItem
+                        label="Avvik"
+                        value={`${avvik(
+                            salary.beregnetInntekt,
+                            salary.gjennomsnittligInntekt
+                        )} %`}
+                    />
                 </div>
-                <InformationPanelItem value="Årsinntekt" />
+                <Undertittel>Årsinntekt</Undertittel>
                 <div className="InformationPanel__grid">
                     <InformationPanelItem
                         label="Omregnet årsinntekt"
@@ -96,6 +98,13 @@ const InformationPanel = () => {
                         value={`${formatCurrency(
                             salary.sammenligningsgrunnlag
                         )} kr`}
+                    />
+                    <InformationPanelItem
+                        label="Avvik"
+                        value={`${avvik(
+                            salary.omregnetÅrsinntekt,
+                            salary.sammenligningsgrunnlag
+                        )} %`}
                     />
                 </div>
             </div>

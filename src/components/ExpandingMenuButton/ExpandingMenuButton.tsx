@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import MenuLink from './MenuLink';
+import StatusIndicator from '../StatusIndicator';
 import { NedChevron, OppChevron } from 'nav-frontend-chevron';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import { TaskStatus } from '../../../context/types';
-import './ExpandingMenuButton.less';
+import { Undertittel } from 'nav-frontend-typografi';
+import { TaskStatus } from '../../context/types';
 import { motion, AnimatePresence } from 'framer-motion';
+import './ExpandingMenuButton.less';
 
 export interface ExpandingMenuButtonData {
     label: string;
@@ -47,13 +48,11 @@ const ExpandingMenuButton = ({ label, data }: ExpandingMenuButtonProps) => {
                 onClick={() => setIsOpen(!isOpen)}
                 aria-expanded={isOpen}
             >
-                {isOpen ? <OppChevron /> : <NedChevron />}
-                <Undertittel>{label}</Undertittel>
-                {unsolvedTasks && unsolvedTasks.length > 0 && (
-                    <Normaltekst className="ExpandingMenuButton__counter">
-                        {unsolvedTasks.length}
-                    </Normaltekst>
+                {!isOpen && unsolvedTasks && unsolvedTasks.length > 0 && (
+                    <StatusIndicator taskCount={unsolvedTasks.length} />
                 )}
+                <Undertittel>{label}</Undertittel>
+                {isOpen ? <OppChevron /> : <NedChevron />}
             </button>
             <AnimatePresence initial={true}>
                 {isOpen && data && (
