@@ -16,9 +16,10 @@
     }
 
     .Picker__popup {
-        left: calc(100% - @chevronWidth + @borderThickness);
-        top: @idHeight + @borderThickness;
-        padding: 1rem;
+        @popupPadding: 1rem;
+        width: calc(100% - @popupPadding * 2);
+        padding: @popupPadding;
+        top: @idHeight;
     }
 
     .Picker__chevron {

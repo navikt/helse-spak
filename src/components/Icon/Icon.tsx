@@ -76,6 +76,7 @@ const Icon = ({
         viewBox={`0 0 24 24`}
         style={{ padding: iconPadding }}
         fill={rest.fill}
+        className="Icon"
     >
         {renderIcon(type, {
             fontFamily,

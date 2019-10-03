@@ -25,7 +25,6 @@ const CaseMenu = ({
     sykmelder = 'Nasse Nøff / Fjellet Legesenter',
     foerstegang = true
 }: Case) => {
-    const [current, setCurrent] = useState(1);
     return (
         <Panel className="CaseMenu">
             <div className="CaseMenu__top">
@@ -35,7 +34,7 @@ const CaseMenu = ({
                     items={['test1', 'test2', 'test3']}
                 />
             </div>
-            {foerstegang && <EtikettInfo>Førstegangs.</EtikettInfo>}
+            {foerstegang && <EtikettInfo>Førstegang</EtikettInfo>}
             <div className="CaseMenu__info">
                 <Normaltekst>
                     <Icon type={IconType.Employer} />
