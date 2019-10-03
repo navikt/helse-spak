@@ -59,6 +59,7 @@ const MenuLink = ({ label, value, status, icon, path }: MenuLinkProps) => {
             {status === TaskStatus.Unsolved && (
                 <StatusIndicator taskCount={1} />
             )}
+            {status === TaskStatus.Solved && <StatusIndicator taskCount={0} />}
             <NavLink
                 to={`/${sanitizePath(path)}/${sanitizePath(label)}`}
                 activeClassName="active"

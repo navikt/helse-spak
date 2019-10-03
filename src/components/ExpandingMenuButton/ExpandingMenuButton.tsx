@@ -4,7 +4,7 @@ import StatusIndicator from '../StatusIndicator';
 import { NedChevron, OppChevron } from 'nav-frontend-chevron';
 import { Undertittel } from 'nav-frontend-typografi';
 import { TaskStatus } from '../../context/types';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import './ExpandingMenuButton.less';
 
 export interface ExpandingMenuButtonData {
@@ -40,6 +40,17 @@ const ExpandingMenuButton = ({ label, data }: ExpandingMenuButtonProps) => {
         [data]
     );
 
+    const solvedTasks = useMemo(
+        () => data && data.filter(item => item.status === TaskStatus.Solved),
+        [data]
+    );
+
+    const allTasksResolved =
+        solvedTasks &&
+        unsolvedTasks &&
+        solvedTasks.length > 0 &&
+        unsolvedTasks.length === 0;
+
     return (
         <>
             <button
@@ -50,6 +61,9 @@ const ExpandingMenuButton = ({ label, data }: ExpandingMenuButtonProps) => {
             >
                 {!isOpen && unsolvedTasks && unsolvedTasks.length > 0 && (
                     <StatusIndicator taskCount={unsolvedTasks.length} />
+                )}
+                {!isOpen && allTasksResolved && (
+                    <StatusIndicator taskCount={0} />
                 )}
                 <Undertittel>{label}</Undertittel>
                 {isOpen ? <OppChevron /> : <NedChevron />}

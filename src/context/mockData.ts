@@ -128,7 +128,7 @@ export const mockCaseData: CaseData = {
         { label: 'Kalenderdager', value: '33' },
         { label: 'Arbeidsgiverdager', value: '16' },
         { label: 'Virkedager', value: '13' },
-        { label: 'Ferie', value: '-', status: TaskStatus.Unsolved },
+        { label: 'Ferie', value: '-', status: TaskStatus.Solved },
         { label: 'Sykepengedager', value: '13' },
         { label: 'Sykmeldingsgrad', value: '100%' }
     ],

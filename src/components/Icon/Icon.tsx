@@ -75,6 +75,7 @@ const Icon = ({
         height={size}
         viewBox={`0 0 24 24`}
         style={{ padding: iconPadding }}
+        fill={rest.fill}
     >
         {renderIcon(type, {
             fontFamily,

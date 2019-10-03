@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { motion } from 'framer-motion';
 import './StatusIndicator.less';
+import Icon, { IconType } from '../Icon';
 
 interface StatusIndicatorProps {
     taskCount: number;
@@ -20,7 +21,14 @@ const StatusIndicator = ({ taskCount }: StatusIndicatorProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <Normaltekst>{taskCount > 0 && taskCount}</Normaltekst>
+            {taskCount > 0 && <Normaltekst>{taskCount}</Normaltekst>}
+            {taskCount === 0 && (
+                <Icon
+                    type={IconType.Check}
+                    size={12}
+                    fill="#fff"
+                />
+            )}
         </motion.div>
     );
 };
