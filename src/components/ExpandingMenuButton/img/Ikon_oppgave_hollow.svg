@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="35px" height="32px" viewBox="0 0 36 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="Ikon_oppgave" fill="none" fill-rule="evenodd">
-        <path d="M4,0 L29,0 L35,16.0096548 L29,32 L4,32 C1.790861,32 2.705415e-16,30.209139 0,28 L0,4 C-2.705415e-16,1.790861 1.790861,4.05812251e-16 4,0 Z" id="Rectangle" fill="#fff" stroke="#d87f0a" stroke-width="1"></path>
-        <text id="!" font-family="SourceSansPro-Bold, Source Sans Pro, sans-serif" font-size="18" font-weight="bold" fill="#3E3832">
-            <tspan x="13" y="22">!</tspan>
-        </text>
-    </g>
-</svg>

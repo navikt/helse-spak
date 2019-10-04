@@ -13,17 +13,14 @@ interface ChipProps {
 }
 
 const Chip = ({ label, done, active, onClick, className }: ChipProps) => {
-    const [isActive, setActive] = useState(active);
-
     const chipClassName = classNames(
         'Chip',
         className,
-        isActive && 'active',
+        active && 'active',
         done && 'done'
     );
 
     const onActivation = () => {
-        setActive(!isActive);
         onClick && onClick();
     };
 

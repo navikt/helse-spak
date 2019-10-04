@@ -10,10 +10,7 @@ export enum ItemType {
     Green = 'green',
     Grey = 'grey',
     Blue = 'blue',
-    Red = 'red',
-    Accepted = 'accepted',
-    Document = 'document',
-    Note = 'note'
+    Red = 'red'
 }
 
 const mockItems = [
@@ -104,7 +101,7 @@ const RightMenu = () => {
                 />
                 <RightMenuButton
                     icon={RightMenuButtonIcon.Dialogue}
-                    onClick={() => setFilters([ItemType.Note])}
+                    onClick={() => setFilters([])}
                 />
             </div>
             <ul className="RightMenu__list">

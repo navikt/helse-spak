@@ -1,5 +1,6 @@
 import React from 'react';
 import Search from '../Search';
+import UserMenu from './UserMenu';
 import Separator, { SeparatorAlignment } from '../Separator';
 import { Sidetittel } from 'nav-frontend-typografi';
 import './TopBar.less';
@@ -9,10 +10,19 @@ const TopBar = () => {
         <header className="TopBar">
             <Sidetittel>NAV Sykepenger</Sidetittel>
             <Separator alignment={SeparatorAlignment.Vertical} />
-            <Search
-                onSearch={value => {
-                    console.log(value);
-                }}
+            <div className="Search__wrapper">
+                <Search
+                    onSearch={value => {
+                        console.log(value);
+                    }}
+                />
+            </div>
+            <Separator alignment={SeparatorAlignment.Vertical} />
+            <UserMenu
+                userName="Hans Hansen"
+                location="NAV Sagene"
+                role="Veileder"
+                id="X121212"
             />
         </header>
     );

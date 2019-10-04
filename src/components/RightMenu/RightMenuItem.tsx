@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { Element, Undertekst } from 'nav-frontend-typografi';

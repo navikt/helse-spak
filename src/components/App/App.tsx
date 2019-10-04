@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import TopBar from '../TopBar';
 import LeftMenu from '../LeftMenu';
 import RightMenu from '../RightMenu';
@@ -9,9 +9,9 @@ import './App.less';
 
 const App = () => {
     return (
-        <Router>
-            <div className="App">
-                <TopBar />
+        <div className="App">
+            <TopBar />
+            <BrowserRouter>
                 <div className="Content">
                     <CaseProvider>
                         <LeftMenu />
@@ -19,8 +19,8 @@ const App = () => {
                         <RightMenu />
                     </CaseProvider>
                 </div>
-            </div>
-        </Router>
+            </BrowserRouter>
+        </div>
     );
 };
 

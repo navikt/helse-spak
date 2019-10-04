@@ -101,7 +101,7 @@ const salary: Salary = {
 
 export const mockCaseData: CaseData = {
     sykdomsvilkår: [
-        { label: 'Sykdomsvilkår', value: 'OK' },
+        { label: 'Sykdomsvilkår', value: 'OK', status: TaskStatus.Unsolved },
         { label: 'Periode', value: '13.02.2019 - 28.02.2019' }
     ],
     inngangsvilkår: [

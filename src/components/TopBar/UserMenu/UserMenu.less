@@ -1,0 +1,98 @@
+@import '../../../variables';
+
+@topBarHeight: 3.125rem;
+
+.UserMenu .UserMenu__button {
+  display: flex;
+  height: @topBarHeight;
+  align-items: center;
+  padding: 0 0 0 1rem;
+  cursor: pointer;
+  user-select: none;
+
+  .UserMenu__top,
+  .UserMenu__bottom {
+    display: flex;
+    align-items: center;
+
+    > .typo-element {
+      line-height: 1rem;
+    }
+  }
+
+  .UserMenu__top {
+    align-items: baseline;
+    justify-content: space-between;
+
+    > .typo-element:last-child {
+      margin-left: 1rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  .UserMenu__bottom {
+    > .typo-element {
+      font-size: 0.75rem;
+    }
+  }
+
+  .UserMenu__right .UserMenu__chevron {
+    display: flex;
+    align-items: center;
+    background: none;
+    height: 100%;
+    border: none;
+    padding: 0 1rem;
+
+    i::before,
+    i::after {
+      background: #fff;
+    }
+  }
+}
+
+.UserMenu .UserMenu__popup {
+  position: absolute;
+  top: @topBarHeight;
+  right: 0;
+  z-index: 10000;
+  padding: 1.25rem 1rem;
+  min-width: 15rem;
+  color: @greyDark;
+  background: #fff;
+  box-shadow: 2px 2px 4px 2px #c3c3c3;
+
+  > .typo-undertittel {
+    line-height: 1.5rem;
+  }
+
+  > .typo-normal {
+    line-height: 1.25rem;
+  }
+
+  > .typo-undertekst {
+    color: @grey;
+  }
+
+  .Separator {
+    width: 100%;
+    margin: 1rem 0;
+    border-color: @greyNormal;
+    height: 1px;
+  }
+
+  &:after {
+    position: absolute;
+    content: '';
+    background: #fff;
+    width: 1rem;
+    height: 1rem;
+    transform: rotate(45deg);
+    right: 1.125rem;
+    top: -0.5rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

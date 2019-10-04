@@ -2,10 +2,9 @@ import React from 'react';
 import Section from './Section';
 import TaskBar from '../TaskBar';
 import PersonBar from '../PersonBar';
-import ActionPanel from '../ActionPanel';
-import FeedbackButton from '../FeedbackButton';
-import InformationPanel from '../InformationPanel';
+import Sykepengegrunnlag from '../../routes/Sykepengegrunnlag';
 import Separator, { SeparatorType } from '../Separator';
+import { Route } from 'react-router-dom';
 import './MainContent.less';
 
 const MainContent = () => {
@@ -19,18 +18,7 @@ const MainContent = () => {
             <Section>
                 <Separator type={SeparatorType.Dotted} />
             </Section>
-            <Section>
-                <InformationPanel />
-                <div className="MainContent__feedback">
-                    <FeedbackButton />
-                </div>
-            </Section>
-            <Section>
-                <Separator type={SeparatorType.Dotted} />
-            </Section>
-            <Section>
-                <ActionPanel />
-            </Section>
+            <Route path="/sykepengegrunnlag" component={Sykepengegrunnlag} />
         </div>
     );
 };
