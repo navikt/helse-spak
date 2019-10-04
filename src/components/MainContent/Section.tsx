@@ -2,7 +2,7 @@ import React, { ReactChild } from 'react';
 import './Section.less';
 
 interface SectionProps {
-    children: ReactChild;
+    children: ReactChild | ReactChild[];
 }
 
 const Section = ({ children }: SectionProps) => {

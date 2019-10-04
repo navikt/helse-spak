@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import Icon, { IconType } from '../Icon';
 import BarChart from './BarChart';
 import InformationPanelItem from './InformationPanelItem';
 import Separator, { SeparatorAlignment } from '../Separator';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import Icon, { IconType } from '../Icon';
 import { formatCurrency } from '../../utility/locale';
 import { CaseContext } from '../../context/CaseContext';
+import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import './InformationPanel.less';
 
 const InformationPanel = () => {

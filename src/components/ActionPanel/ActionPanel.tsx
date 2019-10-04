@@ -1,9 +1,11 @@
 import React from 'react';
 import Multiselect from '../Multiselect';
+import ExpandingTextarea from '../ExpandingTextarea';
 import { Flatknapp, Knapp } from 'nav-frontend-knapper';
-import { Fieldset, Input, Radio, TextareaControlled } from 'nav-frontend-skjema';
+import { Fieldset, Input, Radio } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel, Element } from 'nav-frontend-typografi';
 import './ActionPanel.less';
+import FeedbackButton from '../FeedbackButton';
 
 const ActionPanel = () => {
     return (
@@ -21,10 +23,12 @@ const ActionPanel = () => {
                             { value: 'test_5', label: 'etikett5' }
                         ]}
                     />
-                    <TextareaControlled
+                    <div className="ActionPanel__feedback">
+                        <FeedbackButton />
+                    </div>
+                    <ExpandingTextarea
                         label="Vurdering"
                         placeholder="Videre begrunnelse ved behov for utdyping"
-                        defaultValue=""
                     />
                 </div>
                 <div className="ActionPanel__right">
@@ -54,8 +58,8 @@ const ActionPanel = () => {
                     </Fieldset>
                 </div>
             </div>
-            <Knapp>Ferdig</Knapp>
-            <Flatknapp>Avbryt</Flatknapp>
+            <Knapp mini>Ferdig</Knapp>
+            <Flatknapp mini>Avbryt</Flatknapp>
         </div>
     );
 };

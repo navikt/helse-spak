@@ -9,41 +9,26 @@
   .typo-normal,
   .skjemaelement__label,
   .skjema__legend {
-    color: #3e3832;
+    color: @greyDark;
     font-size: 1rem;
   }
 
   .Multiselect {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
-  input {
-    font-family: 'Source Sans Pro', Arial, sans-serif;
-    font-size: 1rem;
-    color: #3e3832;
+  .ActionPanel__feedback {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .ActionPanel__content {
     display: flex;
     justify-content: space-between;
 
-    > .skjemaelement.textarea__container {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-
-      > .textarea--medMeta__wrapper {
-        flex: 1;
-        display: flex;
-
-        textarea.textarea--medMeta {
-          font-family: 'Source Sans Pro', Arial, sans-serif;
-          font-size: 1rem;
-          height: unset !important;
-          min-height: 5rem !important;
-          flex: 1;
-        }
-      }
+    .ExpandingTextarea {
+      flex: 1;
     }
 
     legend.skjema__legend {
@@ -87,6 +72,8 @@
 
     .ActionPanel__left {
       flex: 1;
+      display: flex;
+      flex-direction: column;
 
       > .skjemaelement:first-child {
         margin-bottom: 2rem;

@@ -1,0 +1,20 @@
+@import '../../variables';
+@import '../../mixins';
+
+.FeedbackButton {
+  height: 2rem;
+  padding: 0 1rem;
+  background: none;
+  border-radius: 1rem;
+  border: 1px solid @greyDark;
+  max-width: max-content;
+  .focusable();
+
+  .typo-normal {
+    color: @blue;
+  }
+
+  &:hover {
+    background: @greyLight;
+  }
+}

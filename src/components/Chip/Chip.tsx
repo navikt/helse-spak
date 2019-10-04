@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import Icon, { IconType } from '../Icon';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './Chip.less';
@@ -8,13 +9,18 @@ interface ChipProps {
     done?: boolean;
     active?: boolean;
     onClick?: () => void;
+    className?: string;
 }
 
-const Chip = ({ label, done, active, onClick }: ChipProps) => {
+const Chip = ({ label, done, active, onClick, className }: ChipProps) => {
     const [isActive, setActive] = useState(active);
 
-    const className =
-        'Chip' + (isActive ? ' active' : '') + (done ? ' done' : '');
+    const chipClassName = classNames(
+        'Chip',
+        className,
+        isActive && 'active',
+        done && 'done'
+    );
 
     const onActivation = () => {
         setActive(!isActive);
@@ -24,7 +30,7 @@ const Chip = ({ label, done, active, onClick }: ChipProps) => {
     return (
         <div
             role="button"
-            className={className}
+            className={chipClassName}
             onClick={onActivation}
             onKeyDown={(e: React.KeyboardEvent) => {
                 if (e.keyCode === 13) {

@@ -3,6 +3,7 @@ import Section from './Section';
 import TaskBar from '../TaskBar';
 import PersonBar from '../PersonBar';
 import ActionPanel from '../ActionPanel';
+import FeedbackButton from '../FeedbackButton';
 import InformationPanel from '../InformationPanel';
 import Separator, { SeparatorType } from '../Separator';
 import './MainContent.less';
@@ -20,6 +21,9 @@ const MainContent = () => {
             </Section>
             <Section>
                 <InformationPanel />
+                <div className="MainContent__feedback">
+                    <FeedbackButton />
+                </div>
             </Section>
             <Section>
                 <Separator type={SeparatorType.Dotted} />
