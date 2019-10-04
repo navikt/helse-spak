@@ -7,6 +7,10 @@ import { AnimatePresence } from 'framer-motion';
 import './RightMenu.less';
 
 export enum ItemType {
+    Green = 'green',
+    Grey = 'grey',
+    Blue = 'blue',
+    Red = 'red',
     Accepted = 'accepted',
     Document = 'document',
     Note = 'note'
@@ -16,39 +20,44 @@ const mockItems = [
     {
         date: '2019-01-04',
         label: 'Utbetaling utført',
-        type: ItemType.Accepted
+        type: ItemType.Green
     },
     {
         date: '2019-01-04',
         label: 'Svar på søknad - Ja',
-        type: ItemType.Accepted
+        type: ItemType.Green
     },
     {
         date: '2019-01-04',
         label: 'Søknad om sykepenger mottatt',
-        type: ItemType.Document
+        type: ItemType.Grey
     },
     {
         date: '2019-01-04',
         label: 'Korrigering',
-        type: ItemType.Note
+        type: ItemType.Blue
+    },
+    {
+        date: '2019-01-04',
+        label: 'Vedtak returnert',
+        type: ItemType.Red
+    },
+    {
+        date: '2019-01-04',
+        label: 'Inntekstmelding mottatt',
+        type: ItemType.Grey
     },
     {
         date: '2019-01-04',
         label: 'Notat',
-        type: ItemType.Note,
+        type: ItemType.Blue,
         body:
             'Mottatt telefon med korrigerende opplysninger på inntektsmelding. Feil uttfylt på ferie.'
     },
     {
         date: '2019-01-04',
-        label: 'Inntekstmelding mottatt',
-        type: ItemType.Document
-    },
-    {
-        date: '2019-01-04',
-        label: 'Svar på søknad - Ja',
-        type: ItemType.Document
+        label: 'Søknad mottatt',
+        type: ItemType.Grey
     }
 ].map(item => ({ ...item, id: uuid() }));
 
@@ -96,10 +105,6 @@ const RightMenu = () => {
                 <RightMenuButton
                     icon={RightMenuButtonIcon.Dialogue}
                     onClick={() => setFilters([ItemType.Note])}
-                />
-                <RightMenuButton
-                    icon={RightMenuButtonIcon.Document}
-                    onClick={() => setFilters([ItemType.Document])}
                 />
             </div>
             <ul className="RightMenu__list">

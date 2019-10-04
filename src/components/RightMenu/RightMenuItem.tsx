@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { Element, Normaltekst, Undertekst } from 'nav-frontend-typografi';
+import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import { Element, Undertekst } from 'nav-frontend-typografi';
 import './RightMenuItem.less';
-import { ItemType } from './RightMenu';
-import { AcceptedIcon, DocumentIcon, PersonIcon } from './icons';
 
 interface RightMenuProps {
     id: string;
@@ -14,58 +13,42 @@ interface RightMenuProps {
     body?: string;
 }
 
-const transition = {
-    duration: 0.2
-};
-
-const itemAnimation = {
-    initial: {
-        opacity: 0,
-        y: '-100%'
-    },
-    whileHover: {
-        x: -10
-    },
-    exit: {
-        x: 25,
-        opacity: 0
-    },
-    transition
-};
-
 const RightMenuItem = ({ type, label, date, body }: RightMenuProps) => {
-    const [hasFocus, setHasFocus] = useState(false);
+    const [active, setActive] = useState(false);
+    const [visited, setVisited] = useState(false);
 
-    const strokeColor = '#3e3832';
-    const icon =
-        type === ItemType.Accepted ? (
-            <AcceptedIcon strokeColor={strokeColor} />
-        ) : type === ItemType.Document ? (
-            <DocumentIcon strokeColor={strokeColor} />
-        ) : (
-            <PersonIcon strokeColor={strokeColor} />
-        );
+    const className = classNames(
+        'RightMenuItem',
+        type,
+        active && 'active',
+        visited && 'visited'
+    );
+
+    const onClick = () => {
+        setActive(true);
+        setVisited(true);
+    };
+
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (e.keyCode === 13) {
+            onClick();
+        }
+    };
 
     return (
         <motion.li
-            positionTransition={transition}
-            className={`RightMenuItem ${type}`}
+            className={className}
             tabIndex={0}
-            onFocus={() => setHasFocus(true)}
-            onBlur={() => setHasFocus(false)}
-            animate={{
-                opacity: 1,
-                y: 0,
-                x: hasFocus ? -10 : 0
-            }}
-            {...itemAnimation}
+            onClick={onClick}
+            onKeyDown={onKeyDown}
+            onFocus={() => setActive(true)}
+            onBlur={() => setActive(false)}
         >
             <div className="RightMenuItem__content">
-                {icon}
                 <div className="content">
-                    <Undertekst>{date}</Undertekst>
                     <Element>{label}</Element>
-                    {body && <Normaltekst>{body}</Normaltekst>}
+                    <Undertekst>{date}</Undertekst>
+                    {body && <Undertekst>{body}</Undertekst>}
                 </div>
             </div>
         </motion.li>
