@@ -1,9 +1,9 @@
 import React from 'react';
+import Multiselect from '../Multiselect';
 import { Flatknapp, Knapp } from 'nav-frontend-knapper';
 import { Fieldset, Input, Radio, TextareaControlled } from 'nav-frontend-skjema';
 import { Normaltekst, Undertittel, Element } from 'nav-frontend-typografi';
 import './ActionPanel.less';
-import Multiselect from '../Multiselect';
 
 const ActionPanel = () => {
     return (
@@ -21,7 +21,14 @@ const ActionPanel = () => {
                             { value: 'test_5', label: 'etikett5' }
                         ]}
                     />
-                    <Fieldset legend="Vurdering">
+                    <TextareaControlled
+                        label="Vurdering"
+                        placeholder="Videre begrunnelse ved behov for utdyping"
+                        defaultValue=""
+                    />
+                </div>
+                <div className="ActionPanel__right">
+                    <Fieldset legend="Skjønnsmessig fastsettelse">
                         <Radio
                             label={
                                 <div className="ActionPanel__radio">
@@ -45,9 +52,6 @@ const ActionPanel = () => {
                             name="fastsettelse"
                         />
                     </Fieldset>
-                </div>
-                <div className="ActionPanel__right">
-                    <TextareaControlled label="Vurdering" defaultValue="" />
                 </div>
             </div>
             <Knapp>Ferdig</Knapp>

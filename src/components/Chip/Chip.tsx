@@ -16,12 +16,20 @@ const Chip = ({ label, done, active, onClick }: ChipProps) => {
     const className =
         'Chip' + (isActive ? ' active' : '') + (done ? ' done' : '');
 
+    const onActivation = () => {
+        setActive(!isActive);
+        onClick && onClick();
+    };
+
     return (
         <div
+            role="button"
             className={className}
-            onClick={() => {
-                setActive(!isActive);
-                onClick && onClick();
+            onClick={onActivation}
+            onKeyDown={(e: React.KeyboardEvent) => {
+                if (e.keyCode === 13) {
+                    onActivation();
+                }
             }}
             tabIndex={0}
         >
