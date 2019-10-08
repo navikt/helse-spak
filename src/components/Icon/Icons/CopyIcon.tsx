@@ -1,9 +1,20 @@
 import React from 'react';
 
-const CopyIcon = () => {
+const CopyIcon = ({ fill = '#3e3832' }) => {
     return (
-        <g transform="translate(2, 2)">
-            <path d="M6 6V2c0-1.1.9-2 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8c0-1.1.9-2 2-2h4zm2 0h4a2 2 0 0 1 2 2v4h4V2H8v4zM2 8v10h10V8H2z" />
+        <g
+            strokeWidth="1"
+            fill="none"
+            fillRule="evenodd"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <g stroke={fill} strokeWidth="1.75">
+                <g transform="translate(4, 4)">
+                    <polygon points="4.4408921e-14 19.1729323 4.4408921e-14 4.5112782 10.1503759 4.5112782 10.1503759 19.1729323" />
+                    <polyline points="5.63909774 2.19924812 5.63909774 -2.69118061e-13 15.7894737 -2.69118061e-13 15.7894737 14.6616541 13.2518797 14.6616541" />
+                </g>
+            </g>
         </g>
     );
 };

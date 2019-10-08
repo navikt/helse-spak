@@ -31,7 +31,7 @@ const PersonBar = () => {
 
     return (
         <div className="PersonBar">
-            <Element>
+            <Element className="PersonBar__gender">
                 <Icon type={iconType(gender)} size={24} />
                 {name}
             </Element>
@@ -40,9 +40,9 @@ const PersonBar = () => {
                 <Normaltekst>{formatFnr(fnr)}</Normaltekst>
             </Clipboard>
             <span>/</span>
-            <Normaltekst>
+            <Normaltekst className="PersonBar__phone">
                 <Icon type={IconType.Phone} />
-                Telefon: {formatTlf(tlf)}
+                {formatTlf(tlf)}
             </Normaltekst>
             <div className="divider" />
         </div>
