@@ -13,7 +13,7 @@ interface UserMenuProps {
 }
 
 const UserMenu = ({ userName, location, role, id }: UserMenuProps) => {
-    const [active, setActive] = useState(true);
+    const [active, setActive] = useState(false);
     const popupRef = useRef<HTMLDivElement>(null);
     useClickOutside(popupRef, active, () => setActive(false));
 

@@ -7,15 +7,17 @@ import './TaskBar.less';
 interface TaskLinkProps {
     label: string;
     path: string;
+    done?: boolean;
 }
 
-const TaskLink = ({ label, path }: TaskLinkProps) => {
+const TaskLink = ({ label, path, ...rest }: TaskLinkProps) => {
     const history = useHistory();
     return (
         <Chip
             label={label}
             onClick={() => history.push(path)}
             active={history.location.pathname.includes(path)}
+            {...rest}
         />
     );
 };
@@ -30,7 +32,7 @@ const TaskBar = () => {
             </div>
             <Element>Utførte:</Element>
             <div className="TaskBar__tasks">
-                <TaskLink label="Periode" path="/sykepengeperiode" />
+                <TaskLink label="Periode" path="/sykepengeperiode" done />
             </div>
         </div>
     );

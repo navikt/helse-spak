@@ -4,6 +4,7 @@ import UserMenu from './UserMenu';
 import Separator, { SeparatorAlignment } from '../Separator';
 import { Sidetittel } from 'nav-frontend-typografi';
 import './TopBar.less';
+import ExternalLinksMenu from './ExternalLinksMenu';
 
 const TopBar = () => {
     return (
@@ -17,6 +18,7 @@ const TopBar = () => {
                     }}
                 />
             </div>
+            <ExternalLinksMenu />
             <Separator alignment={SeparatorAlignment.Vertical} />
             <UserMenu
                 userName="Hans Hansen"
