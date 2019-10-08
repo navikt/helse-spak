@@ -15,7 +15,11 @@ const TaskLink = ({ label, path, ...rest }: TaskLinkProps) => {
     return (
         <Chip
             label={label}
-            onClick={() => history.push(path)}
+            onClick={() => {
+                if (history.location.pathname !== path) {
+                    history.push(path);
+                }
+            }}
             active={history.location.pathname.includes(path)}
             {...rest}
         />
