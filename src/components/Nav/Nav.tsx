@@ -1,9 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
+import uuid from 'uuid';
 import ExpandingMenuButton from '../ExpandingMenuButton';
+import { RouterProps, withRouter } from 'react-router';
 import { CaseContext } from '../../context/CaseContext';
+import { CaseField, TaskStatus } from '../../context/types';
 import './Nav.less';
 
-const Nav = () => {
+interface Item {
+    label: string;
+    data?: CaseField[];
+    expanded?: boolean;
+}
+
+const Nav = ({ history }: RouterProps) => {
     const {
         inngangsvilkår,
         sykdomsvilkår,
@@ -13,23 +22,61 @@ const Nav = () => {
         utbetaling
     } = useContext(CaseContext);
 
+    const shouldExpand = (data: CaseField[], label: string) => {
+        const unsolved = data.filter(
+            t =>
+                t.status === TaskStatus.Unsolved ||
+                t.status === TaskStatus.Solved
+        );
+        return (
+            unsolved && history.location.pathname.includes(label.toLowerCase())
+        );
+    };
+
+    const items = useMemo(
+        () => [
+            {
+                label: 'Sykdomsvilkår',
+                data: sykdomsvilkår,
+                expanded: shouldExpand(sykdomsvilkår, 'sykdomsvilkår')
+            },
+            {
+                label: 'Inngangsvilkår',
+                data: inngangsvilkår,
+                expanded: shouldExpand(inngangsvilkår, 'inngangsvilkår')
+            },
+            {
+                label: 'Oppfølging',
+                data: oppfølging,
+                expanded: shouldExpand(oppfølging, 'oppfølging')
+            },
+            {
+                label: 'Sykepengegrunnlag',
+                data: sykepengegrunnlag,
+                expanded: shouldExpand(sykepengegrunnlag, 'sykepengegrunnlag')
+            },
+            {
+                label: 'Sykepengeperiode',
+                data: sykepengeperiode,
+                expanded: shouldExpand(sykepengeperiode, 'sykepengeperiode')
+            },
+            {
+                label: 'Utbetaling',
+                data: utbetaling,
+                expanded: shouldExpand(utbetaling, 'utbetaling')
+            },
+            { label: 'Oppsummering' }
+        ],
+        [history.location.pathname]
+    );
+
     return (
         <nav className="Nav" role="menu" aria-orientation="vertical">
-            <ExpandingMenuButton label="Sykdomsvilkår" data={sykdomsvilkår} />
-            <ExpandingMenuButton label="Inngangsvilkår" data={inngangsvilkår} />
-            <ExpandingMenuButton label="Oppfølging" data={oppfølging} />
-            <ExpandingMenuButton
-                label="Sykepengegrunnlag"
-                data={sykepengegrunnlag}
-            />
-            <ExpandingMenuButton
-                label="Sykepengeperiode"
-                data={sykepengeperiode}
-            />
-            <ExpandingMenuButton label="Utbetaling" data={utbetaling} />
-            <ExpandingMenuButton label="Oppsummering" />
+            {items.map((item: Item) => (
+                <ExpandingMenuButton key={uuid()} {...item} />
+            ))}
         </nav>
     );
 };
 
-export default Nav;
+export default withRouter(Nav);

@@ -16,6 +16,7 @@ export interface ExpandingMenuButtonData {
 interface ExpandingMenuButtonProps {
     label: string;
     data?: ExpandingMenuButtonData[];
+    expanded?: boolean;
 }
 
 const expandingAnimation = {
@@ -28,8 +29,12 @@ const expandingAnimation = {
     }
 };
 
-const ExpandingMenuButton = ({ label, data }: ExpandingMenuButtonProps) => {
-    const [isOpen, setIsOpen] = useState(false);
+const ExpandingMenuButton = ({
+    label,
+    data,
+    expanded = false
+}: ExpandingMenuButtonProps) => {
+    const [isOpen, setIsOpen] = useState(expanded);
 
     const className = `ExpandingMenuButton ${
         isOpen ? 'ExpandingMenuButton--open' : 'ExpandingMenuButton--closed'
