@@ -1,0 +1,15 @@
+@import '../../variables';
+
+.Tooltip {
+  &.__react_component_tooltip.type-info {
+    background: #fff2e0;
+    color: @fontColor;
+    margin: 0;
+    padding: 0.125rem 0.5rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+
+    &.place-bottom:after {
+      display: none;
+    }
+  }
+}

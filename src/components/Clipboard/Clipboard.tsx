@@ -3,6 +3,7 @@ import Icon, { IconType } from '../Icon';
 import { AnimatePresence, motion } from 'framer-motion';
 import { copyContentsToClipboard } from './util';
 import './Clipboard.less';
+import Tooltip from '../Tooltip';
 
 const animation = {
     initial: { y: 5, opacity: 0 },
@@ -41,17 +42,25 @@ const Clipboard = ({ children }: ClipboardProps) => {
             <div ref={ref}>
                 <div className={childrenClass}>{children}</div>
             </div>
-            <button
-                onClick={copy}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-            >
-                <AnimatePresence initial={false} exitBeforeEnter>
-                    <motion.div {...animation} key={didCopy ? 'check' : 'copy'}>
-                        <Icon type={didCopy ? IconType.Check : IconType.Copy} />
-                    </motion.div>
-                </AnimatePresence>
-            </button>
+            <Tooltip tip="Kopiér">
+                <button
+                    onClick={copy}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    className="Clipboard__button"
+                >
+                    <AnimatePresence initial={false} exitBeforeEnter>
+                        <motion.div
+                            {...animation}
+                            key={didCopy ? 'check' : 'copy'}
+                        >
+                            <Icon
+                                type={didCopy ? IconType.Check : IconType.Copy}
+                            />
+                        </motion.div>
+                    </AnimatePresence>
+                </button>
+            </Tooltip>
         </div>
     );
 };
