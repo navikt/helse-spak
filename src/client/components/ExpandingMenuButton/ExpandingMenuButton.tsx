@@ -73,7 +73,7 @@ const ExpandingMenuButton = ({
                 <Undertittel>{label}</Undertittel>
                 {isOpen ? <OppChevron /> : <NedChevron />}
             </button>
-            <AnimatePresence initial={true}>
+            <AnimatePresence initial={false}>
                 {isOpen && data && (
                     <motion.ul
                         className="ExpandingMenuButton__content"
