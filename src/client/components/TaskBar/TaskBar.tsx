@@ -31,12 +31,12 @@ const TaskBar = () => {
         <div className="TaskBar">
             <Element>Mine oppgaver:</Element>
             <div className="TaskBar__tasks">
-                <TaskLink label="25% avvik" path="/sykepengegrunnlag" />
-                <TaskLink label="Sykdomsvilkår" path="/sykdomsvilkår" />
+                <TaskLink label="25% avvik" path="/sykepengegrunnlag/fastsatt-inntekt" />
+                <TaskLink label="Sykdomsvilkår" path="/sykdomsvilkår/sykdomsvilkår" />
             </div>
             <Element>Utførte:</Element>
             <div className="TaskBar__tasks">
-                <TaskLink label="Periode" path="/sykepengeperiode" done />
+                <TaskLink label="Periode" path="/sykepengeperiode/ferie" done />
             </div>
         </div>
     );
