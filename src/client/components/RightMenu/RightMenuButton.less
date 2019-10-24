@@ -1,3 +1,5 @@
+@import '../../variables';
+
 button.RightMenuButton {
   display: flex;
   align-items: center;
@@ -10,7 +12,7 @@ button.RightMenuButton {
   cursor: pointer;
 
   > .circle {
-    background-color: #e7e9e9;
+    background-color: @greyLighter;
     width: 2rem;
     height: 2rem;
     border-radius: 1rem;
@@ -35,7 +37,7 @@ button.RightMenuButton {
     width: 100%;
     height: 0;
     border-radius: 2px;
-    border: 2px solid #0067c5;
+    border: 2px solid @focusColor;
     z-index: 10;
   }
 }

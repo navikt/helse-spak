@@ -1,3 +1,5 @@
+@import '../../../variables';
+
 @barWidth: 4px;
 @chartWidth: 200px;
 @chartMaxWidth: 400px;
@@ -39,7 +41,7 @@
         > .typo-undertekst {
             display: flex;
             justify-content: center;
-            color: #78706a;
+            color: @greyDark;
             width: @barWidth;
         }
     }
@@ -55,7 +57,7 @@
 
         .typo-undertekst {
             font-size: 0.75rem;
-            color: #3e3832;
+            color: @greyDarkest;
         }
 
         .pin {
@@ -84,7 +86,7 @@
         .pin {
             width: 100%;
             height: 1px;
-            background: #c6c2bf;
+            background: @greyLight;
         }
     }
 

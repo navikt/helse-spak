@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "index.tsx",
   "scripts": {
-    "start": "NODE_ENV=development parcel src/client/index.html --open 'Google Chrome'",
+    "start": "NODE_ENV=development parcel src/client/index.html",
     "server": "NODE_ENV=development nodemon src/server/server.ts",
     "build": "npm run clean:dist && npm run test && parcel build src/client/index.html --out-dir dist/client --public-url /static --no-source-maps",
     "clean:dist": "rimraf dist",

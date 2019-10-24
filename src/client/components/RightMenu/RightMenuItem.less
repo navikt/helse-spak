@@ -1,7 +1,7 @@
 @import '../../variables';
 
 @blueDotColor: #5eaec7;
-@borderColor: #e7e9e9;
+@borderColor: @greyLighter;
 @verticalPadding: 1.125rem;
 
 .RightMenuItem {
@@ -12,7 +12,7 @@
   &:focus {
     cursor: pointer;
     outline: none;
-    background: @greyLight;
+    background: @greyLightest;
   }
 
   .RightMenuItem__content {
@@ -21,7 +21,7 @@
     border-bottom: 1px solid @borderColor;
 
     .typo-undertekst {
-      color: #3e3832
+      color: @greyDarkest
     }
 
     .typo-element {
@@ -30,14 +30,14 @@
   }
 
   &.visited .typo-element {
-    color: @greyDark;
+    color: @greyDarkest;
   }
 
   &:before {
     position: absolute;
     content: '';
     height: 100%;
-    border-left: 1px solid @greyNormal;
+    border-left: 1px solid @greyLight;
     transform: translateX(-0.5px);
     left: 2rem;
   }
@@ -65,11 +65,11 @@
   }
 
   &.green {
-    .boxShadow(@greenNormal);
+    .boxShadow(@green);
   }
 
   &.grey {
-    .boxShadow(@grey);
+    .boxShadow(@greyDark);
   }
 
   &.blue {

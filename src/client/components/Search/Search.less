@@ -4,20 +4,20 @@
 
 .Search {
   position: relative;
-  border: 1px solid @grey;
+  border: 1px solid @greyDark;
   border-radius: @borderRadius;
   display: flex;
   height: 1.875rem;
   width: 24rem;
 
   &:hover {
-    border-color: @greyLight;
+    border-color: @greyLightest;
   }
 
   input[type='text'] {
     padding: 0.5rem;
-    background-color: @greyDark;
-    color: @greyLight;
+    background-color: @greyDarkest;
+    color: @greyLightest;
     font-size: 0.875rem;
     border: none;
     border-radius: @borderRadius;
@@ -25,7 +25,7 @@
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 0 2px #ead744;
+      box-shadow: 0 0 0 2px @focusColor;
     }
   }
 
@@ -50,24 +50,24 @@
 
     &:hover svg > g > path,
     &:focus svg > g > path {
-      fill: @greyLight;
+      fill: @greyLightest;
     }
 
     &:active svg > g > path {
-      fill: @grey;
+      fill: @greyDark;
     }
   }
 }
 
 ::-webkit-input-placeholder {
-  color: @greyNormal;
+  color: @greyLight;
 }
 ::-moz-placeholder {
-  color: @greyNormal;
+  color: @greyLight;
 }
 :-ms-input-placeholder {
-  color: @greyNormal;
+  color: @greyLight;
 }
 ::placeholder {
-  color: @greyNormal;
+  color: @greyLight;
 }

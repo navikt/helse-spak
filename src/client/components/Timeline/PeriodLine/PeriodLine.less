@@ -7,7 +7,7 @@
     position: absolute;
     min-width: 10px;
     height: @height;
-    background: @greenNormal;
+    background: @green;
     transform: translateY(-50%);
     border-radius: @height / 2;
 }
@@ -25,14 +25,14 @@
 .Period:hover,
 .Period:focus {
     background: white;
-    box-shadow: 0 0 0 2px #0067c5;
+    box-shadow: 0 0 0 2px @blue;
     outline: none;
 }
 
 .Period:active,
 .Period.selected {
     background: #ffa733;
-    box-shadow: 0 0 0 2px #0067c5;
+    box-shadow: 0 0 0 2px @blue;
     outline: none;
     height: @heightSelected;
     min-width: @heightSelected;
