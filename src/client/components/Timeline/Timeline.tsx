@@ -96,19 +96,17 @@ const Timeline = ({
     data = timelineData,
     range = Range.ONE_YEAR
 }: TimelineProps) => {
-    const years = yearsInRange(range);
-    const days = daysInPeriod(range);
-
+    const [selectedRange, setSelectedRange] = useState<Range>(range);
     const [selectedInterval, setSelectedInterval] = useState<Period>();
+
+    const years = yearsInRange(selectedRange);
+    const days = daysInPeriod(selectedRange);
 
     const yearPins = years.map(year => {
         const beginningOfYear = `${year}-01-01`;
         return {
             year,
-            left: `${calculateLeftPercentage(
-                beginningOfYear,
-                daysInPeriod(range)
-            )}%`
+            left: `${calculateLeftPercentage(beginningOfYear, days)}%`
         };
     });
 
@@ -130,7 +128,11 @@ const Timeline = ({
             </span>
             <span className="Timeline__periods">
                 {data.map(item => (
-                    <TimelineRow key={item.label} {...item} range={range} />
+                    <TimelineRow
+                        key={item.label}
+                        {...item}
+                        range={selectedRange}
+                    />
                 ))}
                 {yearPins.map(pin => (
                     <div
@@ -158,9 +160,9 @@ const Timeline = ({
                         <>
                             <Normaltekst>
                                 {`${dayjs(selectedInterval.start).format(
-                                    'DD.MM.YYYY'
+                                    'DD.MM.YY'
                                 )} - ${dayjs(selectedInterval.end).format(
-                                    'DD.MM.YYYY'
+                                    'DD.MM.YY'
                                 )}`}
                             </Normaltekst>
                             {selectedInterval.cases.map(c => (
@@ -170,6 +172,17 @@ const Timeline = ({
                             ))}
                         </>
                     )}
+                </span>
+                <span className="Timeline__range-selectors">
+                    <button onClick={() => setSelectedRange(Range.SIX_MONTHS)}>
+                        <Normaltekst>6 mnd</Normaltekst>
+                    </button>
+                    <button onClick={() => setSelectedRange(Range.ONE_YEAR)}>
+                        <Normaltekst>1 år</Normaltekst>
+                    </button>
+                    <button onClick={() => setSelectedRange(Range.THREE_YEARS)}>
+                        <Normaltekst>3 år</Normaltekst>
+                    </button>
                 </span>
             </span>
         </div>

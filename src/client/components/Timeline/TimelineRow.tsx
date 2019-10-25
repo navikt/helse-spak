@@ -19,7 +19,7 @@ const TimelineRow = ({ periods, range }: TimelineRowProps) => {
             ...period,
             style: { ...calculatePosition(period.start, period.end, days) }
         }));
-    }, [periods]);
+    }, [periods, range]);
 
     return (
         <div className="TimelineRow">
