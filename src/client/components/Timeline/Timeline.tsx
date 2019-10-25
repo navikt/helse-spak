@@ -1,15 +1,16 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import TimelineRow from './TimelineRow';
 import { Range } from './types';
-import './Timeline.less';
+import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import {
     calculateLeftPercentage,
+    calculatePosition,
     daysInPeriod,
-    overlapping, splitPeriods,
     yearsInRange
 } from './calc';
-import dayjs = require('dayjs');
-import { Undertekst } from 'nav-frontend-typografi';
+import { getIntervals, Case, Period } from './transform';
+import './Timeline.less';
+import dayjs from 'dayjs';
 
 export enum OrganizationType {
     PRIVATE = 'employer',
@@ -28,13 +29,13 @@ export interface TimelinePeriod {
     status?: PeriodStatus;
 }
 
-interface TimelineRow {
+interface Row {
     label: string;
     type: OrganizationType;
     periods: TimelinePeriod[];
 }
 
-const timelineData: TimelineRow[] = [
+const timelineData: Row[] = [
     {
         label: 'Sykepleierhuset AS',
         type: OrganizationType.PRIVATE,
@@ -79,8 +80,15 @@ const timelineData: TimelineRow[] = [
     }
 ];
 
+const intervals = getIntervals(timelineData).filter(
+    interval =>
+        interval &&
+        interval.cases &&
+        interval.cases.filter(c => (c as Case).status !== 'nav').length > 0
+);
+
 interface TimelineProps {
-    data: TimelineRow[];
+    data: Row[];
     range: Range;
 }
 
@@ -89,6 +97,9 @@ const Timeline = ({
     range = Range.ONE_YEAR
 }: TimelineProps) => {
     const years = yearsInRange(range);
+    const days = daysInPeriod(range);
+
+    const [selectedInterval, setSelectedInterval] = useState<Period>();
 
     const yearPins = years.map(year => {
         const beginningOfYear = `${year}-01-01`;
@@ -101,28 +112,66 @@ const Timeline = ({
         };
     });
 
+    const positionedIntervals = intervals.map(interval => ({
+        ...interval,
+        ...calculatePosition(interval!.start, interval!.end, days)
+    }));
+
+    const onClickInterval = (interval: Period) => {
+        setSelectedInterval(interval);
+    };
+
     return (
         <div className="Timeline">
-            <div className="Timeline__grid">
-                <span />
-                <span className="Timeline__top-row">
-                    {yearPins.map(pin => (
-                        <div
-                            key={pin.year}
-                            className="Timeline__year"
-                            style={{
-                                left: pin.left
-                            }}
-                        >
-                            <Undertekst>{pin.year}</Undertekst>
-                            <div className="Timeline__pin" />
-                        </div>
-                    ))}
-                </span>
-                {data.map(row => (
-                    <TimelineRow key={row.label} {...row} range={range} />
+            <span className="Timeline__labels">
+                {data.map(item => (
+                    <Normaltekst key={item.label}>{item.label}</Normaltekst>
                 ))}
-            </div>
+            </span>
+            <span className="Timeline__periods">
+                {data.map(item => (
+                    <TimelineRow key={item.label} {...item} range={range} />
+                ))}
+                {yearPins.map(pin => (
+                    <div
+                        key={pin.year}
+                        className="Timeline__year"
+                        style={{ left: pin.left }}
+                    >
+                        <Undertekst>{pin.year}</Undertekst>
+                        <div className="Timeline__pin" />
+                    </div>
+                ))}
+                {positionedIntervals.map(interval => (
+                    <div
+                        key={(interval as Period).start}
+                        className="Timeline__interval"
+                        style={{
+                            left: `${interval.left}%`,
+                            width: `${interval.width}%`
+                        }}
+                        onClick={() => onClickInterval(interval as Period)}
+                    />
+                ))}
+                <span className="Timeline__period-info">
+                    {selectedInterval && (
+                        <>
+                            <Normaltekst>
+                                {`${dayjs(selectedInterval.start).format(
+                                    'DD.MM.YYYY'
+                                )} - ${dayjs(selectedInterval.end).format(
+                                    'DD.MM.YYYY'
+                                )}`}
+                            </Normaltekst>
+                            {selectedInterval.cases.map(c => (
+                                <Normaltekst key={c.label}>
+                                    {c.label}
+                                </Normaltekst>
+                            ))}
+                        </>
+                    )}
+                </span>
+            </span>
         </div>
     );
 };

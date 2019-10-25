@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { Range } from './types';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { OrganizationType, TimelinePeriod } from './Timeline';
 import { calculatePosition, daysInPeriod } from './calc';
 import './TimelineRow.less';
@@ -12,7 +11,7 @@ interface TimelineRowProps {
     range: Range;
 }
 
-const TimelineRow = ({ label, type, periods, range }: TimelineRowProps) => {
+const TimelineRow = ({ periods, range }: TimelineRowProps) => {
     const days = daysInPeriod(range);
 
     const positionedPeriods = useMemo(() => {
@@ -23,21 +22,18 @@ const TimelineRow = ({ label, type, periods, range }: TimelineRowProps) => {
     }, [periods]);
 
     return (
-        <>
-            <Normaltekst className="TimelineRow__label">{label}</Normaltekst>
-            <div className="TimelineRow__periods">
-                {positionedPeriods.map(period => (
-                    <div
-                        key={period.start}
-                        className={`TimelineRow__period ${period.status || ''}`}
-                        style={{
-                            left: `${period.style.left}%`,
-                            width: `${period.style.width}%`
-                        }}
-                    />
-                ))}
-            </div>
-        </>
+        <div className="TimelineRow">
+            {positionedPeriods.map(period => (
+                <div
+                    key={period.start}
+                    className={`TimelineRow__period ${period.status || ''}`}
+                    style={{
+                        left: `${period.style.left}%`,
+                        width: `${period.style.width}%`
+                    }}
+                />
+            ))}
+        </div>
     );
 };
 
