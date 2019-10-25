@@ -1,79 +1,79 @@
-import moment, { Moment } from 'moment';
-import { Period } from './types';
-import { TimelineRow } from '../../context/CaseContext';
+import { Range } from './types';
+import dayjs from 'dayjs';
 
-export const toMoments = (rows: TimelineRow[]): TimelineRow[] => {
-    return rows.map(row => ({
-        ...row,
-        periods: row.periods.map(period => ({
-            start: moment(period.start),
-            end: moment(period.end)
-        }))
-    }));
+export const daysInPeriod = (range: Range) => {
+    const now = dayjs();
+    const then = now.subtract(range, 'month');
+
+    return now.diff(then, 'day');
 };
 
-export const extractDates = (rows: TimelineRow[]): Period[] => {
-    return rows.reduce<Period[]>((acc, row) => acc.concat(row.periods), []);
-};
-
-export const earliestDate = (periods: Period[]): Moment => {
-    return periods.reduce((acc: Moment, period: Period) => {
-        return (period.start as Moment) < acc ? (period.start as Moment) : acc;
-    }, moment());
-};
-
-export const latestDate = (periods: Period[]): Moment => {
-    return periods.reduce((acc: Moment, period: Period) => {
-        return (period.end as Moment) > acc ? (period.end as Moment) : acc;
-    }, moment('1900-01-01'));
-};
-
-export const daysBetween = (earliestDate: Moment, latestDate: Moment) => {
-    return Math.abs(earliestDate.diff(latestDate, 'days'));
-};
-
-/* Returnerer en array med alle år hentet fra periodedata, med unntak av det første året.
- * Gitt datoene '2019-05-01', '2017-04-12' og '2013-12-12' returnerer denne
- * [2014, 2015, 2016, 2017, 2018, 2019]
- */
-export const yearsBetween = (periods: Period[]) => {
-    const earliest = earliestDate(periods).year();
-    const latest = latestDate(periods).year();
-
-    return new Array(latest - earliest)
-        .fill(earliest)
-        .map((year, i) => year + i + 1);
-};
-
-/* Finds the horizontal position and width of a period based on the earliest and latest
- * dates as well as the total width of the containing element.
- */
-export const calculatePlacement = (
-    period: Period,
-    start: Moment,
-    end: Moment,
-    width = 1000
-) => {
-    const totalDays = daysBetween(start, end);
-    const ratio = width / totalDays;
+export const calculatePosition = (start: string, end: string, days: number) => {
+    const startOfRange = dayjs().subtract(days, 'day');
+    const startDate = dayjs(start);
+    const endDate = dayjs(end);
 
     return {
-        x: daysBetween(period.start as Moment, start) * ratio,
-        width: daysBetween(period.start as Moment, period.end as Moment) * ratio
+        left: (startDate.diff(startOfRange, 'day') / days) * 100,
+        width: Math.abs((startDate.diff(endDate, 'day') / days) * 100)
     };
 };
 
-/* Finds the horizontal position and width of a year pin/label based on the earliest and latest
- * dates as well as the total width of the containing element.
- */
-export const calculateYearPinPosition = (
-    year: Moment,
-    start: Moment,
-    end: Moment,
-    width = 1000
-) => {
-    const totalDays = daysBetween(start, end);
-    const ratio = width / totalDays;
+export const yearsInRange = (range: Range) => {
+    const now = dayjs();
+    const then = now.subtract(range, 'month');
+    const numberOfYears = now.diff(then, 'year');
 
-    return daysBetween(year, start) * ratio;
+    return new Array(numberOfYears).fill(now.year()).map((year, i) => year - i);
+};
+
+export const calculateLeftPercentage = (date: string, days: number) => {
+    const then = dayjs().subtract(days, 'day');
+    return (dayjs(date).diff(then, 'day') / days) * 100;
+};
+
+type Period = {
+    start: string;
+    end: string;
+    metaData: string[];
+};
+
+export const overlapping = (p1: Period, p2: Period) => {
+    const a = { start: dayjs(p1.start), end: dayjs(p1.end) };
+    const b = { start: dayjs(p2.start), end: dayjs(p2.end) };
+
+    if (a.start.isBefore(b.start)) {
+        return a.end.isAfter(b.start);
+    } else {
+        return b.end.isAfter(a.start);
+    }
+};
+
+export const splitPeriods = (p1: Period, p2: Period) => {
+    const a = { ...p1, start: dayjs(p1.start), end: dayjs(p1.end) };
+    const b = { ...p2, start: dayjs(p2.start), end: dayjs(p2.end) };
+
+    const firstPeriod = a.start.isBefore(b.start) ? a : b;
+    const secondPeriod = firstPeriod === a ? b : a;
+
+    const periodsAreOverlapping = firstPeriod.end.isAfter(secondPeriod.start);
+    if (periodsAreOverlapping) {
+        return [
+            {
+                start: firstPeriod.start,
+                end: secondPeriod.start,
+                metaData: firstPeriod.metaData
+            },
+            {
+                start: secondPeriod.start,
+                end: firstPeriod.end,
+                metaData: [...firstPeriod.metaData, ...secondPeriod.metaData]
+            },
+            {
+                start: firstPeriod.end,
+                end: secondPeriod.end,
+                metaData: secondPeriod.metaData
+            }
+        ];
+    }
 };

@@ -1,74 +1,6 @@
 import { CaseData, Employment, Salary, TaskStatus, TimelineRow } from './types';
 import { IconType } from '../components/Icon';
 
-const timelineData: TimelineRow[] = [
-    {
-        label: 'Sykepleierhuset AS',
-        periods: [
-            {
-                start: '2017-12-01',
-                end: '2018-02-22'
-            },
-            {
-                start: '2018-07-01',
-                end: '2018-07-31'
-            },
-            {
-                start: '2018-08-01',
-                end: '2018-08-31'
-            },
-            {
-                start: '2018-09-01',
-                end: '2018-09-30'
-            },
-            {
-                start: '2019-06-01',
-                end: '2019-06-30'
-            }
-        ]
-    },
-    {
-        label: 'Hjemmehjelpen',
-        periods: [
-            {
-                start: '2018-02-01',
-                end: '2018-03-31'
-            },
-            {
-                start: '2018-09-01',
-                end: '2018-11-30'
-            }
-        ]
-    },
-    {
-        label: 'Sykepleierhuset AS',
-        periods: [
-            {
-                start: '2018-03-20',
-                end: '2018-04-30'
-            }
-        ]
-    },
-    {
-        label: 'Hjemmehjelpen OSLO',
-        periods: [
-            {
-                start: '2018-02-01',
-                end: '2018-03-31'
-            }
-        ]
-    },
-    {
-        label: 'Hjemmehjelpen',
-        periods: [
-            {
-                start: '2018-06-01',
-                end: '2018-06-30'
-            }
-        ]
-    }
-];
-
 const employment: Employment = {
     arbeidsgiver: 'Sykepleierhuset AS',
     arbeidsforhold: 'Ordinær',
@@ -138,7 +70,6 @@ export const mockCaseData: CaseData = {
         { label: 'Fordeling', value: '-' },
         { label: 'Utbetaling', value: '7 407,00 kr' }
     ],
-    timelineData,
     employment,
     salary
 };

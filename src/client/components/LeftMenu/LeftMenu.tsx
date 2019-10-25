@@ -1,13 +1,18 @@
 import React from 'react';
-import Nav from '../Nav/Nav';
-import CaseMenu from '../CaseMenu/CaseMenu';
 import './LeftMenu.less';
+import MenuLink from './MenuLink';
 
 const LeftMenu = () => {
     return (
         <div className="LeftMenu">
-            <CaseMenu />
-            <Nav />
+            <MenuLink label="Sykmeldingsperiode" path="/sykmeldingsperiode" />
+            <MenuLink label="Sykdomsvilkår" path="/sykdomsvilkår" />
+            <MenuLink label="Inngangsvilkår" path="/inngangsvilkår" />
+            <MenuLink label="Inntektskilder" path="/inntektskilder" />
+            <MenuLink label="Sykepengegrunnlag" path="/Sykepengegrunnlag" />
+            <MenuLink label="Fordeling" path="/Fordeling" />
+            <MenuLink label="Utbetalingsoversikt" path="/utbetalingsoversikt" />
+            <MenuLink label="Oppsummering" path="/oppsummering" />
         </div>
     );
 };

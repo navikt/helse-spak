@@ -26,9 +26,10 @@ const Clipboard = ({ children }: ClipboardProps) => {
 
     const copy = (e: React.MouseEvent<HTMLElement>) => {
         e.stopPropagation();
-        if (!didCopy && ref.current) {
+        if (!didCopy && ref.current && ref.current.firstChild) {
             setDidCopy(
-                copyContentsToClipboard(ref.current.firstChild as HTMLElement)
+                copyContentsToClipboard(ref.current.firstChild
+                    .firstChild as HTMLElement)
             );
         }
     };

@@ -93,17 +93,6 @@ const RightMenu = () => {
 
     return (
         <div className="RightMenu">
-            <div className="RightMenu__top">
-                <RightMenuButton
-                    icon={RightMenuButtonIcon.History}
-                    onClick={() => setFilters([])}
-                    active
-                />
-                <RightMenuButton
-                    icon={RightMenuButtonIcon.Dialogue}
-                    onClick={() => setFilters([])}
-                />
-            </div>
             <ul className="RightMenu__list">
                 <AnimatePresence initial={false}>
                     {items

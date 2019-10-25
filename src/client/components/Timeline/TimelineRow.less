@@ -1,0 +1,37 @@
+@import '../../variables';
+
+@normalColor: #669db4;
+@unresolvedColor: #ffbd66;
+@resolvedColor: #51c77f;
+@unrelatedColor: @greyLight;
+
+.TimelineRow__label {
+  color: @fontColor;
+}
+
+.TimelineRow__periods {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background: @greyLight;
+
+  .TimelineRow__period {
+    position: absolute;
+    height: 0.5rem;
+    transform: translateY(-50%);
+    background: @normalColor;
+    border-radius: 2px;
+
+    &.unresolved {
+      background: @unresolvedColor;
+    }
+
+    &.resolved {
+      background: @resolvedColor;
+    }
+
+    &.unrelated {
+      background: @unrelatedColor;
+    }
+  }
+}

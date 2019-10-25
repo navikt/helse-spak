@@ -6,20 +6,24 @@ import RightMenu from '../RightMenu';
 import MainContent from '../MainContent';
 import { CaseProvider } from '../../context/CaseContext';
 import './App.less';
+import PersonBar from '../PersonBar';
+import Timeline from '../Timeline';
 
 const App = () => {
     return (
         <div className="App">
-            <TopBar />
-            <BrowserRouter>
-                <div className="Content">
-                    <CaseProvider>
+            <CaseProvider>
+                <TopBar />
+                <PersonBar />
+                <Timeline />
+                <BrowserRouter>
+                    <div className="Content">
                         <LeftMenu />
                         <MainContent />
                         <RightMenu />
-                    </CaseProvider>
-                </div>
-            </BrowserRouter>
+                    </div>
+                </BrowserRouter>
+            </CaseProvider>
         </div>
     );
 };
