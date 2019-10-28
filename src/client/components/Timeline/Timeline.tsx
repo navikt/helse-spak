@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import TimelineRow from './TimelineRow';
 import { Range, Interval, Case, HorizontallyPositioned } from './types';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -80,8 +80,8 @@ const timelineData: Row[] = [
 ];
 
 interface TimelineProps {
-    data: Row[];
-    range: Range;
+    data?: Row[];
+    range?: Range;
 }
 
 const Timeline = ({
@@ -123,6 +123,10 @@ const Timeline = ({
     const onClickInterval = (interval: Interval) => {
         setSelectedInterval(interval);
     };
+
+    useEffect(() => {
+        setSelectedInterval(undefined);
+    }, [selectedRange]);
 
     return (
         <div className="Timeline">
