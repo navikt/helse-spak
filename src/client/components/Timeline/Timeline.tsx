@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TimelineRow from './TimelineRow';
-import { Range } from './types';
+import { Range, Interval, Case } from './types';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import {
     calculateLeftPercentage,
@@ -8,8 +8,10 @@ import {
     daysInPeriod,
     yearsInRange
 } from './calc';
-import { getIntervals, Case, Period } from './transform';
+import { getIntervals, trimElement } from './transform';
 import './Timeline.less';
+import RangeSelectors from './RangeSelectors';
+import SelectedInterval from './SelectedInterval';
 import dayjs from 'dayjs';
 
 export enum OrganizationType {
@@ -80,13 +82,6 @@ const timelineData: Row[] = [
     }
 ];
 
-const intervals = getIntervals(timelineData).filter(
-    interval =>
-        interval &&
-        interval.cases &&
-        interval.cases.filter(c => (c as Case).status !== 'nav').length > 0
-);
-
 interface TimelineProps {
     data: Row[];
     range: Range;
@@ -97,7 +92,7 @@ const Timeline = ({
     range = Range.ONE_YEAR
 }: TimelineProps) => {
     const [selectedRange, setSelectedRange] = useState<Range>(range);
-    const [selectedInterval, setSelectedInterval] = useState<Period>();
+    const [selectedInterval, setSelectedInterval] = useState<Interval>();
 
     const years = yearsInRange(selectedRange);
     const days = daysInPeriod(selectedRange);
@@ -110,12 +105,28 @@ const Timeline = ({
         };
     });
 
-    const positionedIntervals = intervals.map(interval => ({
-        ...interval,
-        ...calculatePosition(interval!.start, interval!.end, days)
-    }));
+    const firstDayInRange = dayjs().subtract(selectedRange, 'month');
 
-    const onClickInterval = (interval: Period) => {
+    const intervals: [] | Interval[] = getIntervals(timelineData)
+        .filter(
+            (interval: Interval) =>
+                interval &&
+                interval.cases &&
+                interval.cases.filter(c => (c as Case).status !== 'nav')
+                    .length > 0
+        )
+        .filter(interval => dayjs(interval.end).isAfter(firstDayInRange));
+
+    const positionedIntervals = intervals
+        .map(interval => ({
+            ...interval,
+            style: {
+                ...calculatePosition(interval!.start, interval!.end, days)
+            }
+        }))
+        .map(trimElement);
+
+    const onClickInterval = (interval: Interval) => {
         setSelectedInterval(interval);
     };
 
@@ -146,44 +157,20 @@ const Timeline = ({
                 ))}
                 {positionedIntervals.map(interval => (
                     <div
-                        key={(interval as Period).start}
+                        key={interval.id}
                         className="Timeline__interval"
                         style={{
-                            left: `${interval.left}%`,
-                            width: `${interval.width}%`
+                            left: `${interval.style.left}%`,
+                            width: `${interval.style.width}%`
                         }}
-                        onClick={() => onClickInterval(interval as Period)}
+                        onClick={() => onClickInterval(interval as Interval)}
                     />
                 ))}
-                <span className="Timeline__period-info">
-                    {selectedInterval && (
-                        <>
-                            <Normaltekst>
-                                {`${dayjs(selectedInterval.start).format(
-                                    'DD.MM.YY'
-                                )} - ${dayjs(selectedInterval.end).format(
-                                    'DD.MM.YY'
-                                )}`}
-                            </Normaltekst>
-                            {selectedInterval.cases.map(c => (
-                                <Normaltekst key={c.label}>
-                                    {c.label}
-                                </Normaltekst>
-                            ))}
-                        </>
-                    )}
-                </span>
-                <span className="Timeline__range-selectors">
-                    <button onClick={() => setSelectedRange(Range.SIX_MONTHS)}>
-                        <Normaltekst>6 mnd</Normaltekst>
-                    </button>
-                    <button onClick={() => setSelectedRange(Range.ONE_YEAR)}>
-                        <Normaltekst>1 år</Normaltekst>
-                    </button>
-                    <button onClick={() => setSelectedRange(Range.THREE_YEARS)}>
-                        <Normaltekst>3 år</Normaltekst>
-                    </button>
-                </span>
+                <SelectedInterval interval={selectedInterval} />
+                <RangeSelectors
+                    selectedRange={selectedRange}
+                    onSelect={setSelectedRange}
+                />
             </span>
         </div>
     );

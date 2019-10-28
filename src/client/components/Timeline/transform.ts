@@ -1,32 +1,13 @@
-import { OrganizationType, TimelinePeriod } from './Timeline';
-
-export interface Case {
-    label: string;
-    status: string;
-}
-
-export interface Period {
-    start: string;
-    end: string;
-    cases: Case[];
-}
-
-enum DatePosition {
-    START = 'start',
-    END = 'end'
-}
-
-interface Date {
-    position: DatePosition;
-    date: string;
-    case: Case;
-}
-
-interface Row {
-    label: string;
-    type: OrganizationType;
-    periods: TimelinePeriod[];
-}
+import { TimelinePeriod } from './Timeline';
+import {
+    Case,
+    Date,
+    Interval,
+    DatePosition,
+    Row,
+    HorizontallyPositioned
+} from './types';
+import { guid } from 'nav-frontend-js-utils';
 
 const reduceToDates = (dates: Date[], current: TimelinePeriod) => {
     return [
@@ -58,10 +39,10 @@ const extractDates = (timeline: Row[]): Date[] => {
         .sort((a: Date, b: Date) => (a.date > b.date ? 1 : -1));
 };
 
-const extractIntervals = (dates: Date[]) => {
-    const openCases: { [key: string]: object } = {};
+const extractIntervals = (dates: Date[]): Interval[] => {
+    const openCases: { [key: string]: Case } = {};
     const intervals = dates
-        .map((current: Date, i) => {
+        .map((current: Date, i: number) => {
             if (current.position === DatePosition.START) {
                 if (current.case) {
                     openCases[current.case.label] = current.case;
@@ -76,19 +57,31 @@ const extractIntervals = (dates: Date[]) => {
                 return {
                     start: current.date,
                     end: next.date,
-                    cases: [...Object.values(openCases)]
+                    cases: [...Object.values(openCases)],
+                    id: guid()
                 };
             }
         })
-        .slice(0, -1);
-    if (intervals === undefined) {
-        return [];
-    } else {
-        return intervals;
-    }
+        .slice(0, -1)
+        .filter(interval => interval !== undefined);
+    return intervals as Interval[];
 };
 
 export const getIntervals = (timeline: Row[]) => {
     const dates = extractDates(timeline);
     return extractIntervals(dates);
+};
+
+export const trimElement = (element: HorizontallyPositioned) => {
+    const isOutOfBounds = element.style.left < 0;
+    return isOutOfBounds
+        ? {
+              ...element,
+              style: {
+                  ...element.style,
+                  left: 0,
+                  width: element.style.width + element.style.left
+              }
+          }
+        : element;
 };
