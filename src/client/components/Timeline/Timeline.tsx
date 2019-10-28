@@ -10,7 +10,7 @@ import {
 } from './calc';
 import { getIntervals, trimElement } from './transform';
 import './Timeline.less';
-import RangeSelectors from './RangeSelectors';
+import RangeSelector from './RangeSelector';
 import SelectedInterval from './SelectedInterval';
 import dayjs from 'dayjs';
 import Markers from './Markers';
@@ -54,7 +54,7 @@ const timelineData: Row[] = [
             },
             {
                 start: '2019-9-01',
-                end: '2019-9-30',
+                end: '2019-9-31',
                 status: PeriodStatus.RESOLVED
             }
         ]
@@ -150,7 +150,7 @@ const Timeline = ({
                     />
                 ))}
                 <SelectedInterval interval={selectedInterval} />
-                <RangeSelectors
+                <RangeSelector
                     selectedRange={selectedRange}
                     onSelect={setSelectedRange}
                 />

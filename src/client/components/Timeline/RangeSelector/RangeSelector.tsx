@@ -1,21 +1,21 @@
 import React from 'react';
 import { Range } from '../types';
 import { Normaltekst } from 'nav-frontend-typografi';
-import './RangeSelectors.less';
+import './RangeSelector.less';
 
-interface RangeSelectorProps {
+interface RangeSelectorButtonProps {
     label: string;
     range: Range;
     onSelect: (range: Range) => void;
     selectedRange: Range;
 }
 
-const RangeSelector = ({
+const RangeSelectorButton = ({
     label,
     range,
     onSelect,
     selectedRange
-}: RangeSelectorProps) => {
+}: RangeSelectorButtonProps) => {
     return (
         <button
             className={selectedRange === range ? 'active' : ''}
@@ -31,22 +31,22 @@ interface RangeSelectorsProps {
     onSelect: (range: Range) => void;
 }
 
-const RangeSelectors = ({ selectedRange, onSelect }: RangeSelectorsProps) => {
+const RangeSelector = ({ selectedRange, onSelect }: RangeSelectorsProps) => {
     return (
-        <span className="RangeSelectors">
-            <RangeSelector
+        <span className="RangeSelector">
+            <RangeSelectorButton
                 label="6 mdn"
                 range={Range.SIX_MONTHS}
                 onSelect={onSelect}
                 selectedRange={selectedRange}
             />
-            <RangeSelector
+            <RangeSelectorButton
                 label="1 år"
                 range={Range.ONE_YEAR}
                 onSelect={onSelect}
                 selectedRange={selectedRange}
             />
-            <RangeSelector
+            <RangeSelectorButton
                 label="3 år"
                 range={Range.THREE_YEARS}
                 onSelect={onSelect}
@@ -56,4 +56,4 @@ const RangeSelectors = ({ selectedRange, onSelect }: RangeSelectorsProps) => {
     );
 };
 
-export default RangeSelectors;
+export default RangeSelector;
