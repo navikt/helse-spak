@@ -69,7 +69,8 @@
         margin-top: -@adjustedMargin;
         height: calc(100% + @adjustedMargin);
 
-        &:hover {
+        &:hover,
+        &.active {
             background: rgba(red(@blue), green(@blue), blue(@blue), 0.035);
 
             &:before {

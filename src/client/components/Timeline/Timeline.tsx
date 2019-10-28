@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import TimelineRow from './TimelineRow';
 import { Range, Interval, Case, HorizontallyPositioned } from './types';
-import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
-import {
-    calculateLeftPercentage,
-    calculatePosition,
-    daysInPeriod,
-    yearsInRange
-} from './calc';
+import { Normaltekst } from 'nav-frontend-typografi';
+import { calculatePosition, daysInPeriod } from './calc';
 import { getIntervals, trimElement } from './transform';
 import './Timeline.less';
 import RangeSelector from './RangeSelector';
 import SelectedInterval from './SelectedInterval';
 import dayjs from 'dayjs';
 import Markers from './Markers';
+import IntervalButton from './Interval';
 
 export enum OrganizationType {
     PRIVATE = 'employer',
@@ -99,15 +95,21 @@ const Timeline = ({
 
     const firstDayInRange = dayjs().subtract(selectedRange, 'month');
 
-    const intervals: [] | Interval[] = getIntervals(data)
-        .filter(
-            (interval: Interval) =>
-                interval &&
-                interval.cases &&
-                interval.cases.filter(c => (c as Case).status !== 'nav')
-                    .length > 0
-        )
-        .filter(interval => dayjs(interval.end).isAfter(firstDayInRange));
+    const intervals: [] | Interval[] = useMemo(
+        () =>
+            getIntervals(data)
+                .filter(
+                    (interval: Interval) =>
+                        interval &&
+                        interval.cases &&
+                        interval.cases.filter(c => (c as Case).status !== 'nav')
+                            .length > 0
+                )
+                .filter(interval =>
+                    dayjs(interval.end).isAfter(firstDayInRange)
+                ),
+        [data, selectedRange]
+    );
 
     const positionedIntervals = intervals
         .map(interval => ({
@@ -139,14 +141,14 @@ const Timeline = ({
                 ))}
                 <Markers range={selectedRange} />
                 {positionedIntervals.map(interval => (
-                    <div
+                    <IntervalButton
                         key={interval.id}
-                        className="Timeline__interval"
-                        style={{
-                            left: `${interval.style.left}%`,
-                            width: `${interval.style.width}%`
-                        }}
-                        onClick={() => onClickInterval(interval as Interval)}
+                        interval={interval}
+                        isActive={
+                            interval.id ===
+                            (selectedInterval && selectedInterval.id)
+                        }
+                        onClick={onClickInterval}
                     />
                 ))}
                 <SelectedInterval interval={selectedInterval} />
