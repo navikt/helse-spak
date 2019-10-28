@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TimelineRow from './TimelineRow';
-import { Range, Interval, Case } from './types';
+import { Range, Interval, Case, HorizontallyPositioned } from './types';
 import { Normaltekst, Undertekst } from 'nav-frontend-typografi';
 import {
     calculateLeftPercentage,
@@ -13,6 +13,7 @@ import './Timeline.less';
 import RangeSelectors from './RangeSelectors';
 import SelectedInterval from './SelectedInterval';
 import dayjs from 'dayjs';
+import Markers from './Markers';
 
 export enum OrganizationType {
     PRIVATE = 'employer',
@@ -94,20 +95,11 @@ const Timeline = ({
     const [selectedRange, setSelectedRange] = useState<Range>(range);
     const [selectedInterval, setSelectedInterval] = useState<Interval>();
 
-    const years = yearsInRange(selectedRange);
     const days = daysInPeriod(selectedRange);
-
-    const yearPins = years.map(year => {
-        const beginningOfYear = `${year}-01-01`;
-        return {
-            year,
-            left: `${calculateLeftPercentage(beginningOfYear, days)}%`
-        };
-    });
 
     const firstDayInRange = dayjs().subtract(selectedRange, 'month');
 
-    const intervals: [] | Interval[] = getIntervals(timelineData)
+    const intervals: [] | Interval[] = getIntervals(data)
         .filter(
             (interval: Interval) =>
                 interval &&
@@ -124,7 +116,7 @@ const Timeline = ({
                 ...calculatePosition(interval!.start, interval!.end, days)
             }
         }))
-        .map(trimElement);
+        .map(trimElement) as (Interval & HorizontallyPositioned)[];
 
     const onClickInterval = (interval: Interval) => {
         setSelectedInterval(interval);
@@ -145,16 +137,7 @@ const Timeline = ({
                         range={selectedRange}
                     />
                 ))}
-                {yearPins.map(pin => (
-                    <div
-                        key={pin.year}
-                        className="Timeline__year"
-                        style={{ left: pin.left }}
-                    >
-                        <Undertekst>{pin.year}</Undertekst>
-                        <div className="Timeline__pin" />
-                    </div>
-                ))}
+                <Markers range={selectedRange} />
                 {positionedIntervals.map(interval => (
                     <div
                         key={interval.id}
