@@ -143,7 +143,6 @@ const Timeline = ({
                         range={selectedRange}
                     />
                 ))}
-                <Markers range={selectedRange} />
                 {positionedIntervals.map(interval => (
                     <IntervalButton
                         key={interval.id}
@@ -155,6 +154,7 @@ const Timeline = ({
                         onClick={onClickInterval}
                     />
                 ))}
+                <Markers range={selectedRange} />
                 <SelectedInterval interval={selectedInterval} />
                 <RangeSelector
                     selectedRange={selectedRange}

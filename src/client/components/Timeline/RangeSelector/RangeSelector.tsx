@@ -35,7 +35,7 @@ const RangeSelector = ({ selectedRange, onSelect }: RangeSelectorsProps) => {
     return (
         <span className="RangeSelector">
             <RangeSelectorButton
-                label="6 mdn"
+                label="6 mnd"
                 range={Range.SIX_MONTHS}
                 onSelect={onSelect}
                 selectedRange={selectedRange}

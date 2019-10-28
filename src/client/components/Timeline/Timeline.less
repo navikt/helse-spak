@@ -68,10 +68,11 @@
         top: 0;
         margin-top: -@adjustedMargin;
         height: calc(100% + @adjustedMargin);
+        mix-blend-mode: difference;
 
         &:hover,
         &.active {
-            background: rgba(red(@blue), green(@blue), blue(@blue), 0.035);
+            background: #f1f8ff;
 
             &:before {
                 @borderThickness: 0.25rem;
@@ -79,7 +80,7 @@
                 position: absolute;
                 width: calc(100% - @borderThickness * 2);
                 height: 0;
-                border: @borderThickness solid @greyDark;
+                border: @borderThickness solid #8b8b8b;
                 border-bottom: @borderThickness solid transparent;
             }
         }
