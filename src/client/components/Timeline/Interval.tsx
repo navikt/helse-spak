@@ -18,7 +18,9 @@ const Interval = ({ interval, isActive, onClick }: Props) => {
                 width: `${interval.style.width}%`
             }}
             onClick={() => onClick(interval as Interval)}
-        />
+        >
+            <div className={`Timeline__interval--${isActive ? 'active' : 'inactive'}`} />
+        </div>
     );
 };
 

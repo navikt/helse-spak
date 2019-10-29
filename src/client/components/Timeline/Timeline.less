@@ -64,15 +64,25 @@
 
     .Timeline__interval {
         position: absolute;
-        width: 2rem;
         top: 0;
         margin-top: -@adjustedMargin;
         height: calc(100% + @adjustedMargin);
-        mix-blend-mode: difference;
+
+        .Timeline__interval--active,
+        &:hover .Timeline__interval--inactive {
+            position: absolute;
+            width: calc(100% - 2px);
+            height: calc(100% - 0.5rem);
+            top: 0.5rem;
+            background: white;
+            mix-blend-mode: soft-light;
+            border-left: 1px dashed @greyDark;
+            border-right: 1px dashed @greyDark;
+        }
 
         &:hover,
         &.active {
-            background: #f1f8ff;
+
 
             &:before {
                 @borderThickness: 0.25rem;
@@ -80,7 +90,7 @@
                 position: absolute;
                 width: calc(100% - @borderThickness * 2);
                 height: 0;
-                border: @borderThickness solid #8b8b8b;
+                border: @borderThickness solid @greyDark;
                 border-bottom: @borderThickness solid transparent;
             }
         }
