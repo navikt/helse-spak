@@ -68,31 +68,33 @@
         margin-top: -@adjustedMargin;
         height: calc(100% + @adjustedMargin);
 
+        &:focus {
+            outline: none;
+        }
+
         .Timeline__interval--active,
+        &:focus .Timeline__interval--inactive,
         &:hover .Timeline__interval--inactive {
             position: absolute;
             width: calc(100% - 2px);
             height: calc(100% - 0.5rem);
             top: 0.5rem;
-            background: white;
+            background: #fff;
             mix-blend-mode: soft-light;
             border-left: 1px dashed @greyDark;
             border-right: 1px dashed @greyDark;
         }
 
-        &:hover,
-        &.active {
-
-
-            &:before {
-                @borderThickness: 0.25rem;
-                content: '';
-                position: absolute;
-                width: calc(100% - @borderThickness * 2);
-                height: 0;
-                border: @borderThickness solid @greyDark;
-                border-bottom: @borderThickness solid transparent;
-            }
+        &:focus:before,
+        &:hover:before,
+        &.active:before {
+            @borderThickness: 0.25rem;
+            content: '';
+            position: absolute;
+            width: calc(100% - @borderThickness * 2);
+            height: 0;
+            border: @borderThickness solid @greyDark;
+            border-bottom: @borderThickness solid transparent;
         }
 
         &:after {

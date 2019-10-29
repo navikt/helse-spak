@@ -92,7 +92,6 @@ const Timeline = ({
     const [selectedInterval, setSelectedInterval] = useState<Interval>();
 
     const days = daysInPeriod(selectedRange);
-
     const firstDayInRange = dayjs().subtract(selectedRange, 'month');
 
     const intervals: [] | Interval[] = useMemo(
