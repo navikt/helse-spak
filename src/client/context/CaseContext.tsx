@@ -1,19 +1,46 @@
 import React, { useState } from 'react';
-import { mockCaseData } from './mockData';
+import { mockData } from './mockData';
 import { CaseData } from './types';
+import { Case } from '../components/Timeline/types';
 
-const defaultCaseData: CaseData = mockCaseData;
-
-export const CaseContext = React.createContext(defaultCaseData);
+interface CaseContextProps extends CaseData {
+    selectedInterval?: Interval;
+    setSelectedInterval: (interval?: Interval) => void;
+}
 
 interface CaseProviderProps {
     children: React.ReactNode;
 }
 
+interface Interval {
+    start: string;
+    end: string;
+    cases: Case[];
+    id: string;
+}
+
+const defaultCaseData: CaseData = mockData;
+
+export const CaseContext = React.createContext<CaseContextProps>({
+    ...defaultCaseData,
+    setSelectedInterval: () => {}
+});
+
 export const CaseProvider = ({ children }: CaseProviderProps) => {
     const [caseData] = useState<CaseData>(defaultCaseData);
+    const [selectedInterval, setSelectedInterval] = useState<
+        Interval | undefined
+    >();
 
     return (
-        <CaseContext.Provider value={caseData}>{children}</CaseContext.Provider>
+        <CaseContext.Provider
+            value={{
+                ...caseData,
+                selectedInterval,
+                setSelectedInterval
+            }}
+        >
+            {children}
+        </CaseContext.Provider>
     );
 };

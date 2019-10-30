@@ -26,7 +26,11 @@ const Interval = ({ interval, isActive, onClick }: Props) => {
             onKeyDown={e => e.keyCode === Key.Enter && onSelectInterval()}
             tabIndex={0}
         >
-            <div className={`Timeline__interval--${isActive ? 'active' : 'inactive'}`} />
+            <div
+                className={`Timeline__interval--${
+                    isActive ? 'active' : 'inactive'
+                }`}
+            />
         </div>
     );
 };
