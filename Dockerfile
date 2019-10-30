@@ -1,0 +1,1 @@
+FROM navikt/node-express:12.2.0-alpine
