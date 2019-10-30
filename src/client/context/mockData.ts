@@ -1,75 +1,91 @@
-import { CaseData, Employment, Salary, TaskStatus, TimelineRow } from './types';
-import { IconType } from '../components/Icon';
+import { CaseData, DagType, PeriodeStatus } from './types';
+import dayjs from 'dayjs';
 
-const employment: Employment = {
-    arbeidsgiver: 'Sykepleierhuset AS',
-    arbeidsforhold: 'Ordinær',
-    arbeidstidsordning: 'Ikke skift',
-    stillingsprosent: 60,
-    start: '12.0.2017',
-    yrkesbeskrivelse: 'Sykepleier'
+const shouldChangeType = () => {
+    return Math.random() > 0.8;
 };
 
-const salary: Salary = {
-    beregnetInntekt: 17000,
-    omregnetÅrsinntekt: 204000,
-    gjennomsnittligInntekt: 17328,
-    sammenligningsgrunnlag: 155691,
-    lastTwelveMonths: [
-        11523,
-        11523,
-        11523,
-        11523,
-        11523,
-        11523,
-        11523,
-        11523,
-        11523,
-        17328,
-        17328,
-        17328
-    ]
+const randomDagType = (): DagType => {
+    const types = Object.entries(DagType);
+    const index = Math.floor(Math.random() * types.length);
+    let type = types[index][1];
+    if (!shouldChangeType()) {
+        type = DagType.Syk;
+    }
+    return type === DagType.Helg ? randomDagType() : type;
 };
 
-export const mockCaseData: CaseData = {
-    sykdomsvilkår: [
-        { label: 'Sykdomsvilkår', value: 'OK', status: TaskStatus.Unsolved },
-        { label: 'Periode', value: '13.02.2019 - 28.02.2019' }
-    ],
-    inngangsvilkår: [
-        { label: 'Medlemskap', value: 'OK' },
-        { label: 'Opptjening', value: 'OK' },
-        { label: 'Mer enn 0,5 G', value: 'OK' },
-        { label: 'Søknadsfrist', value: 'OK' },
-        { label: 'Dager igjen', value: 'OK' },
-        { label: 'Under 67 år', value: 'OK' }
-    ],
-    oppfølging: [
-        { label: 'Aktivitetsplikt', value: 'OK' },
-        { label: 'Dialogmøte', value: '-' }
-    ],
-    sykepengegrunnlag: [
-        { label: 'Månedsinntekt', value: '17 000,00', icon: IconType.Inntekstmelding },
-        { label: 'Omregnet til årsinntekt', value: '204 000,00' },
-        { label: 'Sammenligningsgr.lag', value: '155 691,00', icon: IconType.Aaregisteret },
-        { label: 'Fastsatt inntekt', value: '-', status: TaskStatus.Unsolved },
-        { label: 'Sykepengegrunnlag', value: '-' },
-        { label: 'Dagsats', value: '-' }
-    ],
-    sykepengeperiode: [
-        { label: 'Kalenderdager', value: '33' },
-        { label: 'Arbeidsgiverdager', value: '16' },
-        { label: 'Virkedager', value: '13' },
-        { label: 'Ferie', value: '-', status: TaskStatus.Solved },
-        { label: 'Sykepengedager', value: '13' },
-        { label: 'Sykmeldingsgrad', value: '100%' }
-    ],
-    utbetaling: [
-        { label: 'Refusjon til arbeidsgiver', value: 'Ja' },
-        { label: 'Betaler arbeidsgiverperiode', value: 'Ja' },
-        { label: 'Fordeling', value: '-' },
-        { label: 'Utbetaling', value: '7 407,00 kr' }
-    ],
-    employment,
-    salary
+const generateDays = (fom: string, tom: string) => {
+    const firstDay = dayjs(fom);
+    const lastDay = dayjs(tom);
+    const daysBetween = Math.abs(firstDay.diff(lastDay, 'day'));
+
+    let currentType = randomDagType();
+    return new Array(daysBetween)
+        .fill({})
+        .map((day, i) => firstDay.add(i, 'day'))
+        .map(day => {
+            if (shouldChangeType()) {
+                currentType = randomDagType();
+            }
+            const isWeekend = day.day() >= 5;
+            return {
+                dato: day.format('YYYY-MM-DD'),
+                type: isWeekend ? DagType.Helg : currentType,
+                gradering: isWeekend ? 0 : 100
+            };
+        });
+};
+
+export const mockData: CaseData = {
+    person: {
+        arbeidsgivere: [
+            {
+                navn: 'Sykepleierhuset AS',
+                perioder: [
+                    {
+                        fom: '2018-11-15',
+                        tom: '2018-12-15',
+                        status: PeriodeStatus.Normal,
+                        dager: generateDays('2018-11-15', '2018-12-15')
+                    },
+                    {
+                        fom: '2019-04-15',
+                        tom: '2019-05-15',
+                        status: PeriodeStatus.Solved,
+                        dager: generateDays('2019-04-15', '2019-05-15')
+                    },
+                    {
+                        fom: '2019-09-01',
+                        tom: '2019-10-01',
+                        status: PeriodeStatus.Solved,
+                        dager: generateDays('2019-09-01', '2019-10-01')
+                    }
+                ]
+            },
+            {
+                navn: 'Hjemmehjelpen',
+                perioder: [
+                    {
+                        fom: '2018-12-01',
+                        tom: '2018-12-31',
+                        status: PeriodeStatus.Unsolved,
+                        dager: generateDays('2018-12-01', '2018-12-31')
+                    }
+                ]
+            }
+        ],
+        ytelser: [
+            {
+                navn: 'Foreldrepenger',
+                perioder: [
+                    {
+                        fom: '2018-11-01',
+                        tom: '2019-05-30',
+                        status: PeriodeStatus.Irrelevant
+                    }
+                ]
+            }
+        ]
+    }
 };

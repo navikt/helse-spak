@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import TimelineRow from './TimelineRow';
 import { Range, Interval, Case, HorizontallyPositioned } from './types';
 import { Normaltekst } from 'nav-frontend-typografi';
@@ -10,22 +10,18 @@ import SelectedInterval from './SelectedInterval';
 import dayjs from 'dayjs';
 import Markers from './Markers';
 import IntervalButton from './Interval';
+import { PeriodeStatus } from '../../context/types';
+import { CaseContext } from '../../context/CaseContext';
 
 export enum OrganizationType {
     PRIVATE = 'employer',
     NAV = 'nav'
 }
 
-enum PeriodStatus {
-    RESOLVED = 'resolved',
-    UNRESOLVED = 'unresolved',
-    UNRELATED = 'unrelated'
-}
-
 export interface TimelinePeriod {
     start: string;
     end: string;
-    status?: PeriodStatus;
+    status?: PeriodeStatus;
 }
 
 interface Row {
@@ -34,65 +30,16 @@ interface Row {
     periods: TimelinePeriod[];
 }
 
-const timelineData: Row[] = [
-    {
-        label: 'Sykepleierhuset AS',
-        type: OrganizationType.PRIVATE,
-        periods: [
-            {
-                start: '2018-11-15',
-                end: '2018-12-15'
-            },
-            {
-                start: '2019-04-15',
-                end: '2019-05-15',
-                status: PeriodStatus.RESOLVED
-            },
-            {
-                start: '2019-9-01',
-                end: '2019-9-31',
-                status: PeriodStatus.RESOLVED
-            }
-        ]
-    },
-    {
-        label: 'Hjemmehjelpen',
-        type: OrganizationType.PRIVATE,
-        periods: [
-            {
-                start: '2018-12-01',
-                end: '2018-12-31',
-                status: PeriodStatus.UNRESOLVED
-            }
-        ]
-    },
-    {
-        label: 'Foreldrepenger',
-        type: OrganizationType.NAV,
-        periods: [
-            {
-                start: '2018-11-01',
-                end: '2019-05-30',
-                status: PeriodStatus.UNRELATED
-            }
-        ]
-    }
-];
-
 interface TimelineProps {
-    data?: Row[];
+    data: Row[];
     range?: Range;
 }
 
-const Timeline = ({
-    data = timelineData,
-    range = Range.ONE_YEAR
-}: TimelineProps) => {
+const Timeline = ({ data, range = Range.ONE_YEAR }: TimelineProps) => {
+    const { selectedInterval, setSelectedInterval } = useContext(CaseContext);
     const [selectedRange, setSelectedRange] = useState<Range>(range);
-    const [selectedInterval, setSelectedInterval] = useState<Interval>();
 
     const days = daysInPeriod(selectedRange);
-
     const firstDayInRange = dayjs().subtract(selectedRange, 'month');
 
     const intervals: [] | Interval[] = useMemo(
@@ -105,7 +52,7 @@ const Timeline = ({
                         interval.cases.filter(c => (c as Case).status !== 'nav')
                             .length > 0
                 )
-                .filter(interval =>
+                .filter((interval: Interval) =>
                     dayjs(interval.end).isAfter(firstDayInRange)
                 ),
         [data, selectedRange]

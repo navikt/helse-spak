@@ -8,8 +8,10 @@ interface SelectedIntervalProps {
 }
 
 const SelectedInterval = ({ interval }: SelectedIntervalProps) => {
-    const start = interval && dayjs(interval.start).format('DD.MM.YY');
-    const end = interval && dayjs(interval.end).format('DD.MM.YY');
+    const start =
+        interval && dayjs(interval.start, 'DD-MM-YYYY').format('DD.MM.YY');
+    const end =
+        interval && dayjs(interval.end, 'DD-MM-YYYY').format('DD.MM.YY');
 
     return (
         <span className="Timeline__selected-interval">
@@ -17,9 +19,7 @@ const SelectedInterval = ({ interval }: SelectedIntervalProps) => {
                 <>
                     <Normaltekst>{`${start} - ${end}`}</Normaltekst>
                     {interval.cases.map(c => (
-                        <Normaltekst key={c.label}>
-                            {c.label}
-                        </Normaltekst>
+                        <Normaltekst key={c.label}>{c.label}</Normaltekst>
                     ))}
                 </>
             )}
