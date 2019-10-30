@@ -1,9 +1,5 @@
 import { Range } from './types';
-// @ts-ignore
-import locale from 'dayjs/locale/nb';
 import dayjs, { Dayjs } from 'dayjs';
-
-dayjs.locale(locale);
 
 export const daysInPeriod = (range: Range) => {
     const now = dayjs();
@@ -14,8 +10,8 @@ export const daysInPeriod = (range: Range) => {
 
 export const calculatePosition = (start: string, end: string, days: number) => {
     const startOfRange = dayjs().subtract(days, 'day');
-    const startDate = dayjs(start);
-    const endDate = dayjs(end);
+    const startDate = dayjs(start, 'DD-MM-YYYY');
+    const endDate = dayjs(end, 'DD-MM-YYYY');
 
     return {
         left: (startDate.diff(startOfRange, 'day') / days) * 100,
@@ -25,7 +21,7 @@ export const calculatePosition = (start: string, end: string, days: number) => {
 
 export const calculateLeftPercentage = (date: string | Dayjs, days: number) => {
     const then = dayjs().subtract(days, 'day');
-    return (dayjs(date).diff(then, 'day') / days) * 100;
+    return (dayjs(date, 'DD-MM-YYYY').diff(then, 'day') / days) * 100;
 };
 
 export const yearsInRange = (range: Range): number[] => {

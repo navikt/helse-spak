@@ -1,0 +1,31 @@
+@import '../../variables';
+
+.Tabs {
+  .Tabs__labels {
+    display: flex;
+    border-bottom: 1px solid @greyLight;
+    margin-bottom: 2.5rem;
+
+    .Tabs__label {
+      @verticalMargin: 0.5rem;
+      position: relative;
+      padding: @verticalMargin 1.5rem @verticalMargin 0;
+      cursor: pointer;
+
+      &.active,
+      &:focus,
+      &:hover {
+        &:before {
+          @activeIndicatorHeight: 5px;
+          content: '';
+          position: absolute;
+          width: 4rem;
+          height: @activeIndicatorHeight;
+          border-radius: @activeIndicatorHeight;
+          background: @interactionColor;
+          bottom: calc(-@activeIndicatorHeight / 2);
+        }
+      }
+    }
+  }
+}

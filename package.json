@@ -43,6 +43,7 @@
     "nav-frontend-paneler-style": "^0.3.16",
     "nav-frontend-skjema": "^1.0.73",
     "nav-frontend-skjema-style": "^1.0.46",
+    "nav-frontend-tabell-style": "^0.2.17",
     "nav-frontend-typografi": "^2.0.15",
     "nav-frontend-typografi-style": "^1.0.16",
     "prop-types": "^15.7.2",
@@ -88,6 +89,6 @@
     "prettier": "^1.18.2",
     "ts-node": "^8.4.1",
     "tsc-watch": "^4.0.0",
-    "typescript": "^3.6.3"
+    "typescript": "^3.7.0-beta"
   }
 }

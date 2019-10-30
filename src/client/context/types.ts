@@ -1,59 +1,75 @@
-import { Moment } from 'moment';
-import { PeriodStatus } from '../components/Timeline/types';
-import { IconType } from '../components/Icon';
+export enum PeriodType {
+    Egenmelding = 'egenmelding',
+    Helg = 'helg',
+    Syk = 'syk',
+    Ubestemt = 'ubestemt',
+    Utenlands = 'utenlands',
+    Permisjon = 'permisjon',
+    Arbeidsdag = 'arbeidsdag',
+    AnnenInntekt = 'annen_inntekt',
+    Utdanning = 'utdanning'
+}
 
-export enum TaskStatus {
+export enum PeriodSource {
+    SM = 'SM'
+}
+
+export enum PeriodeStatus {
     Solved = 'solved',
     Unsolved = 'unsolved',
-    Normal = 'normal'
+    Normal = 'normal',
+    Irrelevant = 'irrelevant'
 }
 
-export interface CaseField {
-    label: string;
-    value?: string;
-    status?: TaskStatus;
-    icon?: IconType;
+export interface TableRow {
+    date: string;
+    type?: PeriodType;
+    source?: PeriodSource;
+    degree?: number;
+    dagsats?: number;
+    key?: string;
 }
 
-export interface TimelinePeriod {
-    start: string | Moment;
-    end: string | Moment;
-    status?: PeriodStatus;
-    action?: () => void;
+export enum DagType {
+    Egenmelding = 'egenmelding',
+    Helg = 'helg',
+    Syk = 'syk',
+    Ubestemt = 'ubestemt',
+    Utenlands = 'utenlands',
+    Permisjon = 'permisjon',
+    Arbeidsdag = 'arbeidsdag',
+    AnnenInntekt = 'annen_inntekt',
+    Utdanning = 'utdanning'
 }
 
-export interface TimelineRow {
-    label: string;
-    periods: TimelinePeriod[];
+export interface Dag {
+    dato: string;
+    type: DagType;
+    gradering: number;
 }
 
-export interface Employment {
-    arbeidsgiver: string;
-    arbeidsforhold: string;
-    yrkesbeskrivelse: string;
-    arbeidstidsordning: string;
-    stillingsprosent: number;
-    start: string;
-    end?: string;
+export interface Periode {
+    fom: string;
+    tom: string;
+    status: PeriodeStatus;
+    dager?: Dag[];
 }
 
-export interface Salary {
-    beregnetInntekt: number;
-    gjennomsnittligInntekt: number;
-    sammenligningsgrunnlag: number;
-    omregnetÅrsinntekt: number;
-    lastTwelveMonths: number[];
-    lønnstype?: string;
+export interface Arbeidsgiver {
+    navn: string;
+    perioder: Periode[];
+}
+
+export interface Ytelse {
+    navn: string;
+    perioder: Periode[];
+}
+
+export interface Person {
+    arbeidsgivere: Arbeidsgiver[];
+    ytelser: Ytelse[];
 }
 
 export interface CaseData {
-    inngangsvilkår: CaseField[];
-    oppfølging: CaseField[];
-    sykdomsvilkår: CaseField[];
-    sykepengegrunnlag: CaseField[];
-    sykepengeperiode: CaseField[];
-    utbetaling: CaseField[];
-    timelineData: TimelineRow[];
-    employment: Employment;
-    salary: Salary;
+    person: Person;
 }
