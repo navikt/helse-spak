@@ -1,33 +1,5 @@
-export enum PeriodType {
-    Egenmelding = 'egenmelding',
-    Helg = 'helg',
-    Syk = 'syk',
-    Ubestemt = 'ubestemt',
-    Utenlands = 'utenlands',
-    Permisjon = 'permisjon',
-    Arbeidsdag = 'arbeidsdag',
-    AnnenInntekt = 'annen_inntekt',
-    Utdanning = 'utdanning'
-}
-
-export enum PeriodSource {
+export enum DataSource {
     SM = 'SM'
-}
-
-export enum PeriodeStatus {
-    Solved = 'solved',
-    Unsolved = 'unsolved',
-    Normal = 'normal',
-    Irrelevant = 'irrelevant'
-}
-
-export interface TableRow {
-    date: string;
-    type?: PeriodType;
-    source?: PeriodSource;
-    degree?: number;
-    dagsats?: number;
-    key?: string;
 }
 
 export enum DagType {
@@ -42,10 +14,18 @@ export enum DagType {
     Utdanning = 'utdanning'
 }
 
+export enum PeriodeStatus {
+    Solved = 'solved',
+    Unsolved = 'unsolved',
+    Normal = 'normal',
+    Irrelevant = 'irrelevant'
+}
+
 export interface Dag {
     dato: string;
     type: DagType;
     gradering: number;
+    kilde?: DataSource;
 }
 
 export interface Periode {

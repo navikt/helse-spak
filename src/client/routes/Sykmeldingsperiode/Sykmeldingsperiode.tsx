@@ -1,16 +1,24 @@
-import React, { useContext } from 'react';
-import Table from '../../components/Table';
-import { CaseContext } from '../../context/CaseContext';
+import React, { useContext, useMemo } from 'react';
 import Tabs from '../../components/Tabs';
-import { Arbeidsgiver } from '../../context/types';
+import Table from '../../components/Table';
 import { Interval } from '../../components/Timeline/types';
+import { CaseContext } from '../../context/CaseContext';
+import { OrganizationType } from '../../components/Timeline/Timeline';
+import { Arbeidsgiver, Periode, PeriodeStatus } from '../../context/types';
+
+const EMPTY_PERIODE = {
+    fom: '',
+    tom: '',
+    status: PeriodeStatus.Irrelevant,
+    dager: []
+};
 
 const getIntersectingPeriod = (
     arbeidsgiver: Arbeidsgiver,
-    interval?: Interval
-) => {
-    return arbeidsgiver.perioder.find(p => {
-        if (!p.dager || p.dager.length === 0 || !interval) {
+    interval: Interval
+): Periode =>
+    arbeidsgiver.perioder.find(p => {
+        if (!p.dager || p.dager.length === 0) {
             return false;
         }
 
@@ -21,28 +29,31 @@ const getIntersectingPeriod = (
             (firstDate >= interval.start && firstDate <= interval.end) ||
             (lastDate >= interval.start && lastDate <= interval.end)
         );
-    });
-};
+    }) || EMPTY_PERIODE;
 
 const Sykmeldingsperiode = () => {
     const { person, selectedInterval } = useContext(CaseContext);
 
-    const labels =
-        selectedInterval &&
-        selectedInterval.cases
-            .filter(c => c.status !== 'nav')
-            .map(c => c.label);
-    const perioder = person.arbeidsgivere
-        .filter(a => labels && labels.includes(a.navn))
-        .map(a => getIntersectingPeriod(a, selectedInterval));
+    const [labels, periods] = useMemo((): [string[], Periode[]] => {
+        if (!selectedInterval) {
+            return [[], []];
+        }
 
-    console.log(labels, perioder);
+        const labels = selectedInterval.cases
+            .filter(c => c.status !== OrganizationType.NAV)
+            .map(c => c.label);
+        const periods = person.arbeidsgivere
+            .filter(a => labels.includes(a.navn))
+            .map(a => getIntersectingPeriod(a, selectedInterval));
+
+        return [labels, periods];
+    }, [selectedInterval, person]);
 
     return (
         <div className="Sykmeldingsperiode content">
-            {labels && perioder && labels.length === perioder.length && (
+            {labels.length > 0 && labels.length === periods.length && (
                 <Tabs labels={labels}>
-                    {perioder.map((p, i) => (
+                    {periods.map((p: Periode, i) => (
                         <Table key={i} data={p.dager} />
                     ))}
                 </Tabs>

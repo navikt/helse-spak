@@ -1,6 +1,7 @@
 import React from 'react';
 import SourceLink from './SourceLink';
 import dayjs from 'dayjs';
+import { DataSource } from '../../context/types';
 
 const capitalize = (value: string) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
@@ -9,13 +10,13 @@ const capitalize = (value: string) => {
 interface Props {
     dato: string;
     type?: string;
-    source?: string;
+    kilde?: DataSource;
     gradering?: number;
     dagsats?: number;
     showType?: boolean;
 }
 
-const Row = ({ dato, type, source, gradering, dagsats, showType }: Props) => {
+const Row = ({ dato, type, kilde, gradering, dagsats, showType }: Props) => {
     return (
         <tr>
             <td>
@@ -23,7 +24,7 @@ const Row = ({ dato, type, source, gradering, dagsats, showType }: Props) => {
                 {type && (
                     <div className={`TableRow__type ${type}`}>
                         <span>{showType && capitalize(type)}</span>
-                        {source && <SourceLink label={source} />}
+                        {kilde && <SourceLink label={kilde} />}
                     </div>
                 )}
             </td>
@@ -31,7 +32,7 @@ const Row = ({ dato, type, source, gradering, dagsats, showType }: Props) => {
                 {gradering !== 0 && (
                     <div className="TableRow__degree">
                         <span>{`${gradering}%`}</span>
-                        {source && <SourceLink label={source} />}
+                        {kilde && <SourceLink label={kilde} />}
                     </div>
                 )}
             </td>

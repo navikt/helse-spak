@@ -1,4 +1,4 @@
-import { CaseData, DagType, PeriodeStatus } from './types';
+import { CaseData, DagType, DataSource, PeriodeStatus } from './types';
 import dayjs from 'dayjs';
 
 const shouldChangeType = () => {
@@ -32,7 +32,8 @@ const generateDays = (fom: string, tom: string) => {
             return {
                 dato: day.format('YYYY-MM-DD'),
                 type: isWeekend ? DagType.Helg : currentType,
-                gradering: isWeekend ? 0 : 100
+                gradering: isWeekend ? 0 : 100,
+                kilde: isWeekend ? undefined : DataSource.SM
             };
         });
 };

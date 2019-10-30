@@ -5,11 +5,15 @@ import 'nav-frontend-tabell-style';
 import './Table.less';
 
 interface Props {
-    data: Dag[];
+    data?: Dag[];
     showDagsats?: boolean;
 }
 
 const Table = ({ data, showDagsats = false }: Props) => {
+    if (!data) {
+        return null;
+    }
+
     return (
         <table className="Table tabell">
             <thead>
@@ -23,11 +27,7 @@ const Table = ({ data, showDagsats = false }: Props) => {
                 {data.map((item, i, array) => {
                     const showType = i === 0 || array[i - 1].type !== item.type;
                     return (
-                        <Row
-                            key={item.dato}
-                            showType={showType}
-                            {...item}
-                        />
+                        <Row key={item.dato} showType={showType} {...item} />
                     );
                 })}
             </tbody>
