@@ -24,10 +24,10 @@ const formatTlf = (tlf: string) => {
 };
 
 const PersonBar = () => {
-    const name = 'Mia Cathrine Svendsen';
-    const fnr = '12108434566';
-    const tlf = '98765432';
-    const gender = 'kvinne';
+    const name = 'Sjaman Durek';
+    const fnr = '12345654321';
+    const tlf = '12345678';
+    const gender = 'mann';
 
     return (
         <div className="PersonBar">

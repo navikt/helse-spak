@@ -1,15 +1,15 @@
-import { TimelinePeriod } from './Timeline';
 import {
+    Row,
     Case,
     Date,
     Interval,
     DatePosition,
-    Row,
+    TimelinePeriod,
     HorizontallyPositioned
 } from './types';
 import { guid } from 'nav-frontend-js-utils';
 
-const reduceToDates = (dates: Date[], current: TimelinePeriod) => {
+const toDates = (dates: Date[], current: TimelinePeriod) => {
     return [
         ...dates,
         {
@@ -29,7 +29,7 @@ const extractDates = (timeline: Row[]): Date[] => {
     return timeline
         .reduce((dates: Date[], current: Row) => {
             const currentDates = current.periods
-                .reduce(reduceToDates, [])
+                .reduce(toDates, [])
                 .map(date => ({
                     ...date,
                     case: { label: current.label, status: current.type }
@@ -67,7 +67,7 @@ const extractIntervals = (dates: Date[]): Interval[] => {
     return intervals as Interval[];
 };
 
-export const getIntervals = (timeline: Row[]) => {
+export const getIntervals = (timeline: Row[]): Interval[] => {
     const dates = extractDates(timeline);
     return extractIntervals(dates);
 };

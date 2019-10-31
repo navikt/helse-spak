@@ -2,6 +2,7 @@ import React from 'react';
 import SourceLink from './SourceLink';
 import dayjs from 'dayjs';
 import { DataSource } from '../../context/types';
+import { OrganizationType } from '../Timeline/Timeline';
 
 const capitalize = (value: string) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
@@ -9,7 +10,7 @@ const capitalize = (value: string) => {
 
 interface Props {
     dato: string;
-    type?: string;
+    type?: OrganizationType;
     kilde?: DataSource;
     gradering?: number;
     dagsats?: number;
@@ -20,7 +21,9 @@ const Row = ({ dato, type, kilde, gradering, dagsats, showType }: Props) => {
     return (
         <tr>
             <td>
-                <div className="TableRow__date">{dayjs(dato).format('DD.MM.YYYY')}</div>
+                <div className="TableRow__date">
+                    {dayjs(dato).format('DD.MM.YYYY')}
+                </div>
                 {type && (
                     <div className={`TableRow__type ${type}`}>
                         <span>{showType && capitalize(type)}</span>

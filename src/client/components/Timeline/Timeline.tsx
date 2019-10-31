@@ -1,28 +1,23 @@
 import React, { useContext, useEffect, useMemo, useState } from 'react';
-import TimelineRow from './TimelineRow';
-import { Range, Interval, Case, HorizontallyPositioned } from './types';
-import { Normaltekst } from 'nav-frontend-typografi';
-import { calculatePosition, daysInPeriod } from './calc';
-import { getIntervals, trimElement } from './transform';
-import './Timeline.less';
-import RangeSelector from './RangeSelector';
-import SelectedInterval from './SelectedInterval';
 import dayjs from 'dayjs';
 import Markers from './Markers';
+import TimelineRow from './TimelineRow';
+import RangeSelector from './RangeSelector';
 import IntervalButton from './Interval';
-import { PeriodeStatus } from '../../context/types';
+import SelectedInterval from './SelectedInterval';
+import {
+    Case,
+    Range,
+    Interval,
+    TimelinePeriod,
+    OrganizationType,
+    PositionedInterval
+} from './types';
+import { Normaltekst } from 'nav-frontend-typografi';
 import { CaseContext } from '../../context/CaseContext';
-
-export enum OrganizationType {
-    PRIVATE = 'employer',
-    NAV = 'nav'
-}
-
-export interface TimelinePeriod {
-    start: string;
-    end: string;
-    status?: PeriodeStatus;
-}
+import { getIntervals, trimElement } from './transform';
+import { calculatePosition, daysInPeriod } from './calc';
+import './Timeline.less';
 
 interface Row {
     label: string;
@@ -33,24 +28,28 @@ interface Row {
 interface TimelineProps {
     data: Row[];
     range?: Range;
+    exclude?: OrganizationType;
 }
 
-const Timeline = ({ data, range = Range.ONE_YEAR }: TimelineProps) => {
+const Timeline = ({
+    data,
+    range = Range.ONE_YEAR,
+    exclude = OrganizationType.NAV
+}: TimelineProps) => {
     const { selectedInterval, setSelectedInterval } = useContext(CaseContext);
     const [selectedRange, setSelectedRange] = useState<Range>(range);
 
     const days = daysInPeriod(selectedRange);
     const firstDayInRange = dayjs().subtract(selectedRange, 'month');
 
-    const intervals: [] | Interval[] = useMemo(
+    const intervals: Interval[] = useMemo(
         () =>
             getIntervals(data)
                 .filter(
                     (interval: Interval) =>
-                        interval &&
-                        interval.cases &&
-                        interval.cases.filter(c => (c as Case).status !== 'nav')
-                            .length > 0
+                        interval.cases.filter(
+                            c => (c as Case).status !== exclude
+                        ).length > 0
                 )
                 .filter((interval: Interval) =>
                     dayjs(interval.end).isAfter(firstDayInRange)
@@ -65,7 +64,7 @@ const Timeline = ({ data, range = Range.ONE_YEAR }: TimelineProps) => {
                 ...calculatePosition(interval!.start, interval!.end, days)
             }
         }))
-        .map(trimElement) as (Interval & HorizontallyPositioned)[];
+        .map(trimElement) as PositionedInterval[];
 
     const onClickInterval = (interval: Interval) => {
         setSelectedInterval(interval);
@@ -86,8 +85,8 @@ const Timeline = ({ data, range = Range.ONE_YEAR }: TimelineProps) => {
                 {data.map(item => (
                     <TimelineRow
                         key={item.label}
-                        {...item}
                         range={selectedRange}
+                        {...item}
                     />
                 ))}
                 {positionedIntervals.map(interval => (

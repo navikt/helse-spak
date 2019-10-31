@@ -1,13 +1,10 @@
 import React, { useMemo } from 'react';
-import { HorizontallyPositioned, Range } from './types';
-import { OrganizationType, TimelinePeriod } from './Timeline';
-import { calculatePosition, daysInPeriod } from './calc';
-import './TimelineRow.less';
 import { trimElement } from './transform';
+import { calculatePosition, daysInPeriod } from './calc';
+import { Range, TimelinePeriod, PositionedPeriod } from './types';
+import './TimelineRow.less';
 
 interface TimelineRowProps {
-    label: string;
-    type: OrganizationType;
     periods: TimelinePeriod[];
     range: Range;
 }
@@ -22,7 +19,7 @@ const TimelineRow = ({ periods, range }: TimelineRowProps) => {
                 style: { ...calculatePosition(period.start, period.end, days) }
             }))
             .filter(period => period.style.left + period.style.width > 0)
-            .map(trimElement) as (TimelinePeriod & HorizontallyPositioned)[];
+            .map(trimElement) as PositionedPeriod[];
     }, [periods, range]);
 
     return (

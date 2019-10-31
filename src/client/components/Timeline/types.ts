@@ -1,4 +1,4 @@
-import { OrganizationType, TimelinePeriod } from './Timeline';
+import { PeriodeStatus } from '../../context/types';
 
 export enum Range {
     SIX_MONTHS = 6,
@@ -9,6 +9,17 @@ export enum Range {
 export enum DatePosition {
     START = 'start',
     END = 'end'
+}
+
+export enum OrganizationType {
+    PRIVATE = 'employer',
+    NAV = 'nav'
+}
+
+export interface TimelinePeriod {
+    start: string;
+    end: string;
+    status?: PeriodeStatus;
 }
 
 export interface Case {
@@ -41,3 +52,7 @@ export interface HorizontallyPositioned {
         width: number;
     };
 }
+
+export type PositionedInterval = Interval & HorizontallyPositioned;
+
+export type PositionedPeriod = TimelinePeriod & HorizontallyPositioned;

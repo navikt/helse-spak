@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import uuid from 'uuid/v4';
 import moment from 'moment';
 import RightMenuItem from './RightMenuItem';
-import RightMenuButton, { RightMenuButtonIcon } from './RightMenuButton';
 import { AnimatePresence } from 'framer-motion';
 import './RightMenu.less';
 

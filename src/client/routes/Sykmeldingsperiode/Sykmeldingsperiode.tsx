@@ -1,9 +1,8 @@
 import React, { useContext, useMemo } from 'react';
 import Tabs from '../../components/Tabs';
 import Table from '../../components/Table';
-import { Interval } from '../../components/Timeline/types';
 import { CaseContext } from '../../context/CaseContext';
-import { OrganizationType } from '../../components/Timeline/Timeline';
+import { Interval, OrganizationType } from '../../components/Timeline/types';
 import { Arbeidsgiver, Periode, PeriodeStatus } from '../../context/types';
 
 const EMPTY_PERIODE = {
