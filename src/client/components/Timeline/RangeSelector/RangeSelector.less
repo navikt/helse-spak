@@ -11,18 +11,28 @@
     border: none;
     cursor: pointer;
 
-    &:hover,
-    &.active {
-      &:after {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 0.25rem;
-        background: @blue;
-        border-radius: 0.25rem;
-        bottom: -0.25rem;
-        left: 0;
-      }
+    &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 0.25rem;
+      border-radius: 0.25rem;
+      bottom: -0.25rem;
+      transition:
+              background 0.1s ease-in-out,
+              width 0.1s ease-in-out,
+              left 0.1s ease-in-out;
+    }
+
+    &:hover:after {
+      width: 80%;
+      background: @greyLight;
+    }
+
+    &.active:after {
+      width: 100%;
+      background: @blue;
     }
 
     &:focus,
