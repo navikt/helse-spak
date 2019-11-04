@@ -29,6 +29,7 @@ export interface Dag {
 }
 
 export interface Periode {
+    id: string;
     fom: string;
     tom: string;
     status: PeriodeStatus;
@@ -36,6 +37,7 @@ export interface Periode {
 }
 
 export interface Arbeidsgiver {
+    id: string;
     navn: string;
     perioder: Periode[];
 }

@@ -25,7 +25,7 @@ const Search = ({ onSearch }: SearchProps) => {
                 placeholder="Oppgi fødselsnummer..."
             />
             <button className="Search__button" onClick={() => onSearch(value)}>
-                <SearchIcon />
+                <SearchIcon fill="#78706a" />
             </button>
         </div>
     );

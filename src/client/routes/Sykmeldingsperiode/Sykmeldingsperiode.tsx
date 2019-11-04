@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import Tabs from '../../components/Tabs';
 import Table from '../../components/Table';
 import { EditIcon } from '../../components/Icon';
@@ -34,6 +34,7 @@ const getIntersectingPeriod = (
 
 const Sykmeldingsperiode = () => {
     const { person, selectedInterval } = useContext(CaseContext);
+    const [isEditingTable, setIsEditingTable] = useState(false);
 
     const [labels, periods] = useMemo((): [string[], Periode[]] => {
         if (!selectedInterval) {
@@ -56,10 +57,20 @@ const Sykmeldingsperiode = () => {
                 <>
                     <Tabs labels={labels}>
                         {periods.map((p: Periode, i) => (
-                            <Table key={i} data={p.dager} />
+                            <Table
+                                key={i}
+                                data={p.dager}
+                                isEditing={isEditingTable}
+                                metaData={{ periodeId: p.id }}
+                            />
                         ))}
                     </Tabs>
-                    <EditIcon />
+                    <button
+                        className="EditButton"
+                        onClick={() => setIsEditingTable(i => !i)}
+                    >
+                        <EditIcon />
+                    </button>
                 </>
             )}
         </div>

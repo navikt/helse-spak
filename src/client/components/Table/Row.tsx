@@ -1,8 +1,8 @@
 import React from 'react';
 import SourceLink from './SourceLink';
 import dayjs from 'dayjs';
-import { DataSource } from '../../context/types';
-import { OrganizationType } from '../Timeline/Timeline';
+import TypeSelect from './TypeSelect';
+import { DagType, DataSource } from '../../context/types';
 
 const capitalize = (value: string) => {
     return value.charAt(0).toUpperCase() + value.slice(1);
@@ -10,14 +10,25 @@ const capitalize = (value: string) => {
 
 interface Props {
     dato: string;
-    type?: OrganizationType;
+    type?: DagType;
     kilde?: DataSource;
     gradering?: number;
     dagsats?: number;
     showType?: boolean;
+    isEditing?: boolean;
+    onUpdateType: (type: DagType) => void;
 }
 
-const Row = ({ dato, type, kilde, gradering, dagsats, showType }: Props) => {
+const Row = ({
+    dato,
+    type,
+    kilde,
+    gradering,
+    dagsats,
+    showType,
+    isEditing,
+    onUpdateType
+}: Props) => {
     return (
         <tr>
             <td>
@@ -26,7 +37,11 @@ const Row = ({ dato, type, kilde, gradering, dagsats, showType }: Props) => {
                 </div>
                 {type && (
                     <div className={`TableRow__type ${type}`}>
-                        <span>{showType && capitalize(type)}</span>
+                        {isEditing && type !== DagType.Helg ? (
+                            <TypeSelect selected={type} onSelect={onUpdateType} />
+                        ) : (
+                            <span>{showType && capitalize(type)}</span>
+                        )}
                         {kilde && <SourceLink label={kilde} />}
                     </div>
                 )}

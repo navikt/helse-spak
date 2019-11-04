@@ -1,8 +1,19 @@
+@import '../../mixins';
+
 .Sykmeldingsperiode {
   display: flex;
   justify-content: space-between;
 
-  .EditIcon {
-    margin-top: 0.5rem;
+  .EditButton {
+    background: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+    -webkit-appearance: none;
+    border: none;
+    height: 24px;
+    border-radius: 2rem;
+    cursor: pointer;
+
+    .focusable();
   }
 }

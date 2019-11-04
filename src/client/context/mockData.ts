@@ -1,4 +1,5 @@
 import { CaseData, DagType, DataSource, PeriodeStatus } from './types';
+import uuid from 'uuid/v4';
 import dayjs from 'dayjs';
 
 const shouldChangeType = () => {
@@ -38,41 +39,47 @@ const generateDays = (fom: string, tom: string) => {
         });
 };
 
+const generatePeriod = (fom: string, tom: string, status: PeriodeStatus) => ({
+    id: uuid(),
+    fom,
+    tom,
+    status,
+    dager: generateDays(fom, tom)
+});
+
 export const mockData: CaseData = {
     person: {
         arbeidsgivere: [
             {
+                id: uuid(),
                 navn: 'Sykepleierhuset AS',
                 perioder: [
-                    {
-                        fom: '2018-11-15',
-                        tom: '2018-12-15',
-                        status: PeriodeStatus.Normal,
-                        dager: generateDays('2018-11-15', '2018-12-15')
-                    },
-                    {
-                        fom: '2019-04-15',
-                        tom: '2019-05-15',
-                        status: PeriodeStatus.Solved,
-                        dager: generateDays('2019-04-15', '2019-05-15')
-                    },
-                    {
-                        fom: '2019-09-01',
-                        tom: '2019-10-01',
-                        status: PeriodeStatus.Solved,
-                        dager: generateDays('2019-09-01', '2019-10-01')
-                    }
+                    generatePeriod(
+                        '2018-11-15',
+                        '2018-12-15',
+                        PeriodeStatus.Normal
+                    ),
+                    generatePeriod(
+                        '2019-04-15',
+                        '2019-05-15',
+                        PeriodeStatus.Solved
+                    ),
+                    generatePeriod(
+                        '2019-09-01',
+                        '2019-10-01',
+                        PeriodeStatus.Solved
+                    )
                 ]
             },
             {
+                id: uuid(),
                 navn: 'Hjemmehjelpen',
                 perioder: [
-                    {
-                        fom: '2018-12-01',
-                        tom: '2018-12-31',
-                        status: PeriodeStatus.Unsolved,
-                        dager: generateDays('2018-12-01', '2018-12-31')
-                    }
+                    generatePeriod(
+                        '2018-12-01',
+                        '2018-12-31',
+                        PeriodeStatus.Unsolved
+                    )
                 ]
             }
         ],
@@ -80,11 +87,11 @@ export const mockData: CaseData = {
             {
                 navn: 'Foreldrepenger',
                 perioder: [
-                    {
-                        fom: '2018-11-01',
-                        tom: '2019-05-30',
-                        status: PeriodeStatus.Irrelevant
-                    }
+                    generatePeriod(
+                        '2018-11-01',
+                        '2019-05-30',
+                        PeriodeStatus.Irrelevant
+                    )
                 ]
             }
         ]
