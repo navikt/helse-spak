@@ -10,7 +10,7 @@ export enum DagType {
     Utenlands = 'utenlands',
     Permisjon = 'permisjon',
     Arbeidsdag = 'arbeidsdag',
-    AnnenInntekt = 'annen_inntekt',
+    AnnenInntekt = 'annen inntekt',
     Utdanning = 'utdanning'
 }
 

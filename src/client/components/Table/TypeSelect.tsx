@@ -20,7 +20,7 @@ const TypeSelect = ({ selected, onSelect }: Props) => {
         >
             <option value={selected}>{capitalize(selected)}</option>
             {Object.values(DagType)
-                .filter(value => value !== selected)
+                .filter(value => value !== selected && value !== DagType.Helg)
                 .map(value => (
                     <option key={value} value={value}>
                         {capitalize(value)}
