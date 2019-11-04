@@ -1,9 +1,11 @@
 import React, { useContext, useMemo } from 'react';
 import Tabs from '../../components/Tabs';
 import Table from '../../components/Table';
+import { EditIcon } from '../../components/Icon';
 import { CaseContext } from '../../context/CaseContext';
 import { Interval, OrganizationType } from '../../components/Timeline/types';
 import { Arbeidsgiver, Periode, PeriodeStatus } from '../../context/types';
+import './Sykmeldingsperiode.less';
 
 const EMPTY_PERIODE = {
     fom: '',
@@ -51,11 +53,14 @@ const Sykmeldingsperiode = () => {
     return (
         <div className="Sykmeldingsperiode content">
             {labels.length > 0 && labels.length === periods.length && (
-                <Tabs labels={labels}>
-                    {periods.map((p: Periode, i) => (
-                        <Table key={i} data={p.dager} />
-                    ))}
-                </Tabs>
+                <>
+                    <Tabs labels={labels}>
+                        {periods.map((p: Periode, i) => (
+                            <Table key={i} data={p.dager} />
+                        ))}
+                    </Tabs>
+                    <EditIcon />
+                </>
             )}
         </div>
     );

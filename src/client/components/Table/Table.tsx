@@ -7,9 +7,10 @@ import './Table.less';
 interface Props {
     data?: Dag[];
     showDagsats?: boolean;
+    isEditing?: boolean;
 }
 
-const Table = ({ data, showDagsats = false }: Props) => {
+const Table = ({ data, showDagsats = false, isEditing = false }: Props) => {
     if (!data) {
         return null;
     }
