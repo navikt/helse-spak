@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Icon, { IconType } from '../Icon';
 import { AnimatePresence, motion } from 'framer-motion';
 import { copyContentsToClipboard } from './util';
 import './Clipboard.less';
 import Tooltip from '../Tooltip';
+import { CheckIcon, CopyIcon } from '../Icon';
 
 const animation = {
     initial: { y: 5, opacity: 0 },
@@ -55,9 +55,7 @@ const Clipboard = ({ children }: ClipboardProps) => {
                             {...animation}
                             key={didCopy ? 'check' : 'copy'}
                         >
-                            <Icon
-                                type={didCopy ? IconType.Check : IconType.Copy}
-                            />
+                            {didCopy ? <CheckIcon /> : <CopyIcon />}
                         </motion.div>
                     </AnimatePresence>
                 </button>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Search.less';
-import Icon, { IconType } from '../Icon';
+import { SearchIcon } from '../Icon';
 
 interface SearchProps {
     onSearch: (value: string) => void;
@@ -24,11 +24,8 @@ const Search = ({ onSearch }: SearchProps) => {
                 onKeyDown={onSubmit}
                 placeholder="Oppgi fødselsnummer..."
             />
-            <button
-                className="Search__button"
-                onClick={() => onSearch(value)}
-            >
-                <Icon type={IconType.Search} fill="#c6c2bf" size={16} />
+            <button className="Search__button" onClick={() => onSearch(value)}>
+                <SearchIcon />
             </button>
         </div>
     );

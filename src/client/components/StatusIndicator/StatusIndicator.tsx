@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import { Normaltekst } from 'nav-frontend-typografi';
 import { motion } from 'framer-motion';
+import { CheckIcon } from '../Icon';
+import { Normaltekst } from 'nav-frontend-typografi';
 import './StatusIndicator.less';
-import Icon, { IconType } from '../Icon';
 
 interface StatusIndicatorProps {
     taskCount: number;
@@ -23,11 +23,7 @@ const StatusIndicator = ({ taskCount }: StatusIndicatorProps) => {
         >
             {taskCount > 0 && <Normaltekst>{taskCount}</Normaltekst>}
             {taskCount === 0 && (
-                <Icon
-                    type={IconType.Check}
-                    size={12}
-                    fill="#fff"
-                />
+                <CheckIcon width={16} height={16} fill="#fff" />
             )}
         </motion.div>
     );

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
-import Icon, { IconType } from '../Icon';
+import { CheckIcon } from '../Icon';
 import { Normaltekst } from 'nav-frontend-typografi';
 import './Chip.less';
 
@@ -37,7 +37,7 @@ const Chip = ({ label, done, active, onClick, className }: ChipProps) => {
             tabIndex={0}
         >
             <Normaltekst>
-                {done && <Icon type={IconType.Check} size={16} />}
+                {done && <CheckIcon width={16} height={16} />}
                 {label}
             </Normaltekst>
         </div>

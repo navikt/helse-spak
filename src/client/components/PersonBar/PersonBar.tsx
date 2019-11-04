@@ -1,18 +1,17 @@
 import React from 'react';
 import Clipboard from '../Clipboard';
-import Icon, { IconType } from '../Icon';
+import { FemaleIcon, MaleIcon, NonBinaryGenderIcon, PhoneIcon } from '../Icon';
 import { Element, Normaltekst } from 'nav-frontend-typografi';
 import './PersonBar.less';
 
-const iconType = (gender: string) => {
-    switch (gender) {
-        case 'kvinne':
-            return IconType.Female;
-        case 'mann':
-            return IconType.Male;
-        default:
-            return IconType.NonBinaryGender;
-    }
+const renderGenderIcon = (gender: string, size = 24) => {
+    return gender === 'kvinne' ? (
+        <FemaleIcon width={size} height={size} />
+    ) : gender === 'mann' ? (
+        <MaleIcon width={size} height={size} />
+    ) : (
+        <NonBinaryGenderIcon width={size} height={size} />
+    );
 };
 
 const formatFnr = (fnr: string) => {
@@ -32,7 +31,7 @@ const PersonBar = () => {
     return (
         <div className="PersonBar">
             <Element className="PersonBar__gender">
-                <Icon type={iconType(gender)} size={24} />
+                {renderGenderIcon(gender)}
                 {name}
             </Element>
             <span>/</span>
@@ -41,7 +40,7 @@ const PersonBar = () => {
             </Clipboard>
             <span>/</span>
             <Normaltekst className="PersonBar__phone">
-                <Icon type={IconType.Phone} />
+                <PhoneIcon />
                 {formatTlf(tlf)}
             </Normaltekst>
             <div className="divider" />

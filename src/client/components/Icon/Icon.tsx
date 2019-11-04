@@ -1,92 +1,34 @@
 import React from 'react';
-import CopyIcon from './Icons/CopyIcon';
-import MaleIcon from './Icons/MaleIcon';
-import CheckIcon from './Icons/CheckIcon';
-import PhoneIcon from './Icons/PhoneIcon';
-import SearchIcon from './Icons/SearchIcon';
-import FemaleIcon from './Icons/FemaleIcon';
-import EmployerIcon from './Icons/EmployerIcon';
-import SykmelderIcon from './Icons/SykmelderIcon';
-import AARegisteretIcon from './Icons/AARegisteretIcon';
-import InntektsmeldingIcon from './Icons/InntektsmeldingIcon';
-import NonBinaryGenderIcon from './Icons/NonBinaryGenderIcon';
-
-export enum IconType {
-    NonBinaryGender = 'nonbinarygender',
-    Inntekstmelding = 'inntektsmelding',
-    Aaregisteret = 'aaregisteret',
-    Sykmelder = 'sykmelder',
-    Employer = 'employer',
-    Female = 'female',
-    Search = 'search',
-    Phone = 'phone',
-    Check = 'check',
-    Male = 'male',
-    Copy = 'copy'
-}
 
 export interface CommonIconProps {
-    fontFamily?: string;
+    width?: number;
+    height?: number;
+    fill?: string;
     fontColor?: string;
     fontSize?: number;
-    fill?: string;
-    size?: number;
 }
 
-export const iconPadding = 2;
-
-interface IconProps {
-    type: IconType;
-    size?: number;
+interface IconProps extends CommonIconProps {
+    children: React.ReactNode | React.ReactNode[];
 }
-
-const renderIcon = (type: IconType, props: CommonIconProps) => {
-    switch (type) {
-        case IconType.NonBinaryGender:
-            return <NonBinaryGenderIcon {...props} />;
-        case IconType.Inntekstmelding:
-            return <InntektsmeldingIcon {...props} />;
-        case IconType.Aaregisteret:
-            return <AARegisteretIcon {...props} />;
-        case IconType.Sykmelder:
-            return <SykmelderIcon {...props} />;
-        case IconType.Employer:
-            return <EmployerIcon {...props} />;
-        case IconType.Female:
-            return <FemaleIcon {...props} />;
-        case IconType.Search:
-            return <SearchIcon {...props} />;
-        case IconType.Phone:
-            return <PhoneIcon />;
-        case IconType.Check:
-            return <CheckIcon />;
-        case IconType.Male:
-            return <MaleIcon {...props} />;
-        case IconType.Copy:
-            return <CopyIcon />;
-    }
-};
 
 const Icon = ({
-    type,
-    size = 20,
-    fontFamily = 'Source Sans Pro, Helvetica, Arial, sans-serif',
+    children,
+    width = 20,
+    height = 20,
+    fill = '#000',
     ...rest
-}: IconProps & CommonIconProps) => (
+}: IconProps) => (
     <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={size}
-        height={size}
-        viewBox={`0 0 24 24`}
-        style={{ padding: iconPadding }}
-        fill={rest.fill}
         className="Icon"
+        xmlns="http://www.w3.org/2000/svg"
+        fill={fill}
+        width={width}
+        height={height}
+        viewBox="0 0 24 24"
+        {...rest}
     >
-        {renderIcon(type, {
-            fontFamily,
-            size,
-            ...rest
-        })}
+        {children}
     </svg>
 );
 
